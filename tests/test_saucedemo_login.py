@@ -6,8 +6,10 @@ from models.saucedemo_login import LoginPage
 from models.saucedemo_PLP import ProductListPage
 
 @pytest.fixture(scope="function", autouse=True)
+#use --browser-channel "chrome" to run tests in chrome, not chromium
+
 def before_each(page: Page):
-    page.goto(SauceDemoData.sauceURL)
+    page.goto(SauceDemoData.sauceURL) #start
     yield
 
 def test_title(page: Page):
@@ -17,6 +19,7 @@ def test_login_UI(page: Page):
     onLoginPage = LoginPage(page)
     onLoginPage.checkUI()
 
+@pytest.mark.critical
 def test_account_is_valid(page: Page):    
     onLoginPage = LoginPage(page)
     onProductListPage = ProductListPage(page)
