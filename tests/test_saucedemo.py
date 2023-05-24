@@ -40,3 +40,6 @@ def test_account_is_nerfed(page: Page):
 
 def test_account_is_slow(page: Page):
     pass
+
+def test_checkout_flow(page: Page):
+    pass
