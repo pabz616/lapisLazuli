@@ -31,6 +31,7 @@
 # Python Tools for Visual Studio (PTVS)
 __pycache__/
 *.pyc
+.pytest_cache
 venv
 
 # VS Code files for those working on multiple tools

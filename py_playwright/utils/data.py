@@ -1,1 +1,0 @@
-sauceURL = 'https://www.saucedemo.com/'
