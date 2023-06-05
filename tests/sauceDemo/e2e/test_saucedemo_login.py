@@ -1,9 +1,9 @@
 from playwright.sync_api import sync_playwright, Page, expect
-from utils.data import SauceDemoData
+from sauceUtils.data import SauceDemoData
 import pytest
 import re
-from models.saucedemo_login import LoginPage
-from models.saucedemo_PLP import ProductListPage
+from sauceModels.saucedemo_login import LoginPage
+from sauceModels.saucedemo_PLP import ProductListPage
 
 @pytest.fixture(scope="function", autouse=True)
 #use --browser-channel "chrome" to run tests in chrome, not chromium
@@ -28,7 +28,7 @@ def test_account_is_valid(page: Page):
     #REDIRECT TO PRODUCT_LIST
     expect(page).to_have_url(re.compile(".*inventory"))
     onProductListPage.checkUI()
-
+    
 def test_account_is_locked_out(page: Page):
     error = page.locator('[data-test="error"]')
     errorMsg = "Epic sadface: Sorry, this user has been locked out."
@@ -37,12 +37,18 @@ def test_account_is_locked_out(page: Page):
     onLoginPage.submitLogin(SauceDemoData.lockedOutUSN, SauceDemoData.password)
     expect(error).to_be_visible()
     expect(error).to_contain_text(errorMsg)
-    
+
+@pytest.mark.xfail(reason="assertion fails due to incorrect image")  
 def test_account_is_nerfed(page: Page):
-    pass
+    onLoginPage = LoginPage(page)
+    onProductListPage = ProductListPage(page)
+    
+    onLoginPage.submitLogin(SauceDemoData.problemUSN, SauceDemoData.password)
+    expect(onProductListPage.product_image).to_have_attribute("src", SauceDemoData.PRD1_IMG_URL)
 
 def test_account_is_slow(page: Page):
-    pass
-
-def test_checkout_flow(page: Page):
-    pass
+    onLoginPage = LoginPage(page)
+    onProductListPage = ProductListPage(page)
+    
+    onLoginPage.submitLogin(SauceDemoData.glitchedUSN, SauceDemoData.password)
+    expect(onProductListPage.product_image).to_have_attribute("src", SauceDemoData.PRD1_IMG_URL)

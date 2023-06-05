@@ -1,4 +1,4 @@
-from locators.page_elements import *
+from sauceLocators.page_elements import *
 
 class LoginPage:
     def __init__(self, page):
