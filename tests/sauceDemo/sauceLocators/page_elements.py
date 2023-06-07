@@ -10,6 +10,7 @@ class SwagLabsHeaderLocators(object):
     PAGE_HEADING = '[class="title"]'
     MENU_BUTTON = '[id="react-burger-menu-btn"]'
     CART_BUTTON = '[id="shopping_cart_container"]'
+    ITEM_ADDED_BADGE = '[span="shopping_cart_badge"]'
     
 class SwagLabsMenuLocators(object):
     VIEW_ALL_ITEMS = '[id="inventory_sidebar_link"]'
