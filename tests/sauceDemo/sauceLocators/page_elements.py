@@ -1,6 +1,6 @@
 
 class SauceDemoPageLocators(object):
-    PAGE_HEADING = '[class="login_logo"]'
+    SAUCE_LOGO = '[class="login_logo"]'
     USN_INPUT = '[id="user-name"]'
     PWD_INPUT = '[id="password"]'
     SUBMIT_BTN = '[id="login-button"]'

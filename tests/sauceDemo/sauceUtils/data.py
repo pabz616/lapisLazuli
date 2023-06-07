@@ -1,4 +1,5 @@
 class SauceDemoData(object):
+    pageTitle = 'Swag Labs'
     sauceURL = 'https://www.saucedemo.com/'
     password = 'secret_sauce'
     validUSN = 'standard_user'
