@@ -5,7 +5,7 @@ from sauceLocators.page_elements import *
 from sauceUtils.data import SauceDemoData
 
 
-@pytest.mark.unitTest
+@pytest.mark.unit_test
 @pytest.fixture(scope="function", autouse=True)
 #use --browser-channel "chrome" to run tests in chrome, not chromium
 

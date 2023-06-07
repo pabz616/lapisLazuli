@@ -5,7 +5,8 @@ class SauceDemoPageLocators(object):
     PWD_INPUT = '[id="password"]'
     SUBMIT_BTN = '[id="login-button"]'
     
-class SwagLabsPageLocators(object):
+class SwagLabsHeaderLocators(object):
+    HEADER_LOGO = '[class="app_logo"]'
     PAGE_HEADING = '[class="title"]'
     MENU_BUTTON = '[id="react-burger-menu-btn"]'
     CART_BUTTON = '[id="shopping_cart_container"]'
