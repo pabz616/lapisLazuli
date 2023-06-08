@@ -1,10 +1,10 @@
 from playwright.sync_api import sync_playwright, Page, expect
 import pytest
 import re
+import time
 
 from sauceLocators.page_elements import *
 from sauceUtils.data import SauceDemoData
-from sauceModels.saucedemo_login import LoginPage
 
 
 @pytest.fixture(scope="function", autouse=True)
