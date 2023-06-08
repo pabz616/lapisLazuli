@@ -1,24 +1,20 @@
 from playwright.sync_api import sync_playwright, Page, expect
 import pytest
 import re
+
 from sauceLocators.page_elements import *
 from sauceUtils.data import SauceDemoData
 from sauceModels.saucedemo_login import LoginPage
 
 
 @pytest.fixture(scope="function", autouse=True)
-def before_each(page: Page):
-    page.goto(SauceDemoData.sauceURL)
+def before_each(create_browser_context, page: Page):
+    page.goto(SauceDemoData.sauceURL+'inventory.html')
+    yield page
     
-    onLoginPage = LoginPage(page)
-    onLoginPage.submitLogin(SauceDemoData.validUSN, SauceDemoData.password)
-    yield
-    
-    #TODO repurpose login authentication .. getting a 405 at the moment
-
 @pytest.mark.unitTest
 def test_productsPage_has_url(page: Page):
-    expect(page).to_have_url(re.compile(SauceDemoData.productsURL))
+    expect(page).to_have_url(re.compile(SauceDemoData.sauceURL+'inventory.html'))
 
 @pytest.mark.unitTest   
 def test_productsPageHeader_has_title(page: Page):
