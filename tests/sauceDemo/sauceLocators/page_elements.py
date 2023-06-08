@@ -20,8 +20,12 @@ class SwagLabsMenuLocators(object):
     CLOSE_MENU = '[id="react-burger-cross-btn"]'
     
 class SwagLabsProductsPageLocators(object):
+    HEADER = '[class="title"]'
     PRD1 = '[class="inventory_item"]'
-    PRD1_IMG = '[src="/static/media/sauce-backpack-1200x1500.0a0b85a3.jpg"]'
+    SELECTED_OPTION = '[class="active_option"]'
+    PRD_SORT = '[class="product_sort_container"]'
+    PRD1_IMG_SRC = '[src="/static/media/sauce-backpack-1200x1500.0a0b85a3.jpg"]'
+    PRD1_IMG = '[class="inventory_item_img"]'
     PRD1_IMG_LNK = '[id="item_4_img_link"]'
     PRD1_IMG_ALT = 'Sauce Labs Backpack'
     PRD1_NAME = '[class="inventory_item_name"]'    
