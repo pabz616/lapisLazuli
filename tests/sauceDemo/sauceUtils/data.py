@@ -8,6 +8,7 @@ class SauceDemoData(object):
     glitchedUSN = 'performance_glitch_user'
 class SauceDemoProducts(object):   
     productsURL = SauceDemoData.sauceURL+'inventory.html'
+    selectedItemURL = SauceDemoData.sauceURL+'inventory-item.html?id=4'
     productsTitle = 'Products'
     PRD1_IMG_URL = '/static/media/sauce-backpack-1200x1500.0a0b85a3.jpg'
     PRD1_NAME = 'Sauce Labs Backpack'

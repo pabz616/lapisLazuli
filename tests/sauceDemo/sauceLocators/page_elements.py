@@ -36,9 +36,9 @@ class SwagLabsProductsPageLocators(object):
 class SwagLabsPDPLocators(object):
     PRD_IMG = '[class="inventory_details_img"]'
     PRD_NAME = '[class="inventory_details_name large_size"]'    
-    PRD_DESC = '[class="inventory_item_desc large_size"]'
+    PRD_DESC = '[class="inventory_details_desc large_size"]'
     PRD_PRICE = '[class="inventory_details_price"]'    
-    PRD_BTN = '[class="btn_inventory"]'
+    PRD_BTN = '[class="btn btn_primary btn_small btn_inventory"]'
     
     
 class SwagLabsCheckoutPageLocators(object):
