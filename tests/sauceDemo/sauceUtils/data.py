@@ -7,11 +7,11 @@ class SauceDemoData(object):
     problemUSN = 'problem_user'
     glitchedUSN = 'performance_glitch_user'
     
-    productsURL = '/inventory.html'
-    cartURL = '/cart.html'
-    orderCheckoutURL = '/checkout-step-one.html'
-    orderOverviewURL = '/checkout-step-two.html'
-    orderConfirmationURL = '/checkout-complete.html'
+    productsURL = 'inventory.html'
+    cartURL = 'cart.html'
+    orderCheckoutURL = 'checkout-step-one.html'
+    orderOverviewURL = 'checkout-step-two.html'
+    orderConfirmationURL = 'checkout-complete.html'
     
     PRD1_IMG_URL = '/static/media/sauce-backpack-1200x1500.0a0b85a3.jpg'
     PRD2_IMG_URL = '#'
