@@ -32,12 +32,14 @@ class SwagLabsProductsPageLocators(object):
     PRD1_DESC = '[class="inventory_item_desc"]'
     PRD1_PRICE = '[class="inventory_item_price"]'    
     PRD1_BTN = '[id="add-to-cart-sauce-labs-backpack"]'
+
+class SwagLabsPDPLocators(object):
+    PRD_IMG = '[class="inventory_details_img"]'
+    PRD_NAME = '[class="inventory_details_name large_size"]'    
+    PRD_DESC = '[class="inventory_item_desc large_size"]'
+    PRD_PRICE = '[class="inventory_details_price"]'    
+    PRD_BTN = '[class="btn_inventory"]'
     
-    PRD2 = '(//div[@class="inventory_item"])[2]'
-    PRD3 = '(//div[@class="inventory_item"])[3]'
-    PRD4 = '(//div[@class="inventory_item"])[4]'
-    PRD5 = '(//div[@class="inventory_item"])[5]'
-    PRD6 = '(//div[@class="inventory_item"])[6]'
     
 class SwagLabsCheckoutPageLocators(object):
     SECTION_TITLE = '#'

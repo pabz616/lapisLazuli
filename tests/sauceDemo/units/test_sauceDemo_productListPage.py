@@ -68,7 +68,7 @@ def test_productsListPage_item1_name_is_consistent(page: Page):
 
 @pytest.mark.unitTest
 def test_productsListPage_item1_description(page: Page):
-    expect(page.locator(SwagLabsProductsPageLocators.PRD1_PRICE).first).to_be_visible()
+    expect(page.locator(SwagLabsProductsPageLocators.PRD1_DESC).first).to_be_visible()
 
 @pytest.mark.unitTest
 def test_productsListPage_item1_price_amount_shown(page: Page):
