@@ -83,12 +83,26 @@ def test_productsListPage_item1_addToCart_button_is_displayed(page: Page):
     expect(page.locator(SwagLabsProductsPageLocators.PRD1_BTN).first).to_be_visible()
     
 @pytest.mark.unitTest
-def test_productsListPage_item1_addToCart_button_id(page: Page):
-    expect(page.locator(SwagLabsProductsPageLocators.PRD1_BTN).first).to_have_id("add-to-cart-sauce-labs-backpack")
+def test_productsListPage_item1_addToCart_button_id(page: Page, element_id= "add-to-cart-sauce-labs-backpack"):
+    expect(page.locator(SwagLabsProductsPageLocators.PRD1_BTN).first).to_have_id(element_id)
 
 @pytest.mark.unitTest
 def test_productsListPage_item1_addToCart_button_is_functional(page: Page):
     expect(page.locator(SwagLabsProductsPageLocators.PRD1_BTN).first).not_to_be_disabled()
+    
+@pytest.mark.unitTest
+def test_productsListPage_item1_addToCart_clicked_state(page: Page, element_id= "remove-sauce-labs-backpack"):
+    """Test that the button id changes after ADD TO CART is clicked"""
+    page.locator(SwagLabsProductsPageLocators.PRD1_BTN).first.click()
+    expect(page.locator(SwagLabsProductsPageLocators.PRD1_REMOVE).first).to_have_id(element_id)
+    expect(page.locator(SwagLabsProductsPageLocators.PRD1_REMOVE).first).to_have_text("Remove")
+    
+@pytest.mark.unitTest
+def test_productsListPage_item1_addToCart_text_changed_to_remove(page: Page):
+    """Test that the button text changes to REMOVE after ADD TO CART is clicked"""
+    page.locator(SwagLabsProductsPageLocators.PRD1_BTN).first.click()
+    expect(page.locator(SwagLabsProductsPageLocators.PRD1_REMOVE).first).to_have_text("Remove")
+    
 
 #ITERATING THROUGH ALL ITEMS
 @pytest.mark.unitTest
