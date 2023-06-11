@@ -18,11 +18,22 @@ class SauceDemoProducts(object):
     PRD4_IMG_URL = '#'
     PRD5_IMG_URL = '#'
     PRD6_IMG_URL = '#'
+    NO_ITEM = 'ITEM NOT FOUND'
+    NO_ITEM_COPY = "We're sorry, but your call could not be completed as dialled. Please check your number, and try your call again. If you are in need of assistance, please dial 0 to be connected with an operator. This is a recording. 4 T 1."
 
 class SauceDemoCart(object):
     cartURL = 'cart.html'
+    cartPageTitle = 'Your Cart'
+    cartItem = 'Sauce Labs Backpack'
+    cartItemPrice = '$29.99'
+    cartQtyLabel = 'QTY'
+    cartDescriptionLabel = 'Description'
+    cartItemCopy = 'Carry all the things with the sleek, streamlined sly pack that melds uncompromising style with unequaled laptop and tablet protection.'
+    cartRemoveItemBtnText = 'Remove'
+    cartCheckoutBtnText = 'Checkout'
+    cartContinueBtnText = 'Continue Shopping'
 class SauceDemoCheckout(object):
-    orderCheckoutURL = 'checkout-step-one.html'
+    orderCheckoutURL = SauceDemoData.sauceURL+'checkout-step-one.html'
 class SauceDemoOverview(object):
     orderOverviewURL = 'checkout-step-two.html'
 class SauceDemoConfirmation(object):

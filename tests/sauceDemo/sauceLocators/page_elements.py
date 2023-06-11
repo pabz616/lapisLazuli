@@ -10,7 +10,7 @@ class SwagLabsHeaderLocators(object):
     PAGE_HEADING = '[class="title"]'
     MENU_BUTTON = '[id="react-burger-menu-btn"]'
     CART_BUTTON = '[id="shopping_cart_container"]'
-    ITEM_ADDED_BADGE = '[span="shopping_cart_badge"]'
+    ITEM_ADDED_BADGE = '[class="shopping_cart_badge"]'
     
 class SwagLabsMenuLocators(object):
     VIEW_ALL_ITEMS = '[id="inventory_sidebar_link"]'
@@ -31,7 +31,8 @@ class SwagLabsProductsPageLocators(object):
     PRD1_NAME = '[class="inventory_item_name"]'    
     PRD1_DESC = '[class="inventory_item_desc"]'
     PRD1_PRICE = '[class="inventory_item_price"]'    
-    PRD1_BTN = '[id="add-to-cart-sauce-labs-backpack"]'
+    PRD1_BTN = '[class="btn btn_primary btn_small btn_inventory"]'
+    PRD1_REMOVE = '[class="btn btn_secondary btn_small btn_inventory"]'
 
 class SwagLabsPDPLocators(object):
     PRD_IMG = '[class="inventory_details_img"]'
@@ -41,15 +42,17 @@ class SwagLabsPDPLocators(object):
     PRD_BTN = '[class="btn btn_primary btn_small btn_inventory"]'
     
     
-class SwagLabsCheckoutPageLocators(object):
-    SECTION_TITLE = '#'
-    QTY = '#'
-    NAME = '#'
-    DESC = '#'
-    PRICE = '#'
-    REMOVE_BTN = '#'
-    CONTINUE_SHOPPING = '#'
-    CHECKOUT_BTN = '[id="checkout"]'
+class SwagLabsCartPageLocators(object):
+    SECTION_TITLE = '[class="title"]'
+    QTY_LABEL = '[class="cart_quantity_label"]'
+    QTY_INPUT = '[class="cart_quantity"]'
+    DESC_LABEL = '[class="cart_desc_label"]'
+    NAME = '[class="inventory_item_name"]'
+    DESC = '[class="inventory_item_desc"]'
+    PRICE = '[class="inventory_item_price"]'
+    REMOVE_BTN = '[class="btn btn_secondary btn_small cart_button"]'
+    CONTINUE_SHOPPING = '[class="btn btn_secondary back btn_medium"]'
+    CHECKOUT_BTN = '[class="btn btn_action btn_medium checkout_button"]'
     
 class SwagLabsCustomerInfoPageLocators(object):
     SECTION_TITLE = '#'
