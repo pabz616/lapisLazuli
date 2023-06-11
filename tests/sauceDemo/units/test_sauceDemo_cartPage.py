@@ -3,7 +3,7 @@ import pytest
 import re
 
 from sauceLocators.page_elements import *
-from sauceUtils.data import SauceDemoData, SauceDemoProducts, SauceDemoCart
+from sauceUtils.data import *
 import time
 
 @pytest.fixture(scope="function", autouse=True)
@@ -34,7 +34,7 @@ def test_cartPage_quantity_label_is_displayed(page: Page):
     
 @pytest.mark.unitTest
 def test_cartPage_quantity_label_is_consistent(page: Page):
-    expect(page.locator(SwagLabsCartPageLocators.QTY_LABEL)).to_have_text("QTY")
+    expect(page.locator(SwagLabsCartPageLocators.QTY_LABEL)).to_have_text(SauceDemoCart.cartQtyLabel)
     
 @pytest.mark.unitTest
 def test_cartPage_description_label_is_displayed(page: Page):
@@ -42,23 +42,114 @@ def test_cartPage_description_label_is_displayed(page: Page):
     
 @pytest.mark.unitTest
 def test_cartPage_description_label_is_consistent(page: Page):
-    expect(page.locator(SwagLabsCartPageLocators.DESC_LABEL)).to_have_text("Description")
+    expect(page.locator(SwagLabsCartPageLocators.DESC_LABEL)).to_have_text(SauceDemoCart.cartDescriptionLabel)
     
 #CART ITEMS ADDED SECTION
 @pytest.mark.unitTest
-def test_cartPage_item_quantity_is_displayed(page: Page):
+def test_cartPage_item_added_quantity_is_displayed(page: Page):
     expect(page.locator(SwagLabsCartPageLocators.QTY_INPUT)).to_be_visible()
     
 @pytest.mark.unitTest
-def test_cartPage_item_quantity_field_shows_item_added(page: Page):
+def test_cartPage_item_added_quantity_field_shows_item_added(page: Page):
     expect(page.locator(SwagLabsCartPageLocators.QTY_INPUT)).not_to_be_empty()
     expect(page.locator(SwagLabsCartPageLocators.QTY_INPUT)).to_have_text("1") 
 
 @pytest.mark.unitTest
-def test_cartPage_item_quantity_field_cannot_be_updated(page: Page):
+def test_cartPage_item_added_quantity_field_cannot_has_no_focus_state(page: Page):
+    """Test that confirms the item added quantity field cannot be edited since it has no focus state"""
     expect(page.locator(SwagLabsCartPageLocators.QTY_INPUT)).not_to_be_focused()
     
 @pytest.mark.unitTest
-def test_cartPage_item_name_is_displayed(page: Page):
-    expect(page.locator(SwagLabsCartPageLocators.QTY_INPUT)).to_be_visible()
+def test_cartPage_item_added_name_is_displayed(page: Page):
+    expect(page.locator(SwagLabsCartPageLocators.NAME)).to_be_visible()
+
+@pytest.mark.unitTest
+def test_cartPage_item_added_name_is_consistent(page: Page):
+    item_added = page.locator(SwagLabsCartPageLocators.NAME)
+    expect(item_added).to_have_text(SauceDemoCart.cartItem)
+        
+@pytest.mark.unitTest
+def test_cartPage_item_added_name_redirect_to_product_details(page: Page):
+    """Test that the product name is actionable by virtue of redirecting to the product details page"""
+    page.locator(SwagLabsCartPageLocators.NAME).click()
+    expect(page).not_to_have_url(re.compile(SauceDemoCart.cartURL))   
+
+@pytest.mark.unitTest
+def test_cartPage_item_added_copy_is_displayed(page: Page):
+    expect(page.locator(SwagLabsCartPageLocators.DESC)).to_be_visible()
+
+@pytest.mark.xfail(reason="Copy is incorrect")
+@pytest.mark.unitTest
+def test_cartPage_item_added_copy_is_consistent(page: Page):
+    expect(page.locator(SwagLabsCartPageLocators.DESC)).to_contain_text(SauceDemoCart.cartItemCopy)
     
+@pytest.mark.unitTest
+def test_cartPage_item_added_price_is_displayed(page: Page):
+    expect(page.locator(SwagLabsCartPageLocators.PRICE)).to_be_visible()
+
+@pytest.mark.unitTest
+def test_cartPage_item_added_price_is_consistent(page: Page):
+    expect(page.locator(SwagLabsCartPageLocators.PRICE)).to_contain_text(SauceDemoCart.cartItemPrice)
+    
+@pytest.mark.unitTest
+def test_cartPage_item_added_REMOVE_button_is_displayed(page: Page):
+    expect(page.locator(SwagLabsCartPageLocators.REMOVE_BTN)).to_be_visible()
+    
+@pytest.mark.unitTest
+def test_cartPage_item_added_REMOVE_button_is_actionable(page: Page):
+    expect(page.locator(SwagLabsCartPageLocators.REMOVE_BTN)).not_to_be_disabled()
+
+@pytest.mark.xfail(reason="Checkout button remains actionable, user can proceed thru checkout w/o an item in cart")
+@pytest.mark.unitTest
+def test_cartPage_item_added_REMOVE_button_clicked(page: Page):
+    """Test that entire item is removed from cart, checkout btn is disabled"""
+    page.locator(SwagLabsCartPageLocators.REMOVE_BTN).click()
+    expect(page.locator(SwagLabsHeaderLocators.ITEM_ADDED_BADGE)).not_to_be_visible()
+    expect(page.locator(SwagLabsCartPageLocators.QTY_INPUT)).not_to_be_visible()
+    expect(page.locator(SwagLabsCartPageLocators.NAME)).not_to_be_visible()
+    expect(page.locator(SwagLabsCartPageLocators.DESC)).not_to_be_visible()
+    expect(page.locator(SwagLabsCartPageLocators.PRICE)).not_to_be_visible()
+    expect(page.locator(SwagLabsCartPageLocators.REMOVE_BTN)).not_to_be_visible()
+    expect(page.locator(SwagLabsCartPageLocators.CHECKOUT_BTN)).to_be_disabled()
+    
+    
+@pytest.mark.unitTest
+def test_cartPage_item_added_REMOVE_button_clicked_state(page: Page, element_id= "remove-sauce-labs-backpack"):
+    expect(page.locator(SwagLabsCartPageLocators.REMOVE_BTN)).to_have_id(element_id)
+    expect(page.locator(SwagLabsCartPageLocators.REMOVE_BTN)).to_have_text(SauceDemoCart.cartRemoveItemBtnText)
+    
+@pytest.mark.unitTest
+def test_cartPage_item_added_CHECKOUT_button_is_displayed(page: Page):
+    expect(page.locator(SwagLabsCartPageLocators.CHECKOUT_BTN)).to_be_visible()
+    
+@pytest.mark.unitTest
+def test_cartPage_item_added_CHECKOUT_button_is_actionable(page: Page):
+    expect(page.locator(SwagLabsCartPageLocators.CHECKOUT_BTN)).not_to_be_disabled()
+
+@pytest.mark.unitTest
+def test_cartPage_item_added_CHECKOUT_redirect_to_checkout_page(page: Page):
+    page.locator(SwagLabsCartPageLocators.CHECKOUT_BTN).click()
+    expect(page).to_have_url(re.compile(SauceDemoCheckout.orderCheckoutURL))
+    
+@pytest.mark.unitTest
+def test_cartPage_item_added_CHECKOUT_button_clicked_state(page: Page, element_id= "checkout"):
+    expect(page.locator(SwagLabsCartPageLocators.CHECKOUT_BTN)).to_have_id(element_id)
+    expect(page.locator(SwagLabsCartPageLocators.CHECKOUT_BTN)).to_have_text(SauceDemoCart.cartCheckoutBtnText)
+    
+@pytest.mark.unitTest
+def test_cartPage_item_added_CONTINUE_SHOPPING_button_is_displayed(page: Page):
+    expect(page.locator(SwagLabsCartPageLocators.CONTINUE_SHOPPING)).to_be_visible()
+    
+@pytest.mark.unitTest
+def test_cartPage_item_added_CONTINUE_SHOPPING_button_is_actionable(page: Page):
+    expect(page.locator(SwagLabsCartPageLocators.CONTINUE_SHOPPING)).not_to_be_disabled()
+
+@pytest.mark.unitTest
+def test_cartPage_item_added_CONTINUE_SHOPPING_redirect_back_to_product_list_page(page: Page):
+    page.locator(SwagLabsCartPageLocators.CONTINUE_SHOPPING).click()
+    expect(page).to_have_url(re.compile(SauceDemoProducts.productsURL))
+    
+@pytest.mark.unitTest
+def test_cartPage_item_added_CONTINUE_SHOPPING_button_clicked_state(page: Page, element_id= "continue-shopping"):
+    expect(page.locator(SwagLabsCartPageLocators.CONTINUE_SHOPPING)).to_have_id(element_id)
+    expect(page.locator(SwagLabsCartPageLocators.CONTINUE_SHOPPING)).to_have_text(SauceDemoCart.cartContinueBtnText)
