@@ -4,6 +4,7 @@ class SauceDemoPageLocators(object):
     USN_INPUT = '[id="user-name"]'
     PWD_INPUT = '[id="password"]'
     SUBMIT_BTN = '[id="login-button"]'
+    SECTION_TITLE = '[class="title"]'
     
 class SwagLabsHeaderLocators(object):
     HEADER_LOGO = '[class="app_logo"]'
@@ -20,7 +21,7 @@ class SwagLabsMenuLocators(object):
     CLOSE_MENU = '[id="react-burger-cross-btn"]'
     
 class SwagLabsProductsPageLocators(object):
-    HEADER = '[class="title"]'
+    HEADER = SauceDemoPageLocators.SECTION_TITLE
     PRD1 = '[class="inventory_item"]'
     SELECTED_OPTION = '[class="active_option"]'
     PRD_SORT = '[class="product_sort_container"]'
@@ -43,7 +44,7 @@ class SwagLabsPDPLocators(object):
     
     
 class SwagLabsCartPageLocators(object):
-    SECTION_TITLE = '[class="title"]'
+    SECTION_TITLE = SauceDemoPageLocators.SECTION_TITLE
     QTY_LABEL = '[class="cart_quantity_label"]'
     QTY_INPUT = '[class="cart_quantity"]'
     DESC_LABEL = '[class="cart_desc_label"]'
@@ -54,13 +55,15 @@ class SwagLabsCartPageLocators(object):
     CONTINUE_SHOPPING = '[class="btn btn_secondary back btn_medium"]'
     CHECKOUT_BTN = '[class="btn btn_action btn_medium checkout_button"]'
     
-class SwagLabsCustomerInfoPageLocators(object):
-    SECTION_TITLE = '#'
+class SwagLabsCheckoutPageLocators(object):
+    SECTION_TITLE = SauceDemoPageLocators.SECTION_TITLE
     FNAME_INPUT = '[id="first-name"]'
     LNAME_INPUT = '[id="last-name"]'
     ZIP_INPUT = '[id="postal-code"]'
     CONTINUE_BUTTON = '[id="continue"]'
     CANCEL_BUTTON = '[id="cancel"]'
+    ERROR_ICON = '[class="svg-inline--fa fa-times-circle fa-w-16 error_icon"]'
+    ERROR_MSG = '[class="error-message-container error"]'
     
 class SwagLabsOverviewPageLocators(object):
     SECTION_TITLE = '#'
