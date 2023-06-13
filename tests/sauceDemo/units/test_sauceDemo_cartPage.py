@@ -4,7 +4,7 @@ import re
 
 from sauceLocators.page_elements import *
 from sauceUtils.data import *
-import time
+
 
 @pytest.fixture(scope="function", autouse=True)
 def before_each(create_browser_context, page: Page):
