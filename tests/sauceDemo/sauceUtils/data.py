@@ -50,7 +50,18 @@ class SauceDemoCheckout(object):
     orderCheckoutZipCodeErrorMsg = 'Error: Postal Code is required'
     
 class SauceDemoOverview(object):
-    orderOverviewURL = 'checkout-step-two.html'
+    orderOverviewURL = SauceDemoData.sauceURL+'checkout-step-two.html'
+    orderOverviewSectionText = 'Checkout: Overview'
+    orderOverviewCartItem = SauceDemoCart.cartItem
+    orderOverviewCartDesc = SauceDemoCart.cartItemCopy
+    orderOverviewCartPrice = SauceDemoCart.cartItemPrice
+    orderOverviewCartQtyLabel = SauceDemoCart.cartQtyLabel
+    orderOverviewCartDescriptionLabel = SauceDemoCart.cartDescriptionLabel
+    orderOverviewPaymentInfo = 'SauceCard #31337'
+    orderOverviewShippingInfo = 'Free Pony Express Delivery!'
+    orderOverviewSumTotal = 'Item total: $29.99'
+    orderOverviewTax  = 'Tax: $2.40'
+    orderOverviewTotal = 'Total: $32.39'
 class SauceDemoConfirmation(object):
     orderConfirmationURL = 'checkout-complete.html'
     

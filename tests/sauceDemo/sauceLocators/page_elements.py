@@ -42,7 +42,6 @@ class SwagLabsPDPLocators(object):
     PRD_PRICE = '[class="inventory_details_price"]'    
     PRD_BTN = '[class="btn btn_primary btn_small btn_inventory"]'
     
-    
 class SwagLabsCartPageLocators(object):
     SECTION_TITLE = SauceDemoPageLocators.SECTION_TITLE
     QTY_LABEL = '[class="cart_quantity_label"]'
@@ -66,18 +65,25 @@ class SwagLabsCheckoutPageLocators(object):
     ERROR_MSG = '[class="error-message-container error"]'
     
 class SwagLabsOverviewPageLocators(object):
-    SECTION_TITLE = '#'
-    QTY = '#'
-    NAME = '#'
-    DESC = '#'
-    PRICE = '#'
-    PAYMENT_INFO = '#'
-    SHIPPING_INFO = '#'
-    PRICE_TOTAL =  '#'
-    ITEM_TOTAL = '#'
-    TAX = '#'
-    TOTAL = '#'
+    SECTION_TITLE = SauceDemoPageLocators.SECTION_TITLE
+    QTY_LABEL = SwagLabsCartPageLocators.QTY_LABEL
+    QTY_INPUT = SwagLabsCartPageLocators.QTY_INPUT
+    DESC_LABEL = SwagLabsCartPageLocators.DESC_LABEL
+    DESC = SwagLabsCartPageLocators.DESC   
+    NAME = SwagLabsCartPageLocators.NAME
+    PRICE = SwagLabsCartPageLocators.PRICE
+    INFO = '[class="summary_info_label"]'
+    VALUE = '[class="summary_value_label"]'
+    PAYMENT_INFO_LABEL = INFO
+    PAYMENT_INFO = VALUE
+    SHIPPING_INFO_LABEL = INFO
+    SHIPPING_INFO = VALUE
+    PRICE_SUBTOTAL_LABEL = INFO
+    PRICE_SUBTOTAL =  '[class="summary_subtotal_label"]'
+    TAX = '[class="summary_tax_label"]'
+    TOTAL = '[class="summary_info_label summary_total_label"]'
     FINISH_BUTTON = '[id="finish"]'
+    CANCEL_BUTTON = '[id="cancel"]'
     
 class SwagLabsOrderConfirmationPageLocators(object):
     SECTION_TITLE = '[class="title"]'
