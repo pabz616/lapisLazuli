@@ -61,18 +61,18 @@ def test_productsPageHeader_cart_button_item_added_badge_is_not_displayed(page: 
     
 @pytest.mark.unitTest
 def test_productsPageHeader_cart_button_item_added_badge_is_displayed(page: Page):
-    page.locator(SwagLabsProductsPageLocators.PRD1_BTN).first.click()
+    page.locator(SwagLabsPLPLocators.PRD1_BTN).first.click()
     expect(page.locator(SwagLabsHeaderLocators.ITEM_ADDED_BADGE)).to_be_visible()
 
 @pytest.mark.unitTest
 def test_productsPageHeader_cart_button_item_added_badge_count_is_displayed(page: Page):
-    page.locator(SwagLabsProductsPageLocators.PRD1_BTN).first.click()
+    page.locator(SwagLabsPLPLocators.PRD1_BTN).first.click()
     expect(page.locator(SwagLabsHeaderLocators.ITEM_ADDED_BADGE)).to_have_text("1")
 
 @pytest.mark.unitTest
 def test_productsPageHeader_cart_button_item_added_badge_count_values(page: Page):
     """Test that the following CART ITEM ADDED values are not possible"""
-    page.locator(SwagLabsProductsPageLocators.PRD1_BTN).first.click()
+    page.locator(SwagLabsPLPLocators.PRD1_BTN).first.click()
     expect(page.locator(SwagLabsHeaderLocators.ITEM_ADDED_BADGE)).not_to_have_text("")
     expect(page.locator(SwagLabsHeaderLocators.ITEM_ADDED_BADGE)).not_to_have_text("0")
     expect(page.locator(SwagLabsHeaderLocators.ITEM_ADDED_BADGE)).not_to_have_text("99")

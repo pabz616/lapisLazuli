@@ -9,7 +9,7 @@ from sauceUtils.data import *
 @pytest.fixture(scope="function", autouse=True)
 def before_each(create_browser_context, page: Page):
     page.goto(SauceDemoProducts.productsURL)
-    page.locator(SwagLabsProductsPageLocators.PRD1_BTN).first.click()
+    page.locator(SwagLabsPLPLocators.ADD_TO_CART).first.click()
     page.locator(SwagLabsHeaderLocators.CART_BUTTON).click()
     yield page
 
