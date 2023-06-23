@@ -1,6 +1,6 @@
 from sauceLocators.page_elements import *
 from playwright.sync_api import sync_playwright, expect
-from sauceUtils.data import SauceDemoData
+from sauceUtils.data import *
 
 class OrderCompletePage:
     def __init__(self, page):
@@ -16,13 +16,13 @@ class OrderCompletePage:
         expect(self.success_pageTitle).to_have_text('Checkout: Complete!')
         #
         expect(self.success_image).to_be_visible()
-        expect(self.success_image).to_have_attribute("alt", SauceDemoData.successImageAlt)
+        expect(self.success_image).to_have_attribute("alt", SauceDemoConfirmation.successImageAlt)
         #
         expect(self.success_message).to_be_visible()
-        expect(self.success_message).to_have_text(SauceDemoData.successMessage)
+        expect(self.success_message).to_have_text(SauceDemoConfirmation.successMessage)
         #
         expect(self.success_copy).to_be_visible()
-        expect(self.success_copy).to_have_text(SauceDemoData.successCopy)
+        expect(self.success_copy).to_have_text(SauceDemoConfirmation.successCopy)
         #
         expect(self.home_button).to_be_visible()
         expect(self.home_button).to_be_enabled()

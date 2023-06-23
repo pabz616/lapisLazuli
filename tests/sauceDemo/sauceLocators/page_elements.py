@@ -20,7 +20,7 @@ class SwagLabsMenuLocators(object):
     RESET_APP = '[id="reset_sidebar_link"]'
     CLOSE_MENU = '[id="react-burger-cross-btn"]'
     
-class SwagLabsProductsPageLocators(object):
+class SwagLabsPLPLocators(object):
     HEADER = SauceDemoPageLocators.SECTION_TITLE
     PRD1 = '[class="inventory_item"]'
     SELECTED_OPTION = '[class="active_option"]'
@@ -52,7 +52,7 @@ class SwagLabsCartPageLocators(object):
     PRICE = '[class="inventory_item_price"]'
     REMOVE_BTN = '[class="btn btn_secondary btn_small cart_button"]'
     CONTINUE_SHOPPING = '[class="btn btn_secondary back btn_medium"]'
-    CHECKOUT_BTN = '[class="btn btn_action btn_medium checkout_button"]'
+    CHECKOUT_BTN = '[id="checkout"]'
     
 class SwagLabsCheckoutPageLocators(object):
     SECTION_TITLE = SauceDemoPageLocators.SECTION_TITLE

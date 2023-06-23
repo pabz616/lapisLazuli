@@ -64,9 +64,7 @@ class SauceDemoOverview(object):
     orderOverviewTotal = 'Total: $32.39'
 class SauceDemoConfirmation(object):
     orderConfirmationURL = 'checkout-complete.html'
-    
     successImageAlt = 'Pony Express'
-    
     successMessage = 'Thank you for your order!'
     successCopy = 'Your order has been dispatched, and will arrive just as fast as the pony can get there!'
     

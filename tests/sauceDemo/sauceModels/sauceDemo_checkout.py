@@ -4,10 +4,10 @@ from playwright.sync_api import sync_playwright, expect
 class CheckoutPage:
     def __init__(self, page):
         self.page = page
-        self.firstName = page.locator(SwagLabsCustomerInfoPageLocators.FNAME_INPUT)
-        self.lastName = page.locator(SwagLabsCustomerInfoPageLocators.LNAME_INPUT)
-        self.zipCode = page.locator(SwagLabsCustomerInfoPageLocators.ZIP_INPUT)
-        self.continue_button = page.locator(SwagLabsCustomerInfoPageLocators.CONTINUE_BUTTON)
+        self.firstName = page.locator(SwagLabsCheckoutPageLocators.FNAME_INPUT)
+        self.lastName = page.locator(SwagLabsCheckoutPageLocators.LNAME_INPUT)
+        self.zipCode = page.locator(SwagLabsCheckoutPageLocators.ZIP_INPUT)
+        self.continue_button = page.locator(SwagLabsCheckoutPageLocators.CONTINUE_BUTTON)
     
     def checkUI(self):
         #TODO assert all page elements

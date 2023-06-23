@@ -28,7 +28,8 @@ def test_account_is_valid(page: Page):
     #REDIRECT TO PRODUCT_LIST
     expect(page).to_have_url(re.compile(".*inventory"))
     onProductListPage.checkUI()
-    
+
+@pytest.mark.critical    
 def test_account_is_locked_out(page: Page):
     error = page.locator('[data-test="error"]')
     errorMsg = "Epic sadface: Sorry, this user has been locked out."
@@ -38,6 +39,7 @@ def test_account_is_locked_out(page: Page):
     expect(error).to_be_visible()
     expect(error).to_contain_text(errorMsg)
 
+@pytest.mark.integration
 @pytest.mark.xfail(reason="assertion fails due to incorrect image")  
 def test_account_is_nerfed(page: Page):
     onLoginPage = LoginPage(page)
@@ -46,6 +48,7 @@ def test_account_is_nerfed(page: Page):
     onLoginPage.submitLogin(SauceDemoData.problemUSN, SauceDemoData.password)
     expect(onProductListPage.product_image).to_have_attribute("src", SauceDemoData.PRD1_IMG_URL)
 
+@pytest.mark.integration
 def test_account_is_slow(page: Page):
     onLoginPage = LoginPage(page)
     onProductListPage = ProductListPage(page)
