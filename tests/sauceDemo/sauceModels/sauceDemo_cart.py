@@ -4,7 +4,7 @@ from playwright.sync_api import sync_playwright, expect
 class CartPage:
     def __init__(self, page):
         self.page = page
-        self.checkout_button = page.locator(SwagLabsCheckoutPageLocators.CHECKOUT_BTN)
+        self.checkout_button = page.locator(SwagLabsCartPageLocators.CHECKOUT_BTN)
         
     def checkUI(self):
         #TODO assert all page elements

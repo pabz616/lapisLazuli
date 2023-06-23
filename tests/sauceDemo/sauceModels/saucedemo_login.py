@@ -16,7 +16,7 @@ class LoginPage:
     
         self.submit_button.is_visible()
         self.submit_button.is_enabled()
-        
+            
     def submitLogin(self, username, password):
         self.username_field.fill(username)
         self.password_field.fill(password)
