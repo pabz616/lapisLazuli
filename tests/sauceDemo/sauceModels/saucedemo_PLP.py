@@ -34,9 +34,17 @@ class ProductListPage:
 
     def addToCart(self):
         expect(self.cartBtn).to_be_visible()
-        expect(self.cartBtn).to_be_enabled()
-        
+        expect(self.cartBtn).to_be_enabled()    
         self.addToCartBtn.click()
+        expect(self.itemAddedBadge).to_be_visible()
+        expect(self.itemAddedBadge).to_have_text("1")
+        
+    def addAnotherItemToCart(self):
+        expect(self.item2).to_be_visible()
+        expect(self.item2).to_be_enabled()    
+        self.item2.click()
+        expect(self.itemAddedBadge).to_be_visible()
+        expect(self.itemAddedBadge).to_have_text("2")
 
     def addAllItemsToCart(self):
         self.item1.click()

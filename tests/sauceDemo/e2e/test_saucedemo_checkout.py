@@ -17,10 +17,9 @@ def before_each(page: Page):
     page.goto(SauceDemoData.sauceURL) #start
     yield
 
- 
 @pytest.mark.critical   
 def test_purchase_single_item(page: Page):
-    #TODO Refactor this .. it needs to be reusable
+    """Test entire checkout flow with a single item"""
     onLoginPage = LoginPage(page)
     onProductListPage = ProductListPage(page)
     onCartPage = CartPage(page)
@@ -38,6 +37,7 @@ def test_purchase_single_item(page: Page):
 
 @pytest.mark.critical
 def test_purchase_entire_catalog(page: Page):
+    """Test entire checkout flow, purchasing all items shown in catalog"""
     onLoginPage = LoginPage(page)
     onProductListPage = ProductListPage(page)
     onCartPage = CartPage(page)
@@ -53,8 +53,9 @@ def test_purchase_entire_catalog(page: Page):
     onOverviewPage.confirmPurchaseDetails()
     onOrderCompletePage.confirmOrderSuccessDetails()
 
-@pytest.mark.critical
+@pytest.mark.high
 def test_purchase_item_filtered_by_name_Z_A(page: Page):
+    """Test that a purchase can be made when the product is filtered by name, alphabetically descending Z to A"""
     onLoginPage = LoginPage(page)
     onProductListPage = ProductListPage(page)
     onCartPage = CartPage(page)
@@ -63,7 +64,7 @@ def test_purchase_item_filtered_by_name_Z_A(page: Page):
     onOrderCompletePage = OrderCompletePage(page)
     #
     onLoginPage.submitLogin(SauceDemoData.validUSN, SauceDemoData.password)
-    onProductListPage.sortByProductNameZtoA()
+    onProductListPage.sortByProductNameZToA()
     onProductListPage.addToCart()
     onProductListPage.navigateToCartPage()
     onCartPage.proceedToCheckout()
@@ -71,8 +72,9 @@ def test_purchase_item_filtered_by_name_Z_A(page: Page):
     onOverviewPage.confirmPurchaseDetails()
     onOrderCompletePage.confirmOrderSuccessDetails()
 
-@pytest.mark.critical
+@pytest.mark.high
 def test_purchase_item_filtered_by_price_Low_to_High(page: Page):
+    """Test that a purchase can be made when the product is filtered by lowest price"""
     onLoginPage = LoginPage(page)
     onProductListPage = ProductListPage(page)
     onCartPage = CartPage(page)
@@ -89,8 +91,9 @@ def test_purchase_item_filtered_by_price_Low_to_High(page: Page):
     onOverviewPage.confirmPurchaseDetails()
     onOrderCompletePage.confirmOrderSuccessDetails()
 
-@pytest.mark.critical
+@pytest.mark.high
 def test_purchase_item_filtered_by_price_High_to_Low(page: Page):
+    """Test that a purchase can be made when the product is filtered by highest price"""
     onLoginPage = LoginPage(page)
     onProductListPage = ProductListPage(page)
     onCartPage = CartPage(page)
@@ -107,15 +110,45 @@ def test_purchase_item_filtered_by_price_High_to_Low(page: Page):
     onOverviewPage.confirmPurchaseDetails()
     onOrderCompletePage.confirmOrderSuccessDetails()
 
-@pytest.mark.critical
+@pytest.mark.normal
 def test_purchase_item_then_update_order(page: Page):
     """Add an item, then return back (continue shopping) and add another item"""
-    pass
+    onLoginPage = LoginPage(page)
+    onProductListPage = ProductListPage(page)
+    onCartPage = CartPage(page)
+    onCheckoutPage = CheckoutPage(page)
+    onOverviewPage = OverviewPage(page)
+    onOrderCompletePage = OrderCompletePage(page)
+    #
+    onLoginPage.submitLogin(SauceDemoData.validUSN, SauceDemoData.password)
+    onProductListPage.sortByProductPriceHighToLow()
+    onProductListPage.addToCart()
+    onProductListPage.navigateToCartPage()
+    onCartPage.continueShopping()
+    onProductListPage.addAnotherItemToCart()
+    onProductListPage.navigateToCartPage()
+    onCartPage.proceedToCheckout()     
+    onCheckoutPage.completeCustomerInfo()
+    onOverviewPage.confirmPurchaseDetails()
+    onOrderCompletePage.confirmOrderSuccessDetails()
 
-@pytest.mark.critical
+@pytest.mark.skip(reason="BUG! Checkout button is still active when cart is empty allowing user to proceed through checkout")
+@pytest.mark.normal
 def test_purchase_item_then_cancel_order(page: Page):
-    """Add an item, then remove it from the cart -- the cancel button is misnamed"""
-    pass
+    """Add a single item, then remove it from the cart"""
+    onLoginPage = LoginPage(page)
+    onProductListPage = ProductListPage(page)
+    onCartPage = CartPage(page)
+    onCheckoutPage = CheckoutPage(page)
+    onOverviewPage = OverviewPage(page)
+    onOrderCompletePage = OrderCompletePage(page)
+    #
+    onLoginPage.submitLogin(SauceDemoData.validUSN, SauceDemoData.password)
+    onProductListPage.addToCart()
+    onProductListPage.navigateToCartPage()
+    onCartPage.removeItem()   
+    
    
 #TODO More Integration tests for "Your Information" section
 #TODO SECURITY TESTS
+#TODO Refactor the page references .. it needs to be reusable
