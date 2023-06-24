@@ -1,5 +1,8 @@
 class SauceDemoData(object):
     pageTitle = 'Swag Labs'
+    FirstName = 'Tester_FirstName'
+    LastName = 'Tester_LastName'
+    ZipCode = '10010'
     sauceURL = 'https://www.saucedemo.com/'
     password = 'secret_sauce'
     validUSN = 'standard_user'
@@ -30,7 +33,6 @@ class SauceDemoProducts(object):
     PRD6_IMG_URL = '#'
     NO_ITEM = 'ITEM NOT FOUND'
     NO_ITEM_COPY = "We're sorry, but your call could not be completed as dialled. Please check your number, and try your call again. If you are in need of assistance, please dial 0 to be connected with an operator. This is a recording. 4 T 1."
-
 class SauceDemoCart(object):
     cartURL = SauceDemoData.sauceURL+'cart.html'
     cartPageTitle = 'Your Cart'
@@ -48,7 +50,6 @@ class SauceDemoCheckout(object):
     orderCheckoutFNameErrorMsg = 'Error: First Name is required'
     orderCheckoutLNameErrorMsg = 'Error: Last Name is required'
     orderCheckoutZipCodeErrorMsg = 'Error: Postal Code is required'
-    
 class SauceDemoOverview(object):
     orderOverviewURL = SauceDemoData.sauceURL+'checkout-step-two.html'
     orderOverviewSectionText = 'Checkout: Overview'
