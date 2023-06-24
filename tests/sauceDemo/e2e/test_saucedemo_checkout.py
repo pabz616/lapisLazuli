@@ -31,7 +31,7 @@ def test_purchase_single_item(page: Page):
     onProductListPage.addToCart()
     onProductListPage.navigateToCartPage()
     onCartPage.proceedToCheckout()
-    onCheckoutPage.completeCustomerInfo()
+    onCheckoutPage.completeCustomerInfo(SauceDemoData.FirstName, sauceDemoData.LastName, sauceDemoData.ZipCode)
     onOverviewPage.confirmPurchaseDetails()
     onOrderCompletePage.confirmOrderSuccessDetails()
 
@@ -49,7 +49,7 @@ def test_purchase_entire_catalog(page: Page):
     onProductListPage.addAllItemsToCart()
     onProductListPage.navigateToCartPage()
     onCartPage.proceedToCheckout()
-    onCheckoutPage.completeCustomerInfo()
+    onCheckoutPage.completeCustomerInfo(SauceDemoData.FirstName, sauceDemoData.LastName, sauceDemoData.ZipCode)
     onOverviewPage.confirmPurchaseDetails()
     onOrderCompletePage.confirmOrderSuccessDetails()
 
@@ -68,7 +68,7 @@ def test_purchase_item_filtered_by_name_Z_A(page: Page):
     onProductListPage.addToCart()
     onProductListPage.navigateToCartPage()
     onCartPage.proceedToCheckout()
-    onCheckoutPage.completeCustomerInfo()
+    onCheckoutPage.completeCustomerInfo(SauceDemoData.FirstName, sauceDemoData.LastName, sauceDemoData.ZipCode)
     onOverviewPage.confirmPurchaseDetails()
     onOrderCompletePage.confirmOrderSuccessDetails()
 
@@ -87,7 +87,7 @@ def test_purchase_item_filtered_by_price_Low_to_High(page: Page):
     onProductListPage.addToCart()
     onProductListPage.navigateToCartPage()
     onCartPage.proceedToCheckout()
-    onCheckoutPage.completeCustomerInfo()
+    onCheckoutPage.completeCustomerInfo(SauceDemoData.FirstName, sauceDemoData.LastName, sauceDemoData.ZipCode)
     onOverviewPage.confirmPurchaseDetails()
     onOrderCompletePage.confirmOrderSuccessDetails()
 
@@ -106,7 +106,7 @@ def test_purchase_item_filtered_by_price_High_to_Low(page: Page):
     onProductListPage.addToCart()
     onProductListPage.navigateToCartPage()
     onCartPage.proceedToCheckout()
-    onCheckoutPage.completeCustomerInfo()
+    onCheckoutPage.completeCustomerInfo(SauceDemoData.FirstName, sauceDemoData.LastName, sauceDemoData.ZipCode)
     onOverviewPage.confirmPurchaseDetails()
     onOrderCompletePage.confirmOrderSuccessDetails()
 
@@ -128,7 +128,7 @@ def test_purchase_item_then_update_order(page: Page):
     onProductListPage.addAnotherItemToCart()
     onProductListPage.navigateToCartPage()
     onCartPage.proceedToCheckout()     
-    onCheckoutPage.completeCustomerInfo()
+    onCheckoutPage.completeCustomerInfo(SauceDemoData.FirstName, sauceDemoData.LastName, sauceDemoData.ZipCode)
     onOverviewPage.confirmPurchaseDetails()
     onOrderCompletePage.confirmOrderSuccessDetails()
 

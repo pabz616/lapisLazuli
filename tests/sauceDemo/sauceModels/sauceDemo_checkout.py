@@ -8,14 +8,24 @@ class CheckoutPage:
         self.lastName = page.locator(SwagLabsCheckoutPageLocators.LNAME_INPUT)
         self.zipCode = page.locator(SwagLabsCheckoutPageLocators.ZIP_INPUT)
         self.continue_button = page.locator(SwagLabsCheckoutPageLocators.CONTINUE_BUTTON)
+  
     
     def checkUI(self):
-        #TODO assert all page elements
-        pass
+        expect(self.firstName).to_be_visible()
+        expect(self.firstName).to_be_editable()
 
-    def completeCustomerInfo(self):
-        self.firstName.fill("Tester_FirstName")
-        self.lastName.fill("Tester_LastName")
-        self.zipCode.fill("10010")
+        expect(self.lastName).to_be_visible()
+        expect(self.lastName).to_be_editable()
+        
+        expect(self.zipCode).to_be_visible()
+        expect(self.zipCode).to_be_editable()
+        
+        expect(self.continue_button).to_be_visible()
+        expect(self.continue_button).to_be_enabled()
+        
+    def completeCustomerInfo(self, fName, lName, zipCode):
+        self.firstName.fill(fName)
+        self.lastName.fill(lName)
+        self.zipCode.fill(zipCode)
         self.continue_button.click()
     
