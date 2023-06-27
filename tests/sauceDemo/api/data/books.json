@@ -1,0 +1,15 @@
+{
+    "books": [
+        {
+            "isbn": "9781449337711",
+            "title": "Designing Evolvable Web APIs with ASP.NET",
+            "subTitle": "Harnessing the Power of the Web",
+            "author": "Glenn Block et al.",
+            "publish_date": "2020-06-04T09:12:43.000Z",
+            "publisher": "O'Reilly Media",
+            "pages": 238,
+            "description": "Design and build Web APIs for a...",
+            "website": "https://chimera.labs.oreilly.com/books/..."
+        }
+    ]
+}
