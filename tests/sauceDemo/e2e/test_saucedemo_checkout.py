@@ -147,8 +147,3 @@ def test_purchase_item_then_cancel_order(page: Page):
     onProductListPage.addToCart()
     onProductListPage.navigateToCartPage()
     onCartPage.removeItem()   
-    
-   
-#TODO More Integration tests for "Your Information" section
-#TODO SECURITY TESTS
-#TODO Refactor the page references .. it needs to be reusable
