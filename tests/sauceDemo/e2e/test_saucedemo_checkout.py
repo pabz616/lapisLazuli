@@ -1,4 +1,4 @@
-from playwright.sync_api import sync_playwright, Page
+from playwright.sync_api import Page
 from sauceUtils.data import SauceDemoData
 import pytest
 from sauceModels.saucedemo_login import LoginPage
