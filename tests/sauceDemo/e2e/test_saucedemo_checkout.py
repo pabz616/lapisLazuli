@@ -121,7 +121,7 @@ def test_purchase_item_filtered_by_price_High_to_Low(page: Page):
 
 @pytest.mark.normal
 def test_purchase_item_then_update_order(page: Page):
-    """Add an item, then return back (continue shopping) and add another item"""
+    """Test purchase an item then update item order"""
     onLoginPage = LoginPage(page)
     onProductListPage = ProductListPage(page)
     onCartPage = CartPage(page)
