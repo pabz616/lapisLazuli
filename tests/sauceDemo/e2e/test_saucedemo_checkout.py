@@ -138,7 +138,7 @@ def test_purchase_item_then_update_order(page: Page):
     onProductListPage.navigateToCartPage()
     onCartPage.proceedToCheckout()
     onCheckoutPage.completeCustomerInfo(
-        SauceDemoData.FirstName, sauceDemoData.LastName, sauceDemoData.ZipCode)
+        SauceDemoData.FirstName, SauceDemoData.LastName, SauceDemoData.ZipCode)
     onOverviewPage.confirmPurchaseDetails()
     onOrderCompletePage.confirmOrderSuccessDetails()
 
