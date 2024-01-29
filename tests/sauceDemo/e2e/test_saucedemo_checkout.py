@@ -9,15 +9,15 @@ from sauceModels.sauceDemo_checkout import CheckoutPage
 from sauceModels.sauceDemo_overview import OverviewPage
 from sauceModels.sauceDemo_success import OrderCompletePage
 
+
 @pytest.fixture(scope="function", autouse=True)
-#use --browser-channel "chrome" to run tests in chrome, not chromium
-
-
+# use --browser-channel "chrome" to run tests in chrome, not chromium
 def before_each(page: Page):
-    page.goto(SauceDemoData.sauceURL) #start
+    page.goto(SauceDemoData.sauceURL)  # start
     yield
 
-@pytest.mark.critical   
+
+@pytest.mark.critical
 def test_purchase_single_item(page: Page):
     """Test entire checkout flow with a single item"""
     onLoginPage = LoginPage(page)
@@ -31,9 +31,11 @@ def test_purchase_single_item(page: Page):
     onProductListPage.addToCart()
     onProductListPage.navigateToCartPage()
     onCartPage.proceedToCheckout()
-    onCheckoutPage.completeCustomerInfo(SauceDemoData.FirstName, sauceDemoData.LastName, sauceDemoData.ZipCode)
+    onCheckoutPage.completeCustomerInfo(
+        SauceDemoData.FirstName, sauceDemoData.LastName, sauceDemoData.ZipCode)
     onOverviewPage.confirmPurchaseDetails()
     onOrderCompletePage.confirmOrderSuccessDetails()
+
 
 @pytest.mark.critical
 def test_purchase_entire_catalog(page: Page):
@@ -49,9 +51,11 @@ def test_purchase_entire_catalog(page: Page):
     onProductListPage.addAllItemsToCart()
     onProductListPage.navigateToCartPage()
     onCartPage.proceedToCheckout()
-    onCheckoutPage.completeCustomerInfo(SauceDemoData.FirstName, sauceDemoData.LastName, sauceDemoData.ZipCode)
+    onCheckoutPage.completeCustomerInfo(
+        SauceDemoData.FirstName, sauceDemoData.LastName, sauceDemoData.ZipCode)
     onOverviewPage.confirmPurchaseDetails()
     onOrderCompletePage.confirmOrderSuccessDetails()
+
 
 @pytest.mark.high
 def test_purchase_item_filtered_by_name_Z_A(page: Page):
@@ -68,9 +72,11 @@ def test_purchase_item_filtered_by_name_Z_A(page: Page):
     onProductListPage.addToCart()
     onProductListPage.navigateToCartPage()
     onCartPage.proceedToCheckout()
-    onCheckoutPage.completeCustomerInfo(SauceDemoData.FirstName, sauceDemoData.LastName, sauceDemoData.ZipCode)
+    onCheckoutPage.completeCustomerInfo(
+        SauceDemoData.FirstName, sauceDemoData.LastName, sauceDemoData.ZipCode)
     onOverviewPage.confirmPurchaseDetails()
     onOrderCompletePage.confirmOrderSuccessDetails()
+
 
 @pytest.mark.high
 def test_purchase_item_filtered_by_price_Low_to_High(page: Page):
@@ -87,9 +93,11 @@ def test_purchase_item_filtered_by_price_Low_to_High(page: Page):
     onProductListPage.addToCart()
     onProductListPage.navigateToCartPage()
     onCartPage.proceedToCheckout()
-    onCheckoutPage.completeCustomerInfo(SauceDemoData.FirstName, sauceDemoData.LastName, sauceDemoData.ZipCode)
+    onCheckoutPage.completeCustomerInfo(
+        SauceDemoData.FirstName, sauceDemoData.LastName, sauceDemoData.ZipCode)
     onOverviewPage.confirmPurchaseDetails()
     onOrderCompletePage.confirmOrderSuccessDetails()
+
 
 @pytest.mark.high
 def test_purchase_item_filtered_by_price_High_to_Low(page: Page):
@@ -106,9 +114,11 @@ def test_purchase_item_filtered_by_price_High_to_Low(page: Page):
     onProductListPage.addToCart()
     onProductListPage.navigateToCartPage()
     onCartPage.proceedToCheckout()
-    onCheckoutPage.completeCustomerInfo(SauceDemoData.FirstName, sauceDemoData.LastName, sauceDemoData.ZipCode)
+    onCheckoutPage.completeCustomerInfo(
+        SauceDemoData.FirstName, sauceDemoData.LastName, sauceDemoData.ZipCode)
     onOverviewPage.confirmPurchaseDetails()
     onOrderCompletePage.confirmOrderSuccessDetails()
+
 
 @pytest.mark.normal
 def test_purchase_item_then_update_order(page: Page):
@@ -127,10 +137,12 @@ def test_purchase_item_then_update_order(page: Page):
     onCartPage.continueShopping()
     onProductListPage.addAnotherItemToCart()
     onProductListPage.navigateToCartPage()
-    onCartPage.proceedToCheckout()     
-    onCheckoutPage.completeCustomerInfo(SauceDemoData.FirstName, sauceDemoData.LastName, sauceDemoData.ZipCode)
+    onCartPage.proceedToCheckout()
+    onCheckoutPage.completeCustomerInfo(
+        SauceDemoData.FirstName, sauceDemoData.LastName, sauceDemoData.ZipCode)
     onOverviewPage.confirmPurchaseDetails()
     onOrderCompletePage.confirmOrderSuccessDetails()
+
 
 @pytest.mark.skip(reason="BUG! Checkout button is still active when cart is empty allowing user to proceed through checkout")
 @pytest.mark.normal
@@ -146,4 +158,4 @@ def test_purchase_item_then_cancel_order(page: Page):
     onLoginPage.submitLogin(SauceDemoData.validUSN, SauceDemoData.password)
     onProductListPage.addToCart()
     onProductListPage.navigateToCartPage()
-    onCartPage.removeItem()   
+    onCartPage.removeItem()
