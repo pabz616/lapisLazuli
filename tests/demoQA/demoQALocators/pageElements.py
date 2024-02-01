@@ -11,3 +11,23 @@ class TextFormLocators(object):
     PERM_ADDRESS_INPUT = '//textarea[@id="permanentAddress"]'
     SUBMIT_BUTTON = '[id="submit"]'
     RESULTS_OUTPUT = '[id="output"]'
+    
+    
+class CheckBoxLocators(object):
+    PAGE_HEADER = '[class="main-header"]'
+    HOME_TOGGLE = '//button[@aria-label="Toggle"]'
+    DESKTOP_TOGGLE = '(//button[@aria-label="Toggle"])[2]'
+    EXPAND = '//button[@aria-label="Expand all"]'
+    COLLAPSE = '//button[@aria-label="Collapse all"]'
+    HOME_CHKBX = '//span[@class="rct-checkbox"]'
+    HOME_CHKBX_TITLE = '//span[@class="rct-title"]'
+    MESSAGE = '[id="result"]'
+    SUBDIR1 = '(//span[@class="rct-text"])[1]'
+    SUBDIR2 = '(//span[@class="rct-text"])[2]'
+    SUBDIR3 = '(//span[@class="rct-text"])[3]'
+    SUBDIR4 = '(//span[@class="rct-text"])[4]'
+    SUBDIR5 = '(//span[@class="rct-text"])[5]'
+    SUBDIR6 = '(//span[@class="rct-text"])[6]'
+    SUBDIR7 = '(//span[@class="rct-text"])[7]'
+    SUBDIR8 = '(//span[@class="rct-text"])[8]'
+    SUBDIR9 = '(//span[@class="rct-text"])[9]'
