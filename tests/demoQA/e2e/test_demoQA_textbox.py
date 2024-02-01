@@ -1,14 +1,13 @@
 import pytest
 from playwright.sync_api import Page
 from demoQAModels.demoQAText import TextBoxPage
-from demoQAUtils.data import DemoQATextForm as testData
-from demoQAUtils.data import InvalidEmailAddresses as testEmails
+from demoQAUtils.data import ProjectData, DemoQATextForm as testData, InvalidEmailAddresses as testEmails
 
 
 @pytest.fixture(scope="function", autouse=True)
 # use --browser-channel "chrome" to run tests in chrome, not chromium
 def before_each(page: Page):
-    textBoxPageUrl = testData.baseUrl+'/text-box'
+    textBoxPageUrl = ProjectData.baseUrl+'/text-box'
     page.goto(textBoxPageUrl)
     yield
 
@@ -60,3 +59,4 @@ def test_validation_occurs_for_invalid_email_address(page: Page):
     for email in testEmails.badEmails:
         onTextBoxPage.fillForm(testData.cName, f"{email}", testData.cAddress, testData.cPermAddress)
         onTextBoxPage.confirmEmailInputErrorState()
+
