@@ -1,0 +1,13 @@
+class TextFormLocators(object):
+    PAGE_HEADER = '[class="main-header"]'
+    FULLNAME_INPUT_LABEL = '[id="userName-label"]'
+    FULLNAME_INPUT = '[id="userName"]'
+    EMAIL_INPUT_LABEL = '[id="userEmail-label"]'
+    EMAIL_INPUT = '[id="userEmail"]'
+    EMAIL_INPUT_ERROR = '//input[contains(@class,"mr-sm-2 field-error form-control")]'
+    ADDRESS_INPUT_LABEL = '[id="currentAddress-label"]'
+    ADDRESS_INPUT = '//textarea[@id="currentAddress"]'
+    PERM_ADDRESS_INPUT_LABEL = '[id="permanentAddress-label"]'
+    PERM_ADDRESS_INPUT = '//textarea[@id="permanentAddress"]'
+    SUBMIT_BUTTON = '[id="submit"]'
+    RESULTS_OUTPUT = '[id="output"]'

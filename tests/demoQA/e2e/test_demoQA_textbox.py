@@ -2,6 +2,7 @@ import pytest
 from playwright.sync_api import Page
 from demoQAModels.demoQAText import TextBoxPage
 from demoQAUtils.data import DemoQATextForm as testData
+from demoQAUtils.data import InvalidEmailAddresses as testEmails
 
 
 @pytest.fixture(scope="function", autouse=True)
@@ -55,13 +56,7 @@ def test_required_validation_occurs_error_for_missing_current_address(page: Page
 
 @pytest.mark.normal
 def test_validation_occurs_for_invalid_email_address(page: Page):
-    badEmails = ['badEmail', 'email.domain.com', '@domain.com',
-                           '#@%^%#$@#$@#.com', 'email@domain.com (Joe Smith)', 'email@domain@domain.com', '.email@domain.com',
-                           'email.@domain.com', 'email..email@domain.com', 'あいうえお@domain.com', 'email@-domain.com', 'email@.domain.com',
-                           'email@111.222.333.44444', 'email@domain..com']
-
     onTextBoxPage = TextBoxPage(page)
-    
-    invalidEmailAddress = [emails for emails in badEmails]
-    onTextBoxPage.fillForm(testData.cName, invalidEmailAddress, testData.cAddress, testData.cPermAddress)
-    onTextBoxPage.confirmEmailInputErrorState()
+    for email in testEmails.badEmails:
+        onTextBoxPage.fillForm(testData.cName, f"{email}", testData.cAddress, testData.cPermAddress)
+        onTextBoxPage.confirmEmailInputErrorState()
