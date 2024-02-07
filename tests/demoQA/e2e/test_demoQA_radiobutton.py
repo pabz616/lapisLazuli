@@ -13,7 +13,7 @@ def before_each(page: Page):
     
 @pytest.mark.normal
 def test_radiobutton_UI(page: Page):
-    """Test that entire textbox page is to spec"""
+    """Test that entire radio buttons page is to spec"""
     onRadioButtonPage = RadioButtonPage(page)
     onRadioButtonPage.checkUI
     
