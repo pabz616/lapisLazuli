@@ -55,3 +55,14 @@ class DatePickerLocators(object):
     DATE = '//input[@id="datePickerMonthYearInput"]'
     DATE_PICKER = '//div[@class="react-datepicker"]'
     DATETIME = '//input[@id="dateAndTimePickerInput"]'
+    
+
+class ListLocators(object):
+    PAGE_HEADER = '//h1[class="text-center"]'
+    LIST = '//div[@class="demo-tabpane-list"]'
+    ROW1 = '(//div[contains(@class,"list-group-item-action")])[1]'
+    ROW2 = '(//div[contains(@class,"list-group-item-action")])[2]'
+    ROW3 = '(//div[contains(@class,"list-group-item-action")])[3]'
+    ROW4 = '(//div[contains(@class,"list-group-item-action")])[4]'
+    ROW5 = '(//div[contains(@class,"list-group-item-action")])[5]'
+    ROW6 = '(//div[contains(@class,"list-group-item-action")])[6]'

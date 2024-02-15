@@ -11,8 +11,6 @@ class DatePickerPage:
         self.dateTimeInput = page.locator(DatePickerLocators.DATETIME)
         
         
-        
-    #DATE_SELECT = f"//div[@class='react-datepicker__day react-datepicker__day--{date}']"
     
     def checkUI(self):
         pageHeaderCopy = 'Date Picker'
