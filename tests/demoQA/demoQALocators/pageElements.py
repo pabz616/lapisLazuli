@@ -48,3 +48,10 @@ class RadioButtonLocators(object):
 class LinksLocators(object):
     PAGE_HEADER = '[class="main-header"]'
     MSG = '//p[@id="linkResponse"]'
+    
+    
+class DatePickerLocators(object):
+    PAGE_HEADER = '//h1[class="text-center"]'
+    DATE = '//input[@id="datePickerMonthYearInput"]'
+    DATE_PICKER = '//div[@class="react-datepicker"]'
+    DATETIME = '//input[@id="dateAndTimePickerInput"]'
