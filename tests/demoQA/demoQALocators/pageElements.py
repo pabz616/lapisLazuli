@@ -31,3 +31,20 @@ class CheckBoxLocators(object):
     SUBDIR7 = '(//span[@class="rct-text"])[7]'
     SUBDIR8 = '(//span[@class="rct-text"])[8]'
     SUBDIR9 = '(//span[@class="rct-text"])[9]'
+
+    
+class RadioButtonLocators(object):
+    PAGE_HEADER = '[class="main-header"]'
+    RB_QUESTION = '//div[class="mb-3"]'
+    RB_ANSWER1_LABEL = '//label[@for="yesRadio"]'
+    RB_ANSWER1 = '//input[@id="yesRadio"]'
+    RB_ANSWER2_LABEL = '//label[@for="impressiveRadio"]'
+    RB_ANSWER2 = '//input[@id="impressiveRadio"]'
+    RB_ANSWER3_LABEL = '//label[@for="noRadio"]'
+    RB_ANSWER3 = '//input[@id="noRadio"]'
+    MSG = '//p[@class="mt-3"]'
+    
+    
+class LinksLocators(object):
+    PAGE_HEADER = '[class="main-header"]'
+    MSG = '//p[@id="linkResponse"]'
