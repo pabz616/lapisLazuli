@@ -89,12 +89,19 @@ class BookStoreSearch(object):
     SEARCH_INPUT = '//input[@id="searchBox"]'
     
 
-class BookStorDisplay(object):
+class BookStoreDisplay(object):
     BOOK_TBL = '//div[@class="ReactTable -striped -highlight"]'
     BOOK_TBL_HEADER = '//div[@class="rt-thead -header"]'
     BOOK_TBL_BODY = '//div[@class="rt-tbody"]'
     BOOK_TBL_ROW = '//div[@class="rt-tr-group"]'
     BOOK_TBL_R1_IMG = '//img[@alt="image"]'
-    BOOK_TBL_R1_TITLE = '//div/span[@id="see-book-Git Pocket Guide"]'
+    BOOK_TBL_R1_TITLE = '//div/span[@id="see-book-Git Pocket Guide"]/a'
     BOOK_TBL_R1_AUTHOR = '(//div[@class="rt-td"])[3]'
     BOOK_TBL_R1_PUBLISHER = '(//div[@class="rt-td"])[4]'
+    BOOK_1 = '//a[contains(.,"Git Pocket Guide")]'
+    PAGINATION = '//div[@class="-pagination"]'
+    PREVIOUS_BTN = '//div[@class="-previous"]/button'
+    NEXT_BTN = '//div[@class="-next"]/button' 
+    PAGE_COUNT = '//span[@class="-pageInfo"]'
+    PAGE_INPUT = '//div[@class="-pageJump"]/input'
+    PAGE_SELECT = '//select[@aria-label="rows per page"]'

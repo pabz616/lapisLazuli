@@ -10,8 +10,13 @@ class BookStoreSearchPage:
         self.element = page.locator(BookStoreSearch.element)
         
     def checkUI(self):
+
         expect(self.element).to_be_visible()
         expect(self.element).to_contain_text('whatever')
+        
+        # LOGIN BUTTON
+        
+        # BOOKSTORE CATALOG
         
     def searchTerm(self, term):
         self.element.fill(term)
