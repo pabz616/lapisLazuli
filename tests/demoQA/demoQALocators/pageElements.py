@@ -66,3 +66,35 @@ class ListLocators(object):
     ROW4 = '(//div[contains(@class,"list-group-item-action")])[4]'
     ROW5 = '(//div[contains(@class,"list-group-item-action")])[5]'
     ROW6 = '(//div[contains(@class,"list-group-item-action")])[6]'
+    
+    
+class BookStoreLogin(object):
+    LOGIN_BTN = '//button[@id="login"]'
+    LOGIN_USN_INPUT = '//input[@id="userName"]'
+    LOGIN_PWD_INPUT = '//input[@id="password"]'
+    
+
+class BookStoreSignUp(object):
+    REGISTER_BTN = '//button[@id="newUser"]'
+    REGISTER_FNAME = '//input[@id="firstname"]'
+    REGISTER_LNAME = '//input[@id="lastname"]'
+    REGISTER_USN = '//input[@id="userName"]'
+    REGISTER_PWD = '//input[@id="password"]'
+    REGISTER_CAPTCHA = '//div[@class="recaptcha-checkbox-border"]'
+    REGISTER_SUBMIT_BTN = '//button[@id="register"]'
+    REGISTER_BACK_BTN = '//button[@id="gotologin"]'
+
+
+class BookStoreSearch(object):
+    SEARCH_INPUT = '//input[@id="searchBox"]'
+    
+
+class BookStorDisplay(object):
+    BOOK_TBL = '//div[@class="ReactTable -striped -highlight"]'
+    BOOK_TBL_HEADER = '//div[@class="rt-thead -header"]'
+    BOOK_TBL_BODY = '//div[@class="rt-tbody"]'
+    BOOK_TBL_ROW = '//div[@class="rt-tr-group"]'
+    BOOK_TBL_R1_IMG = '//img[@alt="image"]'
+    BOOK_TBL_R1_TITLE = '//div/span[@id="see-book-Git Pocket Guide"]'
+    BOOK_TBL_R1_AUTHOR = '(//div[@class="rt-td"])[3]'
+    BOOK_TBL_R1_PUBLISHER = '(//div[@class="rt-td"])[4]'
