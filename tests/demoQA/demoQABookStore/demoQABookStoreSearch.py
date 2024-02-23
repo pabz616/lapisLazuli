@@ -1,24 +1,27 @@
 """ BOOK STORE SEARCH """
 
-from demoQALocators.pageElements import BookStoreSearch
+from demoQALocators.pageElements import BookStoreSearch, BookStoreDisplay
 from playwright.sync_api import expect
 
 
 class BookStoreSearchPage:
     def __init__(self, page):
         self.page = page
-        self.element = page.locator(BookStoreSearch.element)
+        self.searchField = page.locator(BookStoreSearch.SEARCH_INPUT)
+        self.bookStoreCatalog = page.locator(BookStoreDisplay.BOOK_TBL)
+        self.noResultsElement = page.locator(BookStoreDisplay.NO_RESULTS)
         
     def checkUI(self):
 
-        expect(self.element).to_be_visible()
-        expect(self.element).to_contain_text('whatever')
+        expect(self.searchField).to_be_visible()
+        expect(self.searchField).to_be_empty()
+        expect(self.searchField).to_have_placeholder('Type to search')
+           
+    def enterSearchTerm(self, term):
+        self.searchField.fill(term)
         
-        # LOGIN BUTTON
+    def confirmResults(self):
+        expect(self.noResultsElement).not_to_be_visible
         
-        # BOOKSTORE CATALOG
-        
-    def searchTerm(self, term):
-        self.element.fill(term)
-        
-        # TODO - search for valid term, invalid term, random characters, long characters, foreign titles
+    def confirmNoResults(self):
+        expect(self.noResultsElement).to_be_visible

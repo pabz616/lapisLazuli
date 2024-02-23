@@ -105,3 +105,4 @@ class BookStoreDisplay(object):
     PAGE_COUNT = '//span[@class="-pageInfo"]'
     PAGE_INPUT = '//div[@class="-pageJump"]/input'
     PAGE_SELECT = '//select[@aria-label="rows per page"]'
+    NO_RESULTS = '//div[@class="rt-noData"]'
