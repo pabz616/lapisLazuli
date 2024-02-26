@@ -1,6 +1,12 @@
 class ProjectData:
     baseUrl = 'https://demoqa.com'
-
+    mixedCharSet = 'Lorem ipsum dolor sit amet, Римский император Константин I Великий, 北京位於華北平原的西北边缘'
+    sanskrit = 'وضع ابن الهيثم تصور واضح للعلاقة بين النموذج الرياضي المثالي ومنظومة الظواهر الملحوظة.'
+    sqlInjection = "Robert'); DROP TABLE Students;--"
+    jsInjection = "Nice site,  I think I'll take it. <script>alert('Executing JS')</script>"
+    brokenHTML = '<i><b>Bold</i></b>'
+    xssImageTag = "<img src=x onerror=alert(‘boo’)>"
+    
 
 class InvalidEmailAddresses:
     badEmails = ['badEmail', 'email.domain.com', '@domain.com',
