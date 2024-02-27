@@ -84,6 +84,8 @@ class BookStoreRegistration(object):
     REGISTER_CAPTCHA = '//div[@class="recaptcha-checkbox-border"]'
     REGISTER_SUBMIT_BTN = '//button[@id="register"]'
     REGISTER_BACK_BTN = '//button[@id="gotologin"]'
+    REGISTER_ERROR = '//p[@id="name"]'
+    INVALID_STATE = '//input[contains(@class,"is-invalid form-control")]'
 
 
 class BookStoreSearch(object):

@@ -1,10 +1,8 @@
 """ BOOK STORE NEW USER REGISTRATION """
 
-from demoQALocators.pageElements import BookStoreRegistration, BookStoreLogin
+from demoQALocators.pageElements import BookStoreRegistration
 from playwright.sync_api import expect
-
-from faker import Faker
-fake = Faker()
+from demoQAUtils.data import ErrorMessages as msg
 
 
 class BookStoreRegistrationPage:
@@ -25,6 +23,9 @@ class BookStoreRegistrationPage:
         self.captchaInput = page.locator(BookStoreRegistration.REGISTER_CAPTCHA)
         self.submitBtn = page.locator(BookStoreRegistration.REGISTER_SUBMIT_BTN)
         self.backToLoginBtn = page.locator(BookStoreRegistration.REGISTER_BACK_BTN)
+        
+        self.errorMsg = page.locator(BookStoreRegistration.REGISTER_ERROR)
+        self.formErrorState = page.locator(BookStoreRegistration.INVALID_STATE)
         
     def checkUI(self):
         expect(self.firstNameField).to_be_visible()
@@ -47,16 +48,44 @@ class BookStoreRegistrationPage:
         expect(self.submitBtn).not_to_be_disabled()
         
         expect(self.captchaInput).to_be_visible()
+        expect(self.captchaInput).not_to_be_checked()
         
         expect(self.backToLoginBtn).to_be_visible()
         expect(self.backToLoginBtn).not_to_be_disabled()
               
     def completeRegistrationForm(self, fname, lname, usn, pwd):
-        pass
+        self.firstNameField.fill(fname)
+        self.lastNameField.fill(lname)
+        self.userNameField.fill(usn)
+        self.passwordField.fill(pwd)
+        
+        self.submitBtn.click()
     
     def confirmSuccessfulRegistration(self):
         pass
     
-    def confirmErrorMessage(self):
-        pass
+    def confirmPasswordErrorMessage(self):
+        expect(self.errorMsg).to_be_visible()
+        expect(self.errorMsg).to_have_text(msg.passwordValidationMsg)
     
+    def confirmRequiredInputValidationState(self):
+        fname_required = self.formErrorState.nth(1)
+        lname_required = self.formErrorState.nth(2)
+        usn_required = self.formErrorState.nth(3)
+        pwd_required = self.formErrorState.nth(4)
+        
+        expect(fname_required).to_be_visible()
+        expect(lname_required).to_be_visible()
+        expect(usn_required).to_be_visible()
+        expect(pwd_required).to_be_visible()
+        
+    def confirmErrorMessageForExistingUserIsDisplayed(self):
+        expect(self.errorMsg).to_be_visible()
+        expect(self.errorMsg).to_have_text(msg.userExistsMsg)
+
+    def clearForm(self):
+        self.firstNameField.clear()
+        self.lastNameField.clear()
+        self.userNameField.clear()
+        self.passwordField.clear()
+        

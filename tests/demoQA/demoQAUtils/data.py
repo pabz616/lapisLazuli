@@ -8,6 +8,11 @@ class ProjectData:
     xssImageTag = "<img src=x onerror=alert(‘boo’)>"
     
 
+class ErrorMessages:
+    userExistsMsg = 'user exists'
+    passwordValidationMsg = "Passwords must have at least one non alphanumeric character, one digit ('0'-'9'), one uppercase ('A'-'Z'), one lowercase ('a'-'z'), one special character and Password must be eight characters or longer."
+
+
 class InvalidEmailAddresses:
     badEmails = ['badEmail', 'email.domain.com', '@domain.com',
     '#@%^%#$@#$@#.com', 'email@domain.com (Joe Smith)', 'email@domain@domain.com', '.email@domain.com',
