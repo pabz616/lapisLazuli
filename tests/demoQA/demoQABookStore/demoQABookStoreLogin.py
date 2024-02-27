@@ -7,11 +7,13 @@ from playwright.sync_api import expect
 class BookStoreLoginPage:
     def __init__(self, page):
         self.page = page
-        self.element = page.locator(BookStoreLogin.element)
-
+        self.registrationBtn = page.locator(BookStoreLogin.NEW_USER_BTN)
+        # self.element = page.locator(BookStoreLogin.element)
+        
     def checkUI(self):
-        expect(self.element).to_be_visible()
-        expect(self.element).to_contain_text('whatever')
+        pass
+        # expect(self.element).to_be_visible()
+        # expect(self.element).to_contain_text('whatever')
         
     def submitLogin(self, usn, pwd):
         self.element.fill(usn)
@@ -20,6 +22,9 @@ class BookStoreLoginPage:
         
         # TODO - test valid user login, invalid, random data, boundary, password strength, required fields
         
+    def navigateToBookStoreRegistrationPage(self):
+        pass
+    
     def confirmLoginIsSuccessful(self):
         pass
     

@@ -1,6 +1,6 @@
 """ BOOK STORE LANDING """
 
-from demoQALocators.pageElements import BookStoreDisplay, BookStoreSearch, BookStoreLogin
+from demoQALocators.pageElements import BookStoreDisplay, BookStoreSearch
 from playwright.sync_api import expect
 
 
@@ -8,7 +8,7 @@ class BookStoreDisplayPage:
     def __init__(self, page):
         self.page = page
         self.searchField = page.locator(BookStoreSearch.SEARCH_INPUT)
-        self.loginButton = page.locator(BookStoreLogin.LOGIN_BTN)
+        self.loginButton = page.locator(BookStoreDisplay.LOGIN_NAV)
         self.bookStoreCatalog = page.locator(BookStoreDisplay.BOOK_TBL)
         
         self.bookStoreCatalogHeader = page.locator(BookStoreDisplay.BOOK_TBL_HEADER)
@@ -71,3 +71,6 @@ class BookStoreDisplayPage:
         
     def navigateToDetailsView(self):
         self.bookSelected.click()
+        
+    def navigateToBookStoreLoginPage(self):
+        self.loginButton.click()

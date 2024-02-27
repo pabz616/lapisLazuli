@@ -69,12 +69,13 @@ class ListLocators(object):
     
     
 class BookStoreLogin(object):
-    LOGIN_BTN = '//button[@id="login"]'
+    LOGIN_SUBMIT = '//button[@id="login"]'
     LOGIN_USN_INPUT = '//input[@id="userName"]'
     LOGIN_PWD_INPUT = '//input[@id="password"]'
+    NEW_USER_BTN = '//button[@id="newUser"]'
     
 
-class BookStoreSignUp(object):
+class BookStoreRegistration(object):
     REGISTER_BTN = '//button[@id="newUser"]'
     REGISTER_FNAME = '//input[@id="firstname"]'
     REGISTER_LNAME = '//input[@id="lastname"]'
@@ -83,6 +84,8 @@ class BookStoreSignUp(object):
     REGISTER_CAPTCHA = '//div[@class="recaptcha-checkbox-border"]'
     REGISTER_SUBMIT_BTN = '//button[@id="register"]'
     REGISTER_BACK_BTN = '//button[@id="gotologin"]'
+    REGISTER_ERROR = '//p[@id="name"]'
+    INVALID_STATE = '//input[contains(@class,"is-invalid form-control")]'
 
 
 class BookStoreSearch(object):
@@ -106,3 +109,4 @@ class BookStoreDisplay(object):
     PAGE_INPUT = '//div[@class="-pageJump"]/input'
     PAGE_SELECT = '//select[@aria-label="rows per page"]'
     NO_RESULTS = '//div[@class="rt-noData"]'
+    LOGIN_NAV = '(//button)[2]'
