@@ -69,7 +69,7 @@ class ListLocators(object):
     
     
 class BookStoreLogin(object):
-    LOGIN_SUBMIT = '//button[@id="login"]'
+    LOGIN_SUBMIT_BTN = '//button[@id="login"]'
     LOGIN_USN_INPUT = '//input[@id="userName"]'
     LOGIN_PWD_INPUT = '//input[@id="password"]'
     NEW_USER_BTN = '//button[@id="newUser"]'

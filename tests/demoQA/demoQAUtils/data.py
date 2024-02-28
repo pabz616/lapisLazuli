@@ -6,6 +6,8 @@ class ProjectData:
     jsInjection = "Nice site,  I think I'll take it. <script>alert('Executing JS')</script>"
     brokenHTML = '<i><b>Bold</i></b>'
     xssImageTag = "<img src=x onerror=alert(‘boo’)>"
+    demoQAUsn = 'demoQA'
+    demoQAPwd = 'blUeMöon97$'
     
 
 class ErrorMessages:
