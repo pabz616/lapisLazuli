@@ -16,6 +16,10 @@ class BookStoreLoginPage:
         self.loginBtn = page.locator(BookStoreLogin.LOGIN_SUBMIT_BTN)
         self.registrationBtn = page.locator(BookStoreLogin.NEW_USER_BTN)
         
+        self.usernameField_required = page.locator(BookStoreLogin.LOGIN_USN_INPUT_ERROR)
+        self.passwordField_required = page.locator(BookStoreLogin.LOGIN_PWD_INPUT_ERROR)
+        self.loginErrorMsg = page.locator(BookStoreLogin.LOGIN_ERROR_MSG)
+        
     def checkUI(self):
         expect(self.usernameField).to_be_visible()
         expect(self.usernameField).to_be_editable()
@@ -42,5 +46,13 @@ class BookStoreLoginPage:
         self.registrationBtn.click()
         pass
         
-    def confirmLoginFailed(self):
-        pass
+    def confirmRequiredFieldsValidation(self):
+        expect(self.usernameField_required).to_be_visible()
+        expect(self.usernameField_required).to_be_editable()
+        
+        expect(self.passwordField_required).to_be_visible()
+        expect(self.passwordField_required).to_be_editable()
+        
+    def confirmInvalidLoginCredentialsValidation(self):
+        expect(self.loginErrorMsg).to_be_visible()
+        expect(self.loginErrorMsg).to_contain_text('Invalid username or password!')

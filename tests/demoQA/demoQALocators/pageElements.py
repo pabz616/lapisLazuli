@@ -74,6 +74,10 @@ class BookStoreLogin(object):
     LOGIN_PWD_INPUT = '//input[@id="password"]'
     NEW_USER_BTN = '//button[@id="newUser"]'
     
+    LOGIN_USN_INPUT_ERROR = '(//input[contains(@class,"is-invalid form-control")])[1]'
+    LOGIN_PWD_INPUT_ERROR = '(//input[contains(@class,"is-invalid form-control")])[2]'
+    LOGIN_ERROR_MSG = '//p[@id="name"]'
+    
 
 class BookStoreRegistration(object):
     REGISTER_BTN = '//button[@id="newUser"]'
@@ -110,3 +114,9 @@ class BookStoreDisplay(object):
     PAGE_SELECT = '//select[@aria-label="rows per page"]'
     NO_RESULTS = '//div[@class="rt-noData"]'
     LOGIN_NAV = '(//button)[2]'
+    
+    
+class BookStoreUserProfile(object):
+    AUTH_USER_LABEL = '//label[@id="userName-label"]'
+    AUTH_USER_VALUE = '//label[@id="userName-value"]'
+    LOGOUT_BTN = '//button[@id="submit"]'
