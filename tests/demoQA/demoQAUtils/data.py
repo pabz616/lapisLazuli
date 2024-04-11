@@ -1,3 +1,9 @@
+from faker import Faker
+fake = Faker()
+day = fake.day_of_month()
+month = fake.month_name()
+
+
 class ProjectData:
     baseUrl = 'https://demoqa.com'
     mixedCharSet = 'Lorem ipsum dolor sit amet, Римский император Константин I Великий, 北京位於華北平原的西北边缘'
@@ -8,8 +14,15 @@ class ProjectData:
     xssImageTag = "<img src=x onerror=alert(‘boo’)>"
     demoQAUsn = 'demoQA'
     demoQAPwd = 'blUeMöon97$'
+    fname = fake.first_name_male()
+    lname = fake.last_name()
+    email = fake.color_name()+'@mail.com'
+    tel = '2123334455'
+    birthday = day+" "+month+" "+'1975'
+    subj = "English"
+    address = fake.address()
     
-
+    
 class ErrorMessages:
     userExistsMsg = 'user exists'
     passwordValidationMsg = "Passwords must have at least one non alphanumeric character, one digit ('0'-'9'), one uppercase ('A'-'Z'), one lowercase ('a'-'z'), one special character and Password must be eight characters or longer."

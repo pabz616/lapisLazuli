@@ -120,3 +120,29 @@ class BookStoreUserProfile(object):
     AUTH_USER_LABEL = '//label[@id="userName-label"]'
     AUTH_USER_VALUE = '//label[@id="userName-value"]'
     LOGOUT_BTN = '//button[@id="submit"]'
+
+
+class PracticeForm(object):
+    FORM_TITLE = '//h5'
+    STUDENT_FIRSTNAME = '[id="firstName"]'
+    STUDENT_LASTNAME = '[id="lastName"]'
+    STUDENT_EMAIL = '[id="userEmail"]'
+    STUDENT_GENDER_M = '//label[@for="gender-radio-1"]'
+    STUDENT_GENDER_F = '//label[@for="gender-radio-2"]'
+    STUDENT_GENDER_O = '//label[@for="gender-radio-3"]'
+    STUDENT_PHONE = '[id="userNumber"]'
+    STUDENT_DOB = '[id="dateOfBirthInput"]'
+    STUDENT_SUBJECT = '//div[contains(@class,"subjects-auto-complete__value-container")]'
+    STUDENT_HOBBY1 = '//label[@for="hobbies-checkbox-1"]'
+    STUDENT_HOBBY2 = '//label[@for="hobbies-checkbox-2"]'
+    STUDENT_HOBBY3 = '//label[@for="hobbies-checkbox-3"]'
+    STUDENT_PIC_UPLOAD = '[id="uploadPicture"]'
+    STUDENT_ADDR = '[id="currentAddress"]'
+    STUDENT_STATE_DDL = '[id="state"]'
+    STUDENT_STATE_INPUT = '[id="react-select-3-input"]'
+    STUDENT_CITY_DDL = '[id="city"]'
+    SUBMIT_BUTTON = '[id="submit"]'
+    CONFIRMATION_WINDOW = '//div[@class="modal-content"]'
+    CLOSE_BUTTON = '//button[contains(.,"Close")]'
+
+    
