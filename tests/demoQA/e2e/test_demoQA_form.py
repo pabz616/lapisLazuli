@@ -18,11 +18,65 @@ def test_registration_UI(page: Page):
     onRegistrationForm = RegistrationPage(page)
     onRegistrationForm.checkUI
     
-    
 @pytest.mark.normal
-def test_registration_form_submission(page: Page):
+def test_successful_registration_form_submission(page: Page):
     """Test that student can successfully submit registration form"""
     onRegistrationForm = RegistrationPage(page)
-    
     onRegistrationForm.submitForm(pd.fname, pd.lname, pd.email, pd.tel, pd.birthday, pd.subj, pd.address)
     onRegistrationForm.confirmSuccessfulRegistration
+    
+@pytest.mark.normal
+def test_unsuccessful_registration_form_submission(page: Page):
+    """Test that validation occurs for blank registration form"""
+    onRegistrationForm = RegistrationPage(page)
+    onRegistrationForm.submitBlankForm
+    onRegistrationForm.confirmUnsuccessfulRegistration
+    
+@pytest.mark.normal
+def test_mixed_character_inputs_at_registration_form_submission(page: Page):
+    """Test for mixed characters at registration form""" 
+    onRegistrationForm = RegistrationPage(page)
+    onRegistrationForm.submitForm(pd.mixedCharSet, pd.mixedCharSet, pd.mixedCharSet, pd.mixedCharSet, pd.birthday, pd.mixedCharSet, pd.mixedCharSet)
+    onRegistrationForm.confirmUnsuccessfulRegistration
+    
+@pytest.mark.normal
+def test_javascript_injection_at_registration_form_submission(page: Page):
+    """Test for javascript vulnerability at registration form"""
+    onRegistrationForm = RegistrationPage(page)
+    onRegistrationForm.submitForm(pd.jsInjection, pd.jsInjection, pd.jsInjection, pd.mixedCharSet, pd.birthday, pd.jsInjection, pd.jsInjection)
+    onRegistrationForm.confirmUnsuccessfulRegistration
+    
+@pytest.mark.normal
+def test_cross_site_script_injection_at_registration_form_submission(page: Page):
+    """Test for javascript vulnerability using image tag at registration form""" 
+    onRegistrationForm = RegistrationPage(page)
+    onRegistrationForm.submitForm(pd.xssImageTag, pd.xssImageTag, pd.xssImageTag, pd.xssImageTag, pd.xssImageTag, pd.xssImageTag, pd.xssImageTag)
+    onRegistrationForm.confirmUnsuccessfulRegistration
+    
+@pytest.mark.normal
+def test_script_injection_at_registration_form_submission(page: Page):
+    """Test for javascript vulnerability using broken html at registration form"""
+    onRegistrationForm = RegistrationPage(page)
+    onRegistrationForm.submitForm(pd.brokenHTML, pd.brokenHTML, pd.brokenHTML, pd.brokenHTML, pd.brokenHTML, pd.brokenHTML, pd.brokenHTML)
+    onRegistrationForm.confirmUnsuccessfulRegistration
+
+@pytest.mark.normal
+def test_sql_injection_at_registration_form_submission(page: Page):
+    """Test for SQL injection vulnerability at registration form"""
+    onRegistrationForm = RegistrationPage(page)
+    onRegistrationForm.submitForm(pd.sqlInjection, pd.sqlInjection, pd.sqlInjection, pd.sqlInjection, pd.sqlInjection, pd.sqlInjection, pd.sqlInjection)
+    onRegistrationForm.confirmUnsuccessfulRegistration    
+    
+@pytest.mark.normal
+def test_unsuccessful_registration_form_submission_with_improper_email(page: Page):
+    """Test that student cannot successfully submit registration form when email is invalid"""
+    onRegistrationForm = RegistrationPage(page)
+    onRegistrationForm.submitForm(pd.fname, pd.lname, '.email@domain.com', pd.tel, pd.birthday, pd.subj, pd.address)
+    onRegistrationForm.confirmUnsuccessfulRegistration   
+    
+@pytest.mark.normal
+def test_unsuccessful_registration_form_submission_with_invalid_telephone(page: Page):
+    """Test that student cannot successfully submit registration form when telephone is invalid"""
+    onRegistrationForm = RegistrationPage(page)
+    onRegistrationForm.submitForm(pd.fname, pd.lname, pd.email, 'phoneNumber', pd.birthday, pd.subj, pd.address)
+    onRegistrationForm.confirmUnsuccessfulRegistration 

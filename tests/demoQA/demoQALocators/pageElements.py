@@ -144,5 +144,11 @@ class PracticeForm(object):
     SUBMIT_BUTTON = '[id="submit"]'
     CONFIRMATION_WINDOW = '//div[@class="modal-content"]'
     CLOSE_BUTTON = '//button[contains(.,"Close")]'
+    
+    STUDENT_FIRSTNAME_ERROR = ''
+    STUDENT_LASTNAME_ERROR = ''
+    STUDENT_EMAIL_ERROR = ''
+    STUDENT_PHONE_ERROR = ''
+    
 
     

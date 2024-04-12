@@ -122,9 +122,14 @@ class RegistrationPage:
         self.student_address_state.click()
         self.student_address_state.type('Noida')
         self.page.keyboard.press("Enter")
-        # self.submit_form_button.click()
+        self.submit_form_button.click()
         
     def confirmSuccessfulRegistration(self):
-        pass
-        # expect(self.confirmation_modal).to_be_visible()
-        # self.close_modal_button.click()
+        expect(self.confirmation_modal).to_be_visible()
+        self.close_modal_button.click()
+        
+    def submitBlankForm(self):
+        self.submit_form_button.click()
+        
+    def confirmUnsuccessfulRegistration(self):
+        expect(self.confirmation_modal).not_to_be_visible()
