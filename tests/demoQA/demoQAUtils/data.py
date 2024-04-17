@@ -21,7 +21,12 @@ class ProjectData:
     birthday = day+" "+month+" "+'1975'
     subj = "English"
     address = fake.address()
-    
+
+
+class APIDemoData(object):
+    BOOKER_URL = "https://restful-booker.herokuapp.com"
+    BEARER_TOKEN = "Basic YWRtaW46cGFzc3dvcmQxMjM="
+        
     
 class ErrorMessages:
     userExistsMsg = 'user exists'
