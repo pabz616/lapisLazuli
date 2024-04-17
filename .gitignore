@@ -34,6 +34,7 @@ __pycache__/
 .pytest_cache
 venv
 ./tests/sauceDemo/conftest.py
+./archive
 
 # VS Code files for those working on multiple tools
 .vscode/*
