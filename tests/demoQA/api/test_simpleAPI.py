@@ -41,8 +41,8 @@ def test_create_new_booking(api_request_context: APIRequestContext) -> None:
         'totalprice': 747,
         'depositpaid': True,
         'bookingdates': {
-            'checkin' : '2023-06-01',
-            'checkout' : '2023-07-01'
+            'checkin': '2023-06-01',
+            'checkout': '2023-07-01'
         },
         'additionalneeds': "dragon glass"
     }
@@ -92,7 +92,7 @@ def test_update_booking(api_request_context: APIRequestContext) -> None:
     update_booking = api_request_context.put(APIDemoData.BOOKER_URL+f"/booking/{BOOKINGID}", data=booking_details)
     assert update_booking.ok
 
-        
+
 # UPDATE - PATCH
 def test_partially_update_booking(api_request_context: APIRequestContext) -> None:
     booking_details = {

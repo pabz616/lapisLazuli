@@ -19,9 +19,7 @@ print(book_id)
 
 
 def status():
-    return {
-            "user": 200
-        }
+    return {"user": 200}
 
 
 ENDPOINTS = {

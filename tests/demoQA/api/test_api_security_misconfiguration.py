@@ -16,12 +16,17 @@ book_catalog = [
 book_id = random.choice(book_catalog)
 
 PUBLIC_ENDPOINTS = [
+    "/Account/v1/Authorized",
     "/Account/v1/Login",
     "/Account/v1/GenerateToken",
     "/Account/v1/User",
     "/BookStore/v1/Books",
     f"/books?book={book_id}"
     ]
+
+PRIVATE_ENDPOINTS = [
+    f"/Account/v1/User/{pd.demoQAUserId}"
+]
 
 
 @pytest.mark.high
@@ -34,8 +39,9 @@ def test_unprotected_endpoints(endpoint):
 
 
 # Test for missing authentication/authorization mechanisms
-def test_authentication_mechanism():
-    url = pd.baseUrl + f"/Account/v1/User/{pd.demoQAUserId}"
+@pytest.mark.parametrize("endpoint", PRIVATE_ENDPOINTS)
+def test_authentication_mechanism(endpoint):
+    url = pd.baseUrl + endpoint
     response = requests.get(url)
     assert response.status_code == 401, "Authentication mechanism is missing."
 
