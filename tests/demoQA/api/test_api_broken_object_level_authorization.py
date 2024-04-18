@@ -29,6 +29,7 @@ ENDPOINTS = {
         "user": 401  # USER IS NOT LOGGED IN, ENDPOINT SHOULD NOT BE ACCESSIBLE
     },
     "/BookStore/v1/Books": status(),
+    "/BookStore/v1/Book": status(),
     f"/books?book={book_id}": status()
 }
 

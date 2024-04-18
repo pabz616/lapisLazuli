@@ -15,7 +15,6 @@ book_catalog = [
     ]
 
 book_id = random.choice(book_catalog)
-print(book_id)
 
 
 def status():
@@ -23,10 +22,13 @@ def status():
 
 
 ENDPOINTS = {
-    "/Account/v1/Login": status(),
+    "/Account/v1/Authorized": status(),
     "/Account/v1/GenerateToken": status(),
-    "/Account/v1/User": status(),
+    "/Account/v1/User": status(),  
+    "/Account/v1/Login": status(), 
+    f"/Account/v1/User/{pd.demoQAUserId}": status(),
     "/BookStore/v1/Books": status(),
+    "/BookStore/v1/Book": status(),
     f"/books?book={book_id}": status()
 }
 

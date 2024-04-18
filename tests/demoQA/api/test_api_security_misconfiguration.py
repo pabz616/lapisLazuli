@@ -21,6 +21,7 @@ PUBLIC_ENDPOINTS = [
     "/Account/v1/GenerateToken",
     "/Account/v1/User",
     "/BookStore/v1/Books",
+    "/BookStore/v1/Book",
     f"/books?book={book_id}"
     ]
 
