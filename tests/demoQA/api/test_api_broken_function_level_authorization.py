@@ -9,6 +9,7 @@ from demoQAUtils.data import ProjectData as pd
 
 
 tokenEndpoint = pd.baseUrl+'/Account/v1/GenerateToken'
+accountEndpoint = pd.baseUrl+f"/Account/v1/User/{pd.demoQAUserId}"
 
 
 @pytest.mark.high
@@ -17,6 +18,14 @@ def test_generate_token_with_improper_function_delete():
     data = {"userName": pd.demoQANewUser, "password": pd.demoQANewUser}
     response = requests.delete(tokenEndpoint, json=data)
     assert response.status_code == 404, "BROKEN FUNCTION LEVEL AUTHORIZATION VULNERABILITY FOUND!"
+
+
+@pytest.mark.high
+@pytest.mark.api
+def test_modify_user_with_improper_function_delete():
+    data = {"userName": "admin", "password": pd.demoQAPwd}
+    response = requests.delete(accountEndpoint, json=data)
+    assert response.status_code == 401, "BROKEN FUNCTION LEVEL AUTHORIZATION VULNERABILITY FOUND!"
 
 
 @pytest.mark.high

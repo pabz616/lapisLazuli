@@ -8,19 +8,15 @@ import pytest
 from demoQAUtils.data import ProjectData as pd
 
 
+def status():
+    return {"user": 200}
+
+
 ENDPOINTS = {
-    "/Account/v1/Login": {
-        "user": 200
-    },
-    "/Account/v1/GenerateToken": {
-        "user": 200
-    },
-    "/Account/v1/User": {
-        "user": 200
-    },   
-    f"/Account/v1/User/{pd.demoQAUserId}": {
-        "user": 200
-    }
+    "/Account/v1/Login": status(),
+    "/Account/v1/GenerateToken": status(),
+    "/Account/v1/User": status(),  
+    f"/Account/v1/User/{pd.demoQAUserId}": status()
 }
 
 
