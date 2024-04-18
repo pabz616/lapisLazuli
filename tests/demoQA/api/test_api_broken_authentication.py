@@ -12,7 +12,7 @@ loginEndpoint = pd.baseUrl+'/Account/v1/Login'
 tokenEndpoint = pd.baseUrl+'/Account/v1/GenerateToken'
 
 
-@pytest.mark.high_priority
+@pytest.mark.critical
 @pytest.mark.api
 def test_login_endpoint():
     data = {"userName": pd.demoQAUsn, "password": pd.demoQAPwd}
@@ -20,9 +20,9 @@ def test_login_endpoint():
     assert response.status_code == 200, "Login endpoint is broken"
 
 
-@pytest.mark.high_priority
+@pytest.mark.critical
 @pytest.mark.api
-def test_generate_token():
+def test_generate_token_is_successful():
     data = {"userName": pd.demoQAUsn, "password": pd.demoQAPwd}
     response = requests.post(tokenEndpoint, json=data)
     
@@ -32,5 +32,20 @@ def test_generate_token():
     assert resp["expires"] != "2024-04-23", "Token expired"
     assert resp["status"] == "Success", "Unsuccessful token"
     assert resp["result"] == "User authorized successfully.", "Unsuccessful authorization"
+
     
-# Add more tests as needed for specific broken authentication scenarios
+def test_generate_token_is_unsuccessful():
+    data = {"userName": pd.demoQANewUser, "password": pd.demoQANewUser}
+    response = requests.post(tokenEndpoint, json=data)
+    
+    resp = response.json()
+    assert response.status_code == 200
+    assert resp["status"] == "Failed"
+    assert resp["result"] == "User authorization failed."
+    
+
+# BROKEN FUNCTION LEVEL AUTHORIZATION
+def test_generate_token_with_improper_function():
+    data = {"userName": pd.demoQANewUser, "password": pd.demoQANewUser}
+    response = requests.delete(tokenEndpoint, json=data)
+    assert response.status_code == 404, "BROKEN FUNCTION LEVEL AUTHORIZATION VULNERABILITY FOUND!"

@@ -1,5 +1,5 @@
 from typing import Generator
-from utils.data import APIDemoData
+from demoQAUtils.data import APIDemoData
 
 import pytest
 from playwright.sync_api import Playwright, APIRequestContext
