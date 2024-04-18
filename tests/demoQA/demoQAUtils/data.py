@@ -28,7 +28,6 @@ class ProjectData:
     randomString = fake.pystr()
     
 
-
 class APIDemoData(object):
     BOOKER_URL = "https://restful-booker.herokuapp.com"
     BEARER_TOKEN = "Basic YWRtaW46cGFzc3dvcmQxMjM="
