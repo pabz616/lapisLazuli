@@ -5,21 +5,33 @@ TEST ACCOUNT ENDPOINT
 import requests
 import pytest
 from demoQAUtils.data import ProjectData as pd
+from demoQAUtils.response_timer import get_api_response_time
 
 
 @pytest.mark.critical
 @pytest.mark.api
 def test_demoQA_login():
+    loginEndpoint = pd.baseUrl+'/Account/v1/Login'
+    
     data = {"userName": pd.demoQAUsn, "password": pd.demoQAPwd}
-    response = requests.post(pd.baseUrl+'/Account/v1/Login', json=data)
+    response = requests.post(loginEndpoint, json=data)
     assert response.status_code == 200, "Login endpoint is broken"
     
+    # TEST RESPONSE TIME
+    get_api_response_time(loginEndpoint)
+
 
 @pytest.mark.critical
 @pytest.mark.api
 def test_demoQA_generate_token():
+    tokenEndpoint = pd.baseUrl+'/Account/v1/GenerateToken'
     data = {"userName": pd.demoQAUsn, "password": pd.demoQAPwd}
-    response = requests.post(pd.baseUrl+'/Account/v1/GenerateToken', json=data)
+    response = requests.post(tokenEndpoint, json=data)
+    
+    # TEST RESPONSE TIME
+    get_api_response_time(tokenEndpoint)
+    
+    # TEST RESPONSE
     resp = response.json()
     assert response.status_code == 200, "Token was not generated"
     assert resp["token"] is not None, "Token was not generated"
@@ -31,8 +43,14 @@ def test_demoQA_generate_token():
 @pytest.mark.high
 @pytest.mark.api
 def test_demoQA_create_user_is_successful():
+    userEndpoint = pd.baseUrl+'/Account/v1/User'
     data = {"userName": pd.email, "password": pd.demoQANewUser}
-    response = requests.post(pd.baseUrl+'/Account/v1/User', json=data)
+    response = requests.post(userEndpoint, json=data)
+    
+    # TEST RESPONSE TIME
+    get_api_response_time(userEndpoint)
+    
+    # TEST RESPONSE
     resp = response.json()
     assert response.status_code == 201, "Bug! New User was not created"
     assert resp["userID"] is not None, "UserID is null"
