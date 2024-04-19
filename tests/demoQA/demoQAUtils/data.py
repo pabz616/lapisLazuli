@@ -12,7 +12,7 @@ class ProjectData:
     jsInjection = "Nice site,  I think I'll take it. <script>alert('Executing JS')</script>"
     brokenHTML = '<i><b>Bold</i></b>'
     xssImageTag = "<img src=x onerror=alert(‘boo’)>"
-    demoQANewUser = fake.color_name()+'123'
+    demoQANewUser = fake.color_name()+'7777'+'QA!$'
     demoQAUsn = 'demoQA'
     demoQAPwd = 'blUeMöon97$'
     demoQAUserId = "83a593e0-4822-48d1-b770-2051ede2ddaa"
@@ -20,7 +20,7 @@ class ProjectData:
     demoQATokenHacker = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyTmFtZSI6ImRlbW9RQSIsInBhc3N3b3JkIjoiYmxVZU3Dtm9uOTckIiwiaWF0IjoxNzEzNDYzNTM4fQ.yXI26P4Zl-TvH2_MqbPRS-U5muGwedeKSjv-BaDGuy"
     fname = fake.first_name_male()
     lname = fake.last_name()
-    email = fake.color_name()+'@mail.com'
+    email = fake.email()
     tel = '2123334455'
     birthday = day+" "+month+" "+'1975'
     subj = "English"
