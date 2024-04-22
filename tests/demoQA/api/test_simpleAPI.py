@@ -4,7 +4,9 @@ from demoQAUtils.data import APIDemoData
 import pytest
 from playwright.sync_api import Playwright, APIRequestContext
 
-BOOKINGID = 2
+response_limit = float(1.0)  # seconds
+
+BOOKINGID = 1
 
 
 @pytest.fixture(scope="session")
@@ -19,7 +21,7 @@ def api_request_context(playwright: Playwright, ) -> Generator[APIRequestContext
     request_context.dispose()
 
 
-#  GET
+# GET
 @pytest.mark.api
 def test_get_all_bookings(api_request_context: APIRequestContext) -> None:
     booking_resp = api_request_context.get(APIDemoData.BOOKER_URL+"/booking")
@@ -48,12 +50,9 @@ def test_create_new_booking(api_request_context: APIRequestContext) -> None:
     }
     
     # CREATE THE RESERVATION
-    new_booking = api_request_context.post(APIDemoData.BOOKER_URL+"/booking", data=booking_details)
-    assert new_booking.ok
+    new_booking_resp = api_request_context.post(APIDemoData.BOOKER_URL+"/booking", data=booking_details)
+    assert new_booking_resp.ok
     
-    booking_response = new_booking.json()
-    print(f"this is my new booking: {booking_response}")
-
     # CHECK THE PRESENCE OF THE RESERVATION
     all_bookings = api_request_context.get(APIDemoData.BOOKER_URL)
     assert all_bookings.ok
@@ -67,14 +66,15 @@ def test_create_new_admin(api_request_context: APIRequestContext) -> None:
     }
     
     # CREATE THE RESERVATION
-    new_admin = api_request_context.post(APIDemoData.BOOKER_URL+"/auth", data=auth_details)
-    assert new_admin.ok
-    
-    token = new_admin.json()
+    new_admin_resp = api_request_context.post(APIDemoData.BOOKER_URL+"/auth", data=auth_details)
+    assert new_admin_resp.ok
+
+    token = new_admin_resp.json()
     print(f"my new token: {token}")
 
 
 # UPDATE - PUT
+@pytest.mark.api
 def test_update_booking(api_request_context: APIRequestContext) -> None:
     booking_details = {
         'firstname': 'Sally',
@@ -89,11 +89,12 @@ def test_update_booking(api_request_context: APIRequestContext) -> None:
     }
     
     # UPDATE THE RESERVATION
-    update_booking = api_request_context.put(APIDemoData.BOOKER_URL+f"/booking/{BOOKINGID}", data=booking_details)
-    assert update_booking.ok
+    update_booking_resp = api_request_context.put(APIDemoData.BOOKER_URL+f"/booking/{BOOKINGID}", data=booking_details)
+    assert update_booking_resp.ok
 
 
 # UPDATE - PATCH
+@pytest.mark.api
 def test_partially_update_booking(api_request_context: APIRequestContext) -> None:
     booking_details = {
         'firstname': 'Sally',
@@ -102,11 +103,12 @@ def test_partially_update_booking(api_request_context: APIRequestContext) -> Non
     }
     
     # PARTIALLY UPDATE THE RESERVATION
-    patch_booking = api_request_context.patch(APIDemoData.BOOKER_URL+f"/booking/{BOOKINGID}", data=booking_details)
-    assert patch_booking.ok
+    patch_booking_resp = api_request_context.patch(APIDemoData.BOOKER_URL+f"/booking/{BOOKINGID}", data=booking_details)
+    assert patch_booking_resp.ok
 
 
 # DELETE
+@pytest.mark.api
 def test_delete_booking(api_request_context: APIRequestContext) -> None:
-    deleted_booking = api_request_context.delete(APIDemoData.BOOKER_URL+f"/booking/{BOOKINGID}")
-    assert deleted_booking.ok
+    deleted_booking_resp = api_request_context.delete(APIDemoData.BOOKER_URL+f"/booking/{BOOKINGID}")
+    assert deleted_booking_resp.ok

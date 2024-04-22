@@ -8,6 +8,7 @@ import pytest
 from demoQAUtils.data import ProjectData as pd
 import random
 
+response_limit = float(1.0)  # seconds
 
 book_catalog = [
     '9781449325862', '9781449331818', '9781449337711', '9781449365035',
@@ -43,3 +44,4 @@ def test_broken_object_level_auth(endpoint, roles):
         data = {"input": pd.randomString * 100000}  # Simulate a large input data
         response = requests.post(url, json=data)
         assert response.status_code != 429, "Request was rate-limited"
+        assert response.elapsed.total_seconds() < response_limit, "API Response: {0}".format(response.elapsed.total_seconds)

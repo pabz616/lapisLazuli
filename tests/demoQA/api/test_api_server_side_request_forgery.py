@@ -11,9 +11,9 @@ from demoQAUtils.data import ProjectData as pd
 @pytest.mark.high
 @pytest.mark.api
 def test_server_side_request_forgery():
-    url = pd.baseUrl + '/ssrf'
+    """Test for open redirection vulnerability"""
     
-    # Replace with a URL to test SSRF vulnerability
-    data = {"url": "http://malicious-website.com"}
+    url = pd.baseUrl + '/ssrf'
+    data = {"url": "&path=http://evil-user.net"}
     response = requests.post(url, json=data)
-    assert response.status_code != 200, "SSRF vulnerability detected"
+    assert response.status_code == 404, "SSRF vulnerability detected"

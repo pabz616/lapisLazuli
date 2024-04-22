@@ -8,6 +8,8 @@ import pytest
 import random
 from demoQAUtils.data import ProjectData as pd
 
+response_limit = float(1.0)  # seconds
+
 book_catalog = [
     '9781449325862', '9781449331818', '9781449337711', '9781449365035',
     '9781491904244', '9781491950296', '9781593275846', '9781593277574'
@@ -38,3 +40,4 @@ def test_unsafe_consumption(endpoint):
     data = {"input": "user_input"}
     response = requests.post(url, json=data)
     assert response.status_code != 200, "Unsafe consumption vulnerability detected"
+    assert response.elapsed.total_seconds() < response_limit, "API Response: {0}".format(response.elapsed.total_seconds)

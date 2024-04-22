@@ -5,19 +5,12 @@ TEST BOOKS ENDPOINT
 import requests
 import pytest
 from demoQAUtils.data import ProjectData as pd
-from demoQAUtils.response_timer import get_api_response_time
-
 
 booksEndpoint = pd.baseUrl+'/BookStore/v1/Books'
 selectedBookEndpoint = pd.baseUrl+'/BookStore/v1/Book?ISBN=9781449337711'
-
-
-@pytest.mark.critical
-@pytest.mark.api
-def test_books_api_response_time():
-    get_api_response_time(booksEndpoint)
+response_limit = float(1.0)
     
-    
+
 @pytest.mark.critical
 @pytest.mark.api
 def test_books_schema():
@@ -25,7 +18,8 @@ def test_books_schema():
     resp = response.json()
     assert response.status_code == 200, 'Error: {0}'.format(response.status_code)
     assert len(resp) != 0
-    
+    assert response.elapsed.total_seconds() < response_limit, "API Response: {0}".format(response.elapsed.total_seconds)
+  
     # TEST KEYS
     assert "isbn" in resp["books"][0]
     assert "title" in resp["books"][0]
@@ -45,6 +39,7 @@ def test_books_results():
     resp = response.json()
     assert response.status_code == 200, 'Error: {0}'.format(response.status_code)
     assert len(resp) != 0
+    assert response.elapsed.total_seconds() < response_limit, "API Response: {0}".format(response.elapsed.total_seconds)
        
     # TEST VALUES FOR FIRST BOOK
     assert resp["books"][0]["isbn"] == "9781449325862"
@@ -70,6 +65,7 @@ def test_add_new_books_as_unauthorized_user():
             }
     response = requests.post(booksEndpoint, json=data)
     assert response.status_code != 201, "Bug! Unauthorized user can modify contents"
+    assert response.elapsed.total_seconds() < response_limit, "API Response: {0}".format(response.elapsed.total_seconds)
 
 
 @pytest.mark.high
@@ -78,6 +74,7 @@ def test_delete_books_as_unauthorized_user():
     data = {"userId": pd.demoQAUserId}
     response = requests.delete(booksEndpoint, json=data)
     assert response.status_code != 204, "Bug! Unauthorized user can delete contents"
+    assert response.elapsed.total_seconds() < response_limit, "API Response: {0}".format(response.elapsed.total_seconds)
     
 
 @pytest.mark.high
@@ -89,9 +86,7 @@ def test_selected_book_result():
     # TEST RESPONSE
     assert response.status_code == 200, 'Error: {0}'.format(response.status_code)
     assert len(resp) != 0
-    
-    # TEST RESPONSE TIME
-    get_api_response_time(selectedBookEndpoint)
+    assert response.elapsed.total_seconds() < response_limit, "API Response: {0}".format(response.elapsed.total_seconds)
        
     # TEST RESPONSE VALUES 
     assert resp["isbn"] is not None
@@ -110,6 +105,7 @@ def test_selected_book_result():
 def test_update_selected_book_as_unauthorized_user():
     response = requests.put(booksEndpoint+'/9781449365035')
     assert response.status_code != 200, "Bug! Unauthorized user can update book"
+    assert response.elapsed.total_seconds() < response_limit, "API Response: {0}".format(response.elapsed.total_seconds)
 
     
 @pytest.mark.high
@@ -117,6 +113,7 @@ def test_update_selected_book_as_unauthorized_user():
 def test_partial_update_of_selected_book_as_unauthorized_user():
     response = requests.patch(booksEndpoint+'/9781449365035')
     assert response.status_code != 200, "Bug! Unauthorized user can partially update book"
+    assert response.elapsed.total_seconds() < response_limit, "API Response: {0}".format(response.elapsed.total_seconds)
     
     
 @pytest.mark.high
@@ -125,3 +122,4 @@ def test_delete_selected_book_as_unauthorized_user():
     data = {"userId": pd.demoQAUserId, "isbn": "9781449331818"}
     response = requests.delete(selectedBookEndpoint, json=data)
     assert response.status_code != 201, "Bug! Unauthorized user can delete book"
+    assert response.elapsed.total_seconds() < response_limit, "API Response: {0}".format(response.elapsed.total_seconds)

@@ -8,6 +8,7 @@ import pytest
 import random
 from demoQAUtils.data import ProjectData as pd
 
+response_limit = float(1.0)  # seconds
 
 book_catalog = [
     '9781449325862', '9781449331818', '9781449337711', '9781449365035',
@@ -37,3 +38,4 @@ def test_sensitive_business_flows(endpoint):
     headers = {"Authorization": f"Bearer {pd.demoQAToken}"}
     response = requests.get(url, headers=headers)
     assert response.status_code != 401, f"Unauthorized access to {endpoint}"
+    assert response.elapsed.total_seconds() < response_limit, "API Response: {0}".format(response.elapsed.total_seconds)

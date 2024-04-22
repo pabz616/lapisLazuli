@@ -7,6 +7,7 @@ import requests
 import pytest
 from demoQAUtils.data import ProjectData as pd
 
+response_limit = float(1.0)  # seconds
 
 tokenEndpoint = pd.baseUrl+'/Account/v1/GenerateToken'
 accountEndpoint = pd.baseUrl+f"/Account/v1/User/{pd.demoQAUserId}"
@@ -18,6 +19,7 @@ def test_generate_token_with_improper_function_delete():
     data = {"userName": pd.demoQANewUser, "password": pd.demoQANewUser}
     response = requests.delete(tokenEndpoint, json=data)
     assert response.status_code == 404, "BROKEN FUNCTION LEVEL AUTHORIZATION VULNERABILITY FOUND!"
+    assert response.elapsed.total_seconds() < response_limit, "API Response: {0}".format(response.elapsed.total_seconds)
 
 
 @pytest.mark.high
@@ -26,6 +28,7 @@ def test_modify_user_with_improper_function_delete():
     data = {"userName": "admin", "password": pd.demoQAPwd}
     response = requests.delete(accountEndpoint, json=data)
     assert response.status_code == 401, "BROKEN FUNCTION LEVEL AUTHORIZATION VULNERABILITY FOUND!"
+    assert response.elapsed.total_seconds() < response_limit, "API Response: {0}".format(response.elapsed.total_seconds)
 
 
 @pytest.mark.high
@@ -34,6 +37,7 @@ def test_generate_token_with_improper_function_patch():
     data = {"userName": pd.demoQANewUser, "password": pd.demoQANewUser}
     response = requests.patch(tokenEndpoint, json=data)
     assert response.status_code == 404, "BROKEN FUNCTION LEVEL AUTHORIZATION VULNERABILITY FOUND!"
+    assert response.elapsed.total_seconds() < response_limit, "API Response: {0}".format(response.elapsed.total_seconds)
     
 
 @pytest.mark.high
@@ -42,3 +46,4 @@ def test_generate_token_with_improper_function_put():
     data = {"userName": pd.demoQANewUser, "password": pd.demoQANewUser}
     response = requests.put(tokenEndpoint, json=data)
     assert response.status_code == 404, "BROKEN FUNCTION LEVEL AUTHORIZATION VULNERABILITY FOUND!"
+    assert response.elapsed.total_seconds() < response_limit, "API Response: {0}".format(response.elapsed.total_seconds)
