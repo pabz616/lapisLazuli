@@ -26,8 +26,12 @@ class ProjectData:
     subj = "English"
     address = fake.address()
     randomString = fake.pystr()
-    
 
+
+class NetworkScan(object):
+    target_ip = "192.168.1.1/24"
+    
+    
 class APIDemoData(object):
     BOOKER_URL = "https://restful-booker.herokuapp.com"
     BEARER_TOKEN = "Basic YWRtaW46cGFzc3dvcmQxMjM="
