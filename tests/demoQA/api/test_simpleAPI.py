@@ -1,114 +1,63 @@
 from typing import Generator
+from demoQAUtils.urls import RestFulBookerEndpoints as ep
 from demoQAUtils.data import APIDemoData
-
 import pytest
 from playwright.sync_api import Playwright, APIRequestContext
 
-response_limit = float(1.0)  # seconds
 
-BOOKINGID = 1
-
-
+@pytest.mark.api
 @pytest.fixture(scope="session")
 def api_request_context(playwright: Playwright, ) -> Generator[APIRequestContext, None, None]:
-    headers = {
-        'Content-Type': 'application/json',
-        'Accept': 'application/json',
-        'Authorization': 'Basic YWRtaW46cGFzc3dvcmQxMjM='
-        }
-    request_context = playwright.request.new_context(base_url=APIDemoData.BOOKER_URL, extra_http_headers=headers)
+    request_context = playwright.request.new_context(base_url=ep.RFB_URL, extra_http_headers=APIDemoData.HEADERS)
     yield request_context
     request_context.dispose()
 
 
 # GET
-@pytest.mark.api
 def test_get_all_bookings(api_request_context: APIRequestContext) -> None:
-    booking_resp = api_request_context.get(APIDemoData.BOOKER_URL+"/booking")
-    assert booking_resp.ok
+    response = api_request_context.get(ep.BOOKINGS)
+    assert response.ok
 
 
-@pytest.mark.api
 def test_get_single_booking(api_request_context: APIRequestContext) -> None:
-    single_booking_resp = api_request_context.get(APIDemoData.BOOKER_URL+f"/booking/{BOOKINGID}")
+    single_booking_resp = api_request_context.get(ep.RANDOM_BOOKING_ID)
     assert single_booking_resp.ok
 
 
 # POST    
-@pytest.mark.api
 def test_create_new_booking(api_request_context: APIRequestContext) -> None:
-    booking_details = {
-        'firstname': 'Jon',
-        'lastname': 'Snow',
-        'totalprice': 747,
-        'depositpaid': True,
-        'bookingdates': {
-            'checkin': '2023-06-01',
-            'checkout': '2023-07-01'
-        },
-        'additionalneeds': "dragon glass"
-    }
-    
-    # CREATE THE RESERVATION
-    new_booking_resp = api_request_context.post(APIDemoData.BOOKER_URL+"/booking", data=booking_details)
+    new_booking_resp = api_request_context.post(ep.BOOKINGS, data=APIDemoData.BOOKING_DETAILS)
     assert new_booking_resp.ok
     
     # CHECK THE PRESENCE OF THE RESERVATION
-    all_bookings = api_request_context.get(APIDemoData.BOOKER_URL)
+    all_bookings = api_request_context.get(ep.BOOKINGS)
     assert all_bookings.ok
 
 
-@pytest.mark.api
 def test_create_new_admin(api_request_context: APIRequestContext) -> None:
-    auth_details = {
-        'username': 'admin',
-        'password': 'password123'
-    }
-    
-    # CREATE THE RESERVATION
-    new_admin_resp = api_request_context.post(APIDemoData.BOOKER_URL+"/auth", data=auth_details)
+    new_admin_resp = api_request_context.post(ep.AUTH_URL, data=APIDemoData.AUTH_DETAILS)
     assert new_admin_resp.ok
-
+    
     token = new_admin_resp.json()
-    print(f"my new token: {token}")
+    assert len(token) != 0
 
 
 # UPDATE - PUT
-@pytest.mark.api
 def test_update_booking(api_request_context: APIRequestContext) -> None:
-    booking_details = {
-        'firstname': 'Sally',
-        'lastname': 'Brown',
-        'totalprice': 747,
-        'depositpaid': True,
-        'bookingdates': {
-            'checkin' : '2023-07-01',
-            'checkout' : '2023-07-30'
-        },
-        'additionalneeds': "furry pillows"
-    }
-    
-    # UPDATE THE RESERVATION
-    update_booking_resp = api_request_context.put(APIDemoData.BOOKER_URL+f"/booking/{BOOKINGID}", data=booking_details)
+    update_booking_resp = api_request_context.put(ep.SINGLE_BOOKING_ID, data=APIDemoData.DEFAULT_DETAILS)
     assert update_booking_resp.ok
 
 
 # UPDATE - PATCH
-@pytest.mark.api
 def test_partially_update_booking(api_request_context: APIRequestContext) -> None:
-    booking_details = {
-        'firstname': 'Sally',
-        'lastname': 'Brown',
-        'additionalneeds': 'more drinks please'
-    }
+    booking_details = {'additionalneeds': 'more drinks please'}
     
     # PARTIALLY UPDATE THE RESERVATION
-    patch_booking_resp = api_request_context.patch(APIDemoData.BOOKER_URL+f"/booking/{BOOKINGID}", data=booking_details)
+    patch_booking_resp = api_request_context.patch(ep.SINGLE_BOOKING_ID, data=booking_details)
     assert patch_booking_resp.ok
 
 
 # DELETE
-@pytest.mark.api
 def test_delete_booking(api_request_context: APIRequestContext) -> None:
-    deleted_booking_resp = api_request_context.delete(APIDemoData.BOOKER_URL+f"/booking/{BOOKINGID}")
+    deleted_booking_resp = api_request_context.delete(ep.SINGLE_BOOKING_ID)
     assert deleted_booking_resp.ok
