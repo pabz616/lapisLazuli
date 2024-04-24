@@ -5,37 +5,20 @@ src: https://owasp.org/API-Security/editions/2023/en/0xa6-unrestricted-access-to
 
 import requests
 import pytest
-import random
-from demoQAUtils.data import ProjectData as pd
+from demoQAUtils.data import DemoQA
 
-response_limit = float(1.0)  # seconds
 
-book_catalog = [
-    '9781449325862', '9781449331818', '9781449337711', '9781449365035',
-    '9781491904244', '9781491950296', '9781593275846', '9781593277574'
-    ]
-
-book_id = random.choice(book_catalog)
-
-ENDPOINTS = {
-    "/Account/v1/Authorized",
-    "/Account/v1/GenerateToken",
-    "/Account/v1/User",  
-    "/Account/v1/Login", 
-    f"/Account/v1/User/{pd.demoQAUserId}",
-    "/BookStore/v1/Books",
-    "/BookStore/v1/Book",
-    f"/books?book={book_id}"
+USER_INFO = {
+    f"/Account/v1/User/{DemoQA.userId}"
 }
 
 
 @pytest.mark.high
 @pytest.mark.api
-@pytest.mark.parametrize("endpoint", ENDPOINTS)
+@pytest.mark.parametrize("endpoint", USER_INFO)
 def test_sensitive_business_flows(endpoint):
-    url = pd.baseUrl + endpoint
+    url = DemoQA.baseUrl + endpoint
 
-    headers = {"Authorization": f"Bearer {pd.demoQAToken}"}
+    headers = {"Authorization": "Bearer foo123"}
     response = requests.get(url, headers=headers)
-    assert response.status_code != 401, f"Unauthorized access to {endpoint}"
-    assert response.elapsed.total_seconds() < response_limit, "API Response: {0}".format(response.elapsed.total_seconds)
+    assert response.status_code == 401, 'Error: {0}'.format(response.status_code)

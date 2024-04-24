@@ -5,7 +5,7 @@ src: https://owasp.org/API-Security/editions/2023/en/0xa7-server-side-request-fo
 
 import requests
 import pytest
-from demoQAUtils.data import ProjectData as pd
+from demoQAUtils.data import DemoQA
 
 
 @pytest.mark.high
@@ -13,7 +13,7 @@ from demoQAUtils.data import ProjectData as pd
 def test_server_side_request_forgery():
     """Test for open redirection vulnerability"""
     
-    url = pd.baseUrl + '/ssrf'
+    url = DemoQA.baseUrl + '/ssrf'
     data = {"url": "&path=http://evil-user.net"}
     response = requests.post(url, json=data)
     assert response.status_code == 404, "SSRF vulnerability detected"

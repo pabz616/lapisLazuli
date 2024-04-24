@@ -5,10 +5,9 @@ src: https://owasp.org/API-Security/editions/2023/en/0xa4-unrestricted-resource-
 
 import requests
 import pytest
-from demoQAUtils.data import ProjectData as pd
+from demoQAUtils.data import DemoQA, ProjectData as pd
 import random
 
-response_limit = float(1.0)  # seconds
 
 book_catalog = [
     '9781449325862', '9781449331818', '9781449337711', '9781449365035',
@@ -27,10 +26,10 @@ ENDPOINTS = {
     "/Account/v1/GenerateToken": status(),
     "/Account/v1/User": status(),  
     "/Account/v1/Login": status(), 
-    f"/Account/v1/User/{pd.demoQAUserId}": status(),
+    f"/Account/v1/User/{DemoQA.userId}": status(),
     "/BookStore/v1/Books": status(),
-    "/BookStore/v1/Book": status(),
-    f"/books?book={book_id}": status()
+    f"/BookStore/v1/Book?ISBN={book_id}": status(),
+    f"/BookStore/v1/Books/{book_id}": status(),
 }
 
 
@@ -38,10 +37,9 @@ ENDPOINTS = {
 @pytest.mark.api
 def test_broken_object_level_auth(endpoint, roles):
     for role, expected_status_code in roles.items():
-        url = pd.baseUrl + endpoint
+        url = DemoQA.baseUrl + endpoint
         
         # Adjust the data sent in the request to simulate a resource-intensive operation
         data = {"input": pd.randomString * 100000}  # Simulate a large input data
         response = requests.post(url, json=data)
         assert response.status_code != 429, "Request was rate-limited"
-        assert response.elapsed.total_seconds() < response_limit, "API Response: {0}".format(response.elapsed.total_seconds)

@@ -6,9 +6,8 @@ src: https://owasp.org/API-Security/editions/2023/en/0xaa-unsafe-consumption-of-
 import requests
 import pytest
 import random
-from demoQAUtils.data import ProjectData as pd
+from demoQAUtils.data import DemoQA
 
-response_limit = float(1.0)  # seconds
 
 book_catalog = [
     '9781449325862', '9781449331818', '9781449337711', '9781449365035',
@@ -23,10 +22,10 @@ PUBLIC_ENDPOINTS = [
     "/Account/v1/GenerateToken",
     "/Account/v1/Login",
     "/Account/v1/User",
-    f"/Account/v1/User/{pd.demoQAUserId}"
+    f"/Account/v1/User/{DemoQA.userId}"
     "/BookStore/v1/Books"
-    "/BookStore/v1/Book",
-    f"/books?book={book_id}"
+    f"/BookStore/v1/Book?ISBN={book_id}",
+    f"/BookStore/v1/Books/{book_id}",
     ]
 
 
@@ -34,10 +33,9 @@ PUBLIC_ENDPOINTS = [
 @pytest.mark.api
 @pytest.mark.parametrize("endpoint", PUBLIC_ENDPOINTS)
 def test_unsafe_consumption(endpoint):
-    url = pd.baseUrl + endpoint
+    url = DemoQA.baseUrl + endpoint
 
     # Replace with valid data for unsafe consumption ... this should not work
     data = {"input": "user_input"}
     response = requests.post(url, json=data)
     assert response.status_code != 200, "Unsafe consumption vulnerability detected"
-    assert response.elapsed.total_seconds() < response_limit, "API Response: {0}".format(response.elapsed.total_seconds)

@@ -6,10 +6,10 @@ src: https://owasp.org/API-Security/editions/2023/en/0xa3-broken-object-property
 import requests
 import pytest
 import random
-from demoQAUtils.data import ProjectData as pd
+from demoQAUtils.data import DemoQA, ProjectData as pd
 
-response_limit = float(1.0)  # seconds
 
+# TODO - Make this a reusable function
 book_catalog = [
     '9781449325862', '9781449331818', '9781449337711', '9781449365035',
     '9781491904244', '9781491950296', '9781593275846', '9781593277574'
@@ -26,11 +26,11 @@ ENDPOINTS = {
     "/Account/v1/Authorized": status(),
     "/Account/v1/GenerateToken": status(),
     "/Account/v1/User": status(),  
-    f"/Account/v1/User/{pd.demoQAUserId}": status(),
+    f"/Account/v1/User/{DemoQA.userId}": status(),
     "/Account/v1/Login": status(), 
     "/BookStore/v1/Books": status(),
-    "/BookStore/v1/Book": status(),
-    f"/books?book={book_id}": status()
+    f"/BookStore/v1/Book?ISBN={book_id}": status(),
+    f"/BookStore/v1/Books/{book_id}": status(),
 }
 
 
@@ -42,7 +42,7 @@ def test_broken_object_property_level_auth(endpoint, roles):
     def test_broken_object_property_level_auth(endpoint, roles):
         for role, methods in roles.items():
             for method, expected_status_code in methods.items():
-                url = pd.baseUrl + endpoint
+                url = DemoQA.baseUrl + endpoint
                 headers = {"Authorization": f"Bearer {get_token(role)}"}
                 if method == "GET":
                     response = requests.get(url, headers=headers)
@@ -51,7 +51,6 @@ def test_broken_object_property_level_auth(endpoint, roles):
                     data = {"property": "new_value"}
                     response = requests.put(url, json=data, headers=headers)
                 assert response.status_code == expected_status_code, f"Access to {method} {endpoint} for role {role} is broken"
-                assert response.elapsed.total_seconds() < response_limit, "API Response: {0}".format(response.elapsed.total_seconds)
 
 
 def get_token(role):

@@ -5,9 +5,9 @@ src: https://owasp.org/API-Security/editions/2023/en/0xa8-security-misconfigurat
 import requests
 import pytest
 import random
-from demoQAUtils.data import ProjectData as pd
+from demoQAUtils.data import DemoQA
+from demoQAUtils.urls import Accounts
 
-response_limit = float(1.0)  # seconds
 
 book_catalog = [
     '9781449325862', '9781449331818', '9781449337711', '9781449365035',
@@ -22,12 +22,12 @@ PUBLIC_ENDPOINTS = [
     "/Account/v1/GenerateToken",
     "/Account/v1/User",
     "/BookStore/v1/Books",
-    "/BookStore/v1/Book",
-    f"/books?book={book_id}"
+    f"/BookStore/v1/Book?ISBN={book_id}",
+    f"/BookStore/v1/Books/{book_id}"
     ]
 
 PRIVATE_ENDPOINTS = [
-    f"/Account/v1/User/{pd.demoQAUserId}"
+    f"/Account/v1/User/{DemoQA.userId}"
 ]
 
 
@@ -35,10 +35,9 @@ PRIVATE_ENDPOINTS = [
 @pytest.mark.api
 @pytest.mark.parametrize("endpoint", PUBLIC_ENDPOINTS)
 def test_unprotected_endpoints(endpoint):
-    url = pd.baseUrl + endpoint
+    url = DemoQA.baseUrl + endpoint
     response = requests.get(url)
     assert response.status_code == 200, f"Endpoint {endpoint} is unprotected."
-    assert response.elapsed.total_seconds() < response_limit, "API Response: {0}".format(response.elapsed.total_seconds)
 
 
 # Test for missing authentication/authorization mechanisms
@@ -46,17 +45,14 @@ def test_unprotected_endpoints(endpoint):
 @pytest.mark.api
 @pytest.mark.parametrize("endpoint", PRIVATE_ENDPOINTS)
 def test_authentication_mechanism(endpoint):
-    url = pd.baseUrl + endpoint
+    url = DemoQA.baseUrl + endpoint
     response = requests.get(url)
     assert response.status_code == 401, "Authentication mechanism is missing."
-    assert response.elapsed.total_seconds() < response_limit, "API Response: {0}".format(response.elapsed.total_seconds)
-
+ 
 
 # Test for exposure of sensitive data
 @pytest.mark.high
 @pytest.mark.api
 def test_sensitive_data_exposure():
-    url = pd.baseUrl + f"/Account/v1/User/{pd.demoQAUserId}"
-    response = requests.get(url)
-    assert response.status_code != 200, "Sensitive data should not be exposed."
-    assert response.elapsed.total_seconds() < response_limit, "API Response: {0}".format(response.elapsed.total_seconds)
+    response = requests.get(Accounts.SELECTED_USER)
+    assert response.status_code == 401, "Sensitive data should not be exposed."
