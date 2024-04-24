@@ -7,16 +7,18 @@ import pytest
 from demoQAUtils.data import ProjectData as pd, DemoQA
 from demoQAUtils.urls import Accounts
 
+
 @pytest.mark.critical
 @pytest.mark.api
 class TestCriticalAccountEndpoints:
     def test_demoQA_login(self):
-        response = requests.post(Accounts.LOGIN_ENDPOINT, json=DemoQA.data)
-        assert response.status_code == 200, "Login endpoint is broken"
+        response = requests.post(Accounts.LOGIN_ENDPOINT, json=DemoQA.loginData)
+        assert response.status_code == 200, 'Error: {0}'.format(response.status_code)
         assert response.elapsed.total_seconds() < pd.response_limit, "API Response: {0}".format(response.elapsed.total_seconds)
 
     def test_demoQA_generate_token(self):
-        response = requests.post(Accounts.TOKEN_ENDPOINT, json=DemoQA.data)
+        response = requests.post(Accounts.TOKEN_ENDPOINT, json=DemoQA.loginData)
+        assert response.status_code == 200, 'Error: {0}'.format(response.status_code)
         assert response.elapsed.total_seconds() < pd.response_limit, "API Response: {0}".format(response.elapsed.total_seconds)
         
         # TEST RESPONSE
@@ -29,7 +31,7 @@ class TestCriticalAccountEndpoints:
     def test_demoQA_create_user_validation_for_blank_password(self):
         data = {"userName": pd.email, "password": ''}
         response = requests.post(Accounts.USER_ENDPOINT, json=data)
-        assert response.status_code == 400, "Bug! Blank password was allowed"
+        assert response.status_code == 400, 'Error: {0}'.format(response.status_code)
 
 
 @pytest.mark.high
