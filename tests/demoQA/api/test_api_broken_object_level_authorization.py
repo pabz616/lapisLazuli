@@ -7,7 +7,6 @@ import requests
 import pytest
 import random
 from demoQAUtils.data import DemoQA, ProjectData as pd
-# from demoQAUtils.urls import Accounts, Bookstore
 
 book_catalog = [
     '9781449325862', '9781449331818', '9781449337711', '9781449365035',
