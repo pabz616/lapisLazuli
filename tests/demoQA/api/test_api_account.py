@@ -48,12 +48,12 @@ class TestHighAccountEndpoints:
         
     def test_demoQA_get_new_user_is_unsuccessful(self):
         response = requests.post(Accounts.USER_ENDPOINT, json=DemoQA.newUserData)
-        resp = response.json()
-        assert response.status_code == 201, "Bug! New User was not created"
+        assert response.status_code == 201, 'Error: {0}'.format(response.status_code)
         
+        resp = response.json()
         UUID = resp["userID"]
-        new_user_response = requests.get(f"dqa.USER_ENDPOINT/{UUID}")
-        assert new_user_response.status_code == 406, "Bug! Able to retrieve user details"
+        new_user_response = requests.get(f"{Accounts.USER_ENDPOINT}/{UUID}")
+        assert new_user_response.status_code == 401, 'Error: {0}'.format(response.status_code)
   
     def test_demoQA_delete_user_is_not_successful(self):
         response = requests.post(Accounts.USER_ENDPOINT,  json=DemoQA.newUserData)
@@ -61,16 +61,15 @@ class TestHighAccountEndpoints:
         
         resp = response.json()
         UUID = resp["userID"]
-        delete_response = requests.delete(f"Accounts.USER_ENDPOINT/{UUID}")
-        assert delete_response.status_code == 401, "Bug! New User can be deleted"
-        assert delete_response.total_seconds() < pd.response_limit, "API Response: {0}".format(response.elapsed.total_seconds)
+        delete_response = requests.delete(f"{Accounts.USER_ENDPOINT}/{UUID}")
+        assert delete_response.status_code == 401, 'Error: {0}'.format(response.status_code)
 
     def test_demoQA_create_user_validation_for_weak_password(self):
         response = requests.post(Accounts.USER_ENDPOINT,  json=DemoQA.newUserData)
-        assert response.status_code != 200, "Bug! Weak password was allowed"
+        assert response.status_code != 200, 'Error: {0}'.format(response.status_code)
         assert response.elapsed.total_seconds() < pd.response_limit, "API Response: {0}".format(response.elapsed.total_seconds)
         
     def test_demoQA_create_user_validation_for_existing_user(self):
         response = requests.post(Accounts.USER_ENDPOINT,  json=DemoQA.newUserData)
-        assert response.status_code == 406, "Bug! No check for duplicate user"
+        assert response.status_code == 406, 'Error: {0}'.format(response.status_code)
         assert response.elapsed.total_seconds() < pd.response_limit, "API Response: {0}".format(response.elapsed.total_seconds)
