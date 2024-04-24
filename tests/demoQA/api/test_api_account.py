@@ -64,6 +64,7 @@ class TestHighAccountEndpoints:
         UUID = resp["userID"]
         delete_response = requests.delete(f"demoQAEp.USER_ENDPOINT/{UUID}")
         assert delete_response.status_code == 401, "Bug! New User can be deleted"
+        assert delete_response.total_seconds() < pd.response_limit, "API Response: {0}".format(response.elapsed.total_seconds)
 
     def test_demoQA_create_user_validation_for_weak_password(self):
         response = requests.post(demoQAEp.USER_ENDPOINT,  json=DemoQA.newUserData)
