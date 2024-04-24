@@ -28,11 +28,19 @@ class DemoQA(object):
     baseUrl = 'https://demoqa.com'
     usn = 'demoQA'
     pwd = 'blUeMöon97$'
-    data = {"userName": usn, "password": pwd}
+    loginData = {"userName": usn, "password": pwd}
     newUserData = {"userName": ProjectData.email, "password": ProjectData.newUser}
     userId = "83a593e0-4822-48d1-b770-2051ede2ddaa"
     token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyTmFtZSI6ImRlbW9RQSIsInBhc3N3b3JkIjoiYmxVZU3Dtm9uOTckIiwiaWF0IjoxNzEzNDYzNTM4fQ.yXI26P4Zl-TvH2_MqbPRS-U5muGwedeKSjvVD1Lv-VQ"
     tokenHacker = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyTmFtZSI6ImRlbW9RQSIsInBhc3N3b3JkIjoiYmxVZU3Dtm9uOTckIiwiaWF0IjoxNzEzNDYzNTM4fQ.yXI26P4Zl-TvH2_MqbPRS-U5muGwedeKSjv-BaDGuy"
+    userData = {"userId": userId}
+    adminData = {"userName": "admin", "password": pwd}
+    bookData = {"userId": userId, "isbn": "9781449331818"}
+    bookCollection = { "userId": userId, "collectionOfIsbns": [
+                    {"isbn": "9785303754511"},
+                    {"isbn": "9712434961101"},
+                    {"isbn": "9578984058653"}]
+                    }
     
 
 class NetworkScan(object):
