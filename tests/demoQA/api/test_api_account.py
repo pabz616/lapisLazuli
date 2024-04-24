@@ -5,19 +5,18 @@ TEST ACCOUNT ENDPOINT
 import requests
 import pytest
 from demoQAUtils.data import ProjectData as pd, DemoQA
-from demoQAUtils.urls import DemoQAEndpoints as demoQAEp
-
+from demoQAUtils.urls import Accounts
 
 @pytest.mark.critical
 @pytest.mark.api
 class TestCriticalAccountEndpoints:
     def test_demoQA_login(self):
-        response = requests.post(demoQAEp.LOGIN_ENDPOINT, json=DemoQA.data)
+        response = requests.post(Accounts.LOGIN_ENDPOINT, json=DemoQA.data)
         assert response.status_code == 200, "Login endpoint is broken"
         assert response.elapsed.total_seconds() < pd.response_limit, "API Response: {0}".format(response.elapsed.total_seconds)
 
     def test_demoQA_generate_token(self):
-        response = requests.post(demoQAEp.TOKEN_ENDPOINT, json=DemoQA.data)
+        response = requests.post(Accounts.TOKEN_ENDPOINT, json=DemoQA.data)
         assert response.elapsed.total_seconds() < pd.response_limit, "API Response: {0}".format(response.elapsed.total_seconds)
         
         # TEST RESPONSE
@@ -29,7 +28,7 @@ class TestCriticalAccountEndpoints:
     
     def test_demoQA_create_user_validation_for_blank_password(self):
         data = {"userName": pd.email, "password": ''}
-        response = requests.post(demoQAEp.USER_ENDPOINT, json=data)
+        response = requests.post(Accounts.USER_ENDPOINT, json=data)
         assert response.status_code == 400, "Bug! Blank password was allowed"
 
 
@@ -37,7 +36,7 @@ class TestCriticalAccountEndpoints:
 @pytest.mark.api
 class TestHighAccountEndpoints:
     def test_demoQA_create_user_is_successful(self):
-        response = requests.post(demoQAEp.USER_ENDPOINT, json=DemoQA.newUserData)
+        response = requests.post(Accounts.USER_ENDPOINT, json=DemoQA.newUserData)
         assert response.elapsed.total_seconds() < pd.response_limit, "API Response: {0}".format(response.elapsed.total_seconds)
         
         # TEST RESPONSE
@@ -48,7 +47,7 @@ class TestHighAccountEndpoints:
         assert resp["books"] == []
         
     def test_demoQA_get_new_user_is_unsuccessful(self):
-        response = requests.post(demoQAEp.USER_ENDPOINT, json=DemoQA.newUserData)
+        response = requests.post(Accounts.USER_ENDPOINT, json=DemoQA.newUserData)
         resp = response.json()
         assert response.status_code == 201, "Bug! New User was not created"
         
@@ -57,21 +56,21 @@ class TestHighAccountEndpoints:
         assert new_user_response.status_code == 406, "Bug! Able to retrieve user details"
   
     def test_demoQA_delete_user_is_not_successful(self):
-        response = requests.post(demoQAEp.USER_ENDPOINT,  json=DemoQA.newUserData)
+        response = requests.post(Accounts.USER_ENDPOINT,  json=DemoQA.newUserData)
         assert response.status_code == 201, "Bug! New User was not created"
         
         resp = response.json()
         UUID = resp["userID"]
-        delete_response = requests.delete(f"demoQAEp.USER_ENDPOINT/{UUID}")
+        delete_response = requests.delete(f"Accounts.USER_ENDPOINT/{UUID}")
         assert delete_response.status_code == 401, "Bug! New User can be deleted"
         assert delete_response.total_seconds() < pd.response_limit, "API Response: {0}".format(response.elapsed.total_seconds)
 
     def test_demoQA_create_user_validation_for_weak_password(self):
-        response = requests.post(demoQAEp.USER_ENDPOINT,  json=DemoQA.newUserData)
+        response = requests.post(Accounts.USER_ENDPOINT,  json=DemoQA.newUserData)
         assert response.status_code != 200, "Bug! Weak password was allowed"
         assert response.elapsed.total_seconds() < pd.response_limit, "API Response: {0}".format(response.elapsed.total_seconds)
         
     def test_demoQA_create_user_validation_for_existing_user(self):
-        response = requests.post(demoQAEp.USER_ENDPOINT,  json=DemoQA.newUserData)
+        response = requests.post(Accounts.USER_ENDPOINT,  json=DemoQA.newUserData)
         assert response.status_code == 406, "Bug! No check for duplicate user"
         assert response.elapsed.total_seconds() < pd.response_limit, "API Response: {0}".format(response.elapsed.total_seconds)
