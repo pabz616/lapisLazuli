@@ -18,7 +18,7 @@ def status():
 
 ENDPOINTS = {
     "/Account/v1/Authorized": status(),
-    "/Account/v1/GenerateToken": status(),
+    "/Account/v1/generate_token": status(),
     "/Account/v1/User": status(),  
     "/Account/v1/Login": status(), 
     f"/Account/v1/User/{DemoQA.userId}": status(),

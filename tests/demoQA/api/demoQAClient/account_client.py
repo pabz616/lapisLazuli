@@ -19,43 +19,36 @@ class AccountsClient(BaseClient):
         self.selected_user_url = Accounts.SELECTED_USER
         self.request = APIRequest()
         
-    def createUserAccount(self):
+    def create_user_account(self):
         payload = dumps({"userName": pd.email, "password": pd.newUser})
         return self.request.post(self.user_url, payload, self.headers)
     
-    def authenticateUser(self):
+    def authenticate_user(self):
         payload = dumps(DemoQA.loginData)
         return self.request.post(self.authorized, payload, self.headers)
     
-    def createUserAccount_BlankPassword(self):
+    def create_user_account_blank_password(self):
         payload = dumps({"userName": pd.email, "password": ''})
         return self.request.post(self.user_url, payload, self.headers)
     
-    def createUserAccount_WeakPassword(self):
+    def create_user_account_weak_password(self):
         payload = dumps({"userName": pd.email, "password": 'pass'})
         return self.request.post(self.user_url, payload, self.headers)
     
-    def createUserAccount_ExistingUser(self):
+    def create_user_account_existing_user(self):
         payload = dumps(DemoQA.loginData)
         return self.request.post(self.user_url, payload, self.headers)
         
-    def generateToken(self):
+    def generate_token(self):
         payload = dumps(DemoQA.loginData)
         return self.request.post(self.token_url, payload, self.headers)
     
-    def getUserAccount_unauthorizedAccess(self):
+    def get_user_account_unauthorized_access(self):
         return self.request.get(self.user_url+f"/{UUID}")
     
-    def getUserAccount(self):
+    def get_user_account(self):
         return self.request.get(self.user_url)
-    
-    def updateUserAccount(self):
-        payload = dumps(x)
-        return self.request.put(self.user_url, payload)
-    
-    def partiallyUserAccount(self):
-        payload = dumps(x)
-        return self.request.patch(self.user_url, payload)
-    
-    def deleteUserAccount(self):
-        return self.request.delete(self.user_url+f"/{UUID}")
+        
+    def delete_user_account(self):
+        payload = ''
+        return self.request.delete(self.user_url+f"/{UUID}", payload, self.headers)

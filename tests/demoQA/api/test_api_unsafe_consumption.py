@@ -14,7 +14,7 @@ book_id = BookSelection.select_a_book()
 
 PUBLIC_ENDPOINTS = [
     "/Account/v1/Authorized",
-    "/Account/v1/GenerateToken",
+    "/Account/v1/generate_token",
     "/Account/v1/Login",
     "/Account/v1/User",
     f"/Account/v1/User/{DemoQA.userId}"
