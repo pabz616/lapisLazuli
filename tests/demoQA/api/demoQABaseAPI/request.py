@@ -19,20 +19,20 @@ class APIRequest:
         response = requests.get(url)
         return self.__get_responses(response)
     
-    def patch(self, url, payload):
-        response = requests.patch(url, data=payload)
+    def patch(self, url, payload, headers):
+        response = requests.patch(url, data=payload, headers=headers)
         return self.__get_responses(response)
     
-    def put(self, url, payload):
-        response = requests.put(url, data=payload)
+    def put(self, url, payload, headers):
+        response = requests.put(url, data=payload, headers=headers)
         return self.__get_responses(response)
 
     def post(self, url, payload, headers):
         response = requests.post(url, data=payload, headers=headers)
         return self.__get_responses(response)
 
-    def delete(self, url):
-        response = requests.delete(url)
+    def delete(self, url, payload, headers):
+        response = requests.delete(url, data=payload, headers=headers)
         return self.__get_responses(response)
 
     def __get_responses(self, response):

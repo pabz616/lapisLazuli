@@ -59,9 +59,3 @@ class AccountsClient(BaseClient):
     
     def deleteUserAccount(self):
         return self.request.delete(self.user_url+f"/{UUID}")
-
-
-class BooksClient(object):
-    def __init__(self):
-        super().__init__()
-        pass

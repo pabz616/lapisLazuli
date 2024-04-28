@@ -4,7 +4,7 @@ TEST ACCOUNT ENDPOINT
 
 import pytest
 import json
-from api.demoQAClient.clients import AccountsClient
+from api.demoQAClient.account_client import AccountsClient
 from api.demoQAAssertions import assertions as confirm
 
 client = AccountsClient()
