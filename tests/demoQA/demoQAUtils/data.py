@@ -12,7 +12,7 @@ class ProjectData:
     jsInjection = "Nice site,  I think I'll take it. <script>alert('Executing JS')</script>"
     brokenHTML = '<i><b>Bold</i></b>'
     xssImageTag = "<img src=x onerror=alert(‘boo’)>"
-    newUser = fake.color_name()+'7777'+'QA!$'
+    newUser = 'turquoise777777QA!$'  # fake.color_name()+'777777'+'QA!$'
     fname = fake.first_name_male()
     lname = fake.last_name()
     email = fake.email()
