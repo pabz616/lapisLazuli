@@ -4,50 +4,29 @@ src: https://owasp.org/API-Security/editions/2023/en/0xa8-security-misconfigurat
 """
 import requests
 import pytest
-from demoQAUtils.data import DemoQA
-from demoQAUtils.urls import Accounts
-from demoQAUtils.book_selection import BookSelection
+from api.demoQABaseAPI.endpoints import PUBLIC_ENDPOINTS, PRIVATE_ENDPOINTS
+from api.demoQAClient.account_client import AccountsClient
+from api.demoQAAssertions import assertions as confirm
+
+client = AccountsClient()
 
 
-book_id = BookSelection.select_a_book()
-
-PUBLIC_ENDPOINTS = [
-    "/Account/v1/Authorized",
-    "/Account/v1/Login",
-    "/Account/v1/generate_token",
-    "/Account/v1/User",
-    "/BookStore/v1/Books",
-    f"/BookStore/v1/Book?ISBN={book_id}",
-    f"/BookStore/v1/Books/{book_id}"
-    ]
-
-PRIVATE_ENDPOINTS = [
-    f"/Account/v1/User/{DemoQA.userId}"
-]
-
-
+@pytest.mark.security
 @pytest.mark.high
 @pytest.mark.api
-@pytest.mark.parametrize("endpoint", PUBLIC_ENDPOINTS)
-def test_unprotected_endpoints(endpoint):
-    url = DemoQA.baseUrl + endpoint
-    response = requests.get(url)
-    assert response.status_code == 200, f"Endpoint {endpoint} is unprotected."
+class TestSecurityMisconfiguration:
+    @pytest.mark.parametrize("endpoint", PUBLIC_ENDPOINTS)
+    def test_unprotected_endpoints(self, endpoint):
+        response = requests.get(endpoint)
+        confirm.ok_response_status(response, 200), f"Endpoint {endpoint} is unprotected."
 
-
-# Test for missing authentication/authorization mechanisms
-@pytest.mark.high
-@pytest.mark.api
-@pytest.mark.parametrize("endpoint", PRIVATE_ENDPOINTS)
-def test_authentication_mechanism(endpoint):
-    url = DemoQA.baseUrl + endpoint
-    response = requests.get(url)
-    assert response.status_code == 401, "Authentication mechanism is missing."
- 
-
-# Test for exposure of sensitive data
-@pytest.mark.high
-@pytest.mark.api
-def test_sensitive_data_exposure():
-    response = requests.get(Accounts.SELECTED_USER)
-    assert response.status_code == 401, "Sensitive data should not be exposed."
+    # Test for missing authentication/authorization mechanisms
+    @pytest.mark.parametrize("endpoint", PRIVATE_ENDPOINTS)
+    def test_authentication_mechanism(self, endpoint):
+        response = requests.get(endpoint)
+        confirm.unauthorized_status(response, 401),  f"Authentication mechanism for {endpoint} is missing."
+    
+    # Test for exposure of sensitive data
+    def test_sensitive_data_exposure(self):
+        response = client.get_user_account_unauthorized_access()
+        confirm.unauthorized_status(response, 401), "Sensitive data should not be exposed."

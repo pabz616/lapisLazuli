@@ -30,6 +30,10 @@ class APIRequest:
     def post(self, url, payload, headers):
         response = requests.post(url, data=payload, headers=headers)
         return self.__get_responses(response)
+    
+    def options(self, url, payload, headers):
+        response = requests.post(url, data=payload, headers=headers)
+        return self.__get_responses(response)
 
     def delete(self, url, payload, headers):
         response = requests.delete(url, data=payload, headers=headers)

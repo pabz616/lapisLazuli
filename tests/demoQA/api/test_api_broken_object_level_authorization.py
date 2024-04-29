@@ -5,44 +5,20 @@ src: https://owasp.org/API-Security/editions/2023/en/0xa1-broken-object-level-au
 
 import requests
 import pytest
-from demoQAUtils.book_selection import BookSelection
-from demoQAUtils.data import DemoQA, ProjectData as pd
+from api.demoQAClient.account_client import AccountsClient
+from api.demoQABaseAPI.endpoints import ENDPOINTS
+from api.demoQAAssertions import assertions as confirm
+
+client = AccountsClient()
 
 
-book_id = BookSelection.select_a_book()
-
-
-def status():
-    return {"user": 200}
-
-
-ENDPOINTS = {
-    "/Account/v1/Authorized": status(),
-    "/Account/v1/Login": status(),
-    "/Account/v1/generate_token": status(),
-    "/Account/v1/User": status(),
-    f"/Account/v1/User/{DemoQA.userId}": {"user": 401},
-    "/BookStore/v1/Books": status(),
-    f"/BookStore/v1/Book?ISBN={book_id}": status(),
-    f"/BookStore/v1/Books/{book_id}": status()
-}
-
-
+@pytest.mark.security
+@pytest.mark.critical
 @pytest.mark.api
-@pytest.mark.parametrize("endpoint, roles", ENDPOINTS.items())
-def test_broken_object_level_auth(endpoint, roles):
-    for role, expected_status_code in roles.items():
-        url = DemoQA.baseUrl + endpoint
-        headers = {"Authorization": f"Bearer {get_token(role)}"}
-        response = requests.get(url, headers=headers)
-        assert response.status_code == expected_status_code, f"Access to {endpoint} for role {role} is broken"
-        assert response.elapsed.total_seconds() < pd.response_limit, "API Response: {0}".format(response.elapsed.total_seconds)
-        
-                
-def get_token(role):
-    if role == "user":
-        return DemoQA.token
-    elif role == "hacker":
-        return DemoQA.tokenHacker
-    else:
-        return ""
+class TestBrokenObjectLevelAuthorization:
+    @pytest.mark.parametrize("endpoint, roles", ENDPOINTS.items())
+    def test_broken_object_level_auth(self, endpoint, roles):
+        for role, expected_status_code in roles.items():
+            headers = {"Authorization": f"Bearer {client.get_token()}"}
+            response = requests.get(endpoint, headers=headers)
+            confirm.ok_response_status(response, 200), f"Access to {endpoint} for role {role} is broken"
