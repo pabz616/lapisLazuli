@@ -48,7 +48,7 @@ def test_BookStore_Registration_Duplicate_Account_Validation(page: Page):
     
     onBookStoreRegistrationPage = Registration(page)
     onBookStoreRegistrationPage.completeRegistrationForm(first_name, last_name, username, password)
-    onBookStoreRegistrationPage.confirmErrorMessageForExistingUserIsDisplayed
+    onBookStoreRegistrationPage.confirmErrorMessageForexisting_userIsDisplayed
    
    
 @pytest.mark.normal

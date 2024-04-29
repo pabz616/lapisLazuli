@@ -79,7 +79,7 @@ class BookStoreRegistrationPage:
         expect(usn_required).to_be_visible()
         expect(pwd_required).to_be_visible()
         
-    def confirmErrorMessageForExistingUserIsDisplayed(self):
+    def confirmErrorMessageForexisting_userIsDisplayed(self):
         expect(self.errorMsg).to_be_visible()
         expect(self.errorMsg).to_have_text(msg.userExistsMsg)
 

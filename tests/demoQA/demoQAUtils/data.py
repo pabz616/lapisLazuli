@@ -36,7 +36,7 @@ class DemoQA(object):
     userData = {"userId": userId}
     adminData = {"userName": "admin", "password": pwd}
     bookData = {"userId": userId, "isbn": "9781449331818"}
-    bookCollection = { "userId": userId, "collectionOfIsbns": [
+    bookCollection = {"userId": userId, "collectionOfIsbns": [
                     {"isbn": "9785303754511"},
                     {"isbn": "9712434961101"},
                     {"isbn": "9578984058653"}]
