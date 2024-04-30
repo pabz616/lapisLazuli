@@ -2,121 +2,62 @@
 TEST ACCOUNT ENDPOINT
 """
 
-import requests
 import pytest
-from demoQAUtils.data import ProjectData as pd
-from demoQAUtils.response_timer import get_api_response_time
+import json
+from api.demoQAClient.account_client import AccountsClient
+from api.demoQAAssertions import assertions as confirm
+
+client = AccountsClient()
 
 
 @pytest.mark.critical
 @pytest.mark.api
-def test_demoQA_login():
-    loginEndpoint = pd.baseUrl+'/Account/v1/Login'
-    
-    data = {"userName": pd.demoQAUsn, "password": pd.demoQAPwd}
-    response = requests.post(loginEndpoint, json=data)
-    assert response.status_code == 200, "Login endpoint is broken"
-    
-    # TEST RESPONSE TIME
-    get_api_response_time(loginEndpoint)
+class TestCriticalAccountEndpoints:
+    def test_demoQA_login(self):
+        response = client.authenticate_user()
+        confirm.ok_response_status(response, 200)
+        confirm.api_response_time
 
-
-@pytest.mark.critical
-@pytest.mark.api
-def test_demoQA_generate_token():
-    tokenEndpoint = pd.baseUrl+'/Account/v1/GenerateToken'
-    data = {"userName": pd.demoQAUsn, "password": pd.demoQAPwd}
-    response = requests.post(tokenEndpoint, json=data)
-    
-    # TEST RESPONSE TIME
-    get_api_response_time(tokenEndpoint)
-    
-    # TEST RESPONSE
-    resp = response.json()
-    assert response.status_code == 200, "Token was not generated"
-    assert resp["token"] is not None, "Token was not generated"
-    assert resp["expires"] != "2024-04-23", "Token expired"
-    assert resp["status"] == "Success", "Unsuccessful token"
-    assert resp["result"] == "User authorized successfully.", "Unsuccessful authorization"
-    
-
-@pytest.mark.high
-@pytest.mark.api
-def test_demoQA_create_user_is_successful():
-    userEndpoint = pd.baseUrl+'/Account/v1/User'
-    data = {"userName": pd.email, "password": pd.demoQANewUser}
-    response = requests.post(userEndpoint, json=data)
-    
-    # TEST RESPONSE TIME
-    get_api_response_time(userEndpoint)
-    
-    # TEST RESPONSE
-    resp = response.json()
-    assert response.status_code == 201, "Bug! New User was not created"
-    assert resp["userID"] is not None, "UserID is null"
-    assert resp["username"] is not None, "Username is null"
-    assert resp["books"] == []
-    
-    
-@pytest.mark.high
-@pytest.mark.api
-def test_demoQA_get_new_user_is_unsuccessful():
-    data = {"userName": pd.email, "password": pd.demoQANewUser}
-    response = requests.post(pd.baseUrl+'/Account/v1/User', json=data)
-    resp = response.json()
-    assert response.status_code == 201, "Bug! New User was not created"
-    
-    UUID = resp["userID"]
-    new_user_response = requests.get(pd.baseUrl+f"/Account/v1/User/{UUID}", json=data)
-    assert new_user_response.status_code == 401, "Bug! Able to retrieve user details"
-    
-
-@pytest.mark.high
-@pytest.mark.api
-def test_demoQA_delete_user_is_not_successful():
-    data = {"userName": pd.email, "password": pd.demoQANewUser}
-    create_response = requests.post(pd.baseUrl+'/Account/v1/User', json=data)
-    assert create_response.status_code == 201, "Bug! New User was not created"
-    
-    resp = create_response.json()
-    UUID = resp["userID"]
-
-    delete_response = requests.delete(pd.baseUrl+f"/Account/v1/User/{UUID}", json=data)
-    assert delete_response.status_code == 401, "Bug! New User can be deleted"
-    
-    
-@pytest.mark.critical
-@pytest.mark.api
-def test_demoQA_create_user_validation_for_blank_password():
-    data = {"userName": pd.email, "password": ''}
-    response = requests.post(pd.baseUrl+'/Account/v1/User', json=data)
-    assert response.status_code != 200, "Bug! Blank password was allowed"
+    def test_demoQA_generate_token(self):
+        response = client.generate_token()
+        data = json.loads(response.text)
+        confirm.ok_response_status(response, 200)
+        confirm.created_token(data)
+        confirm.api_response_time
+        
+    def test_demoQA_create_user_validation_for_blank_password(self):
+        response = client.create_user_account_blank_password()
+        confirm.validation_response_status(response, 400)
+        confirm.api_response_time
 
 
 @pytest.mark.high
 @pytest.mark.api
-def test_demoQA_create_user_validation_for_weak_password():
-    data = {"userName": pd.email, "password": pd.demoQANewUser}
-    response = requests.post(pd.baseUrl+'/Account/v1/User', json=data)
-    assert response.status_code != 200, "Bug! Weak password was allowed"
-    
-    
-@pytest.mark.high
-@pytest.mark.api
-def test_demoQA_create_user_validation_for_existing_user():
-    data = {"userName": pd.demoQAUsn, "password": pd.demoQAPwd}
-    response = requests.post(pd.baseUrl+'/Account/v1/User', json=data)
-    assert response.status_code == 406, "Bug! No check for duplicate user"
-
-
-
-
-
-
-
-
-# @pytest.mark.high
-# @pytest.mark.api
-# def test_demoQA_get_books():
-#     response = requests.get(pd.baseUrl+'/BookStore/v1/Books')
-#     assert response.status_code == 200, "Books endpoint is broken"
+class TestHighAccountEndpoints: 
+    def test_demoQA_create_user_is_successful(self):
+        response = client.create_user_account()
+        data = json.loads(response.text)
+        confirm.created_status(response, 201)
+        confirm.created_account(data)
+        confirm.api_response_time
+                             
+    def test_demoQA_get_new_user_is_unsuccessful(self):
+        response = client.get_user_account_unauthorized_access()
+        confirm.unauthorized_status(response, 401)
+     
+    def test_demoQA_delete_user_is_not_successful(self):
+        response = client.delete_user_account()
+        confirm.unauthorized_status(response, 401)
+        confirm.api_response_time
+        
+    def test_demoQA_create_user_validation_for_weak_password(self):
+        response = client.create_user_account_weak_password()
+        confirm.validation_response_status(response, 400)
+        confirm.api_response_time
+         
+    def test_demoQA_create_user_validation_for_existing_user(self):
+        response = client.create_user_account_existing_user()
+        data = json.loads(response.text)
+        confirm.not_acceptable_status(response, 406)
+        confirm.existing_user_error(data)
+        confirm.api_response_time

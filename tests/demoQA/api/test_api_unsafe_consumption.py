@@ -5,36 +5,28 @@ src: https://owasp.org/API-Security/editions/2023/en/0xaa-unsafe-consumption-of-
 
 import requests
 import pytest
-import random
-from demoQAUtils.data import ProjectData as pd
-
-book_catalog = [
-    '9781449325862', '9781449331818', '9781449337711', '9781449365035',
-    '9781491904244', '9781491950296', '9781593275846', '9781593277574'
-    ]
-
-book_id = random.choice(book_catalog)
+from api.demoQABaseAPI.endpoints import PUBLIC_ENDPOINTS, PRIVATE_ENDPOINTS
+from api.demoQAAssertions import assertions as confirm
 
 
-PUBLIC_ENDPOINTS = [
-    "/Account/v1/Authorized",
-    "/Account/v1/GenerateToken",
-    "/Account/v1/Login",
-    "/Account/v1/User",
-    f"/Account/v1/User/{pd.demoQAUserId}"
-    "/BookStore/v1/Books"
-    "/BookStore/v1/Book",
-    f"/books?book={book_id}"
-    ]
-
-
+@pytest.mark.security
 @pytest.mark.high
 @pytest.mark.api
-@pytest.mark.parametrize("endpoint", PUBLIC_ENDPOINTS)
-def test_unsafe_consumption(endpoint):
-    url = pd.baseUrl + endpoint
-
-    # Replace with valid data for unsafe consumption ... this should not work
-    data = {"input": "user_input"}
-    response = requests.post(url, json=data)
-    assert response.status_code != 200, "Unsafe consumption vulnerability detected"
+class TestUnsafeConsumption:
+    @pytest.mark.parametrize("endpoint", PUBLIC_ENDPOINTS)
+    def test_api_security_posture_public_endpoints(self, endpoint):
+        
+        # Replace with valid data for unsafe consumption ... this should not work
+        data = {"genome": "ACTAGTAG__TTGADDAAIICCTT…"}
+        response = requests.post(endpoint, json=data)
+        
+        # TODO - Needs a better assertion. Not all APIs yield the same error
+        assert response.status_code != 200, 'Error: {0}'.format(response.status_code) 
+    
+    @pytest.mark.parametrize("endpoint", PRIVATE_ENDPOINTS)
+    def test_api_security_posture_for_private_endpoints(self, endpoint):
+        
+        # Replace with valid data for unsafe consumption ... this should not work
+        data = {"genome": "ACTAGTAG__TTGADDAAIICCTT…"}
+        response = requests.post(endpoint, json=data)
+        assert response.status_code == 502, 'Error: {0}'.format(response.status_code) 
