@@ -19,7 +19,7 @@ class AccountsClient(BaseClient):
         self.selected_user_url = Accounts.SELECTED_USER
         self.request = APIRequest()
         
-    def get_token(role):
+    def get_token(self, role):
         if role == "user":
             return DemoQA.token
         elif role == "hacker":

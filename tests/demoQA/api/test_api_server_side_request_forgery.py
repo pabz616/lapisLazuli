@@ -13,7 +13,7 @@ from api.demoQAAssertions import assertions as confirm
 @pytest.mark.high
 @pytest.mark.api
 class TestServerSideRequestForgery:
-    def test_open_redirect_vulnerability():   
+    def test_open_redirect_vulnerability(self): 
         url = DemoQA.baseUrl + '/ssrf'
         data = {"url": "&path=http://evil-user.net"}
         response = requests.post(url, json=data)

@@ -19,6 +19,6 @@ class TestBrokenObjectLevelAuthorization:
     @pytest.mark.parametrize("endpoint, roles", ENDPOINTS.items())
     def test_broken_object_level_auth(self, endpoint, roles):
         for role, expected_status_code in roles.items():
-            headers = {"Authorization": f"Bearer {client.get_token()}"}
+            headers = {"Authorization": f"Bearer {client.get_token(role)}"}
             response = requests.get(endpoint, headers=headers)
             confirm.ok_response_status(response, 200), f"Access to {endpoint} for role {role} is broken"

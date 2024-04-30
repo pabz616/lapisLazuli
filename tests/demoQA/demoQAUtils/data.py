@@ -32,7 +32,7 @@ class DemoQA(object):
     newUserData = {"userName": ProjectData.email, "password": ProjectData.newUser}
     userId = "83a593e0-4822-48d1-b770-2051ede2ddaa"
     token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyTmFtZSI6ImRlbW9RQSIsInBhc3N3b3JkIjoiYmxVZU3Dtm9uOTckIiwiaWF0IjoxNzEzNDYzNTM4fQ.yXI26P4Zl-TvH2_MqbPRS-U5muGwedeKSjvVD1Lv-VQ"
-    tokenHacker = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyTmFtZSI6ImRlbW9RQSIsInBhc3N3b3JkIjoiYmxVZU3Dtm9uOTckIiwiaWF0IjoxNzEzNDYzNTM4fQ.yXI26P4Zl-TvH2_MqbPRS-U5muGwedeKSjv-BaDGuy"
+    tokenHacker = "BZAkJZc9rXgkOJN52TdTvzlENSJWbhde9ypN3eWH00fpuXsxJzVtrR4B3y4hoe3w9.yXI26P4Zl-TvH2_MqbPRS-BaDGuy"
     userData = {"userId": userId}
     adminData = {"userName": "admin", "password": pwd}
     bookData = {"userId": userId, "isbn": "9781449331818"}
