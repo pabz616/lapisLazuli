@@ -1,6 +1,6 @@
 import pytest
 from playwright.sync_api import Page
-from demoQAUtils.data import ProjectData as pd
+from demoQAUtils.data import ProjectData as pd, DemoQA
 
 from demoQABookStore.demoQABookStoreRegistration import BookStoreRegistrationPage as Registration
 
@@ -15,7 +15,7 @@ username = fake.color_name()+str(fake.port_number())+'!@'
 @pytest.fixture(scope="function", autouse=True)
 # use --browser-channel "chrome" to run tests in chrome, not chromium
 def before_each(page: Page):
-    bookStoreUrl = pd.baseUrl+'/register'
+    bookStoreUrl = DemoQA.baseUrl+'/register'
     page.goto(bookStoreUrl)
     yield
 
