@@ -1,9 +1,11 @@
 import pytest
-from playwright.sync_api import Page, expect
+from playwright.sync_api import Page
+from playwright.sync_api import expect
 from demoQAUtils.data import DemoQA
 from demoQAUtils.book_selection import BookSelection
 from demoQAUtils.injection_parameters import InjectionParameters as IP
 file_path = '../../demoQA/demoQAUtils/payload.txt'
+
 
 # PAYLOAD FILE
 with open(file_path) as file:
@@ -18,17 +20,16 @@ redirect_url = "https://www.hackthissite.org/"
 
 PAGES = {
     f"{DemoQA}/Books",
-    # f"{DemoQA}/Books?book={ISBN}",
-    # f"{DemoQA}/login",
-    # f"{DemoQA}/register",
-    # f"{DemoQA}/profile"
+    f"{DemoQA}/Books?book={ISBN}",
+    f"{DemoQA}/login",
+    f"{DemoQA}/register",
+    f"{DemoQA}/profile"
 }
 
 
 @pytest.mark.security
 @pytest.mark.parametrize("target_url", PAGES)
 class TestForcedURLRedirect:
-
     def test_url_redirect_with_domain_parameters(self, page: Page, target_url):
         forced_redirect_url = target_url+f"{injection_params}"+redirect_url
         page.goto(forced_redirect_url)
@@ -115,3 +116,4 @@ class TestForcedURLRedirect:
         forced_redirect_url = f"{target_url}/redirect.php?url=data:text/html;base64,PHNjcmlwdD5hbGVydCgiWFNTIik7PC9zY3JpcHQ+Cg=="
         page.goto(forced_redirect_url)
         expect(page).not_to_have_url(f"{forced_redirect_url}"), f"Vulnerability found! Forced redirected to {forced_redirect_url} was successful"
+
