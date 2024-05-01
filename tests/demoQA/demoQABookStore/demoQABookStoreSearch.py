@@ -11,6 +11,8 @@ class BookStoreSearchPage:
         self.bookStoreCatalog = page.locator(BookStoreDisplay.BOOK_TBL)
         self.noResultsElement = page.locator(BookStoreDisplay.NO_RESULTS)
         
+        self.alert = page.on("dialog", lambda dialog: dialog.accept())
+        
     def checkUI(self):
 
         expect(self.searchField).to_be_visible()
@@ -25,3 +27,7 @@ class BookStoreSearchPage:
         
     def confirmNoResults(self):
         expect(self.noResultsElement).to_be_visible
+        
+    def confirmNoAlertShown(self):
+        expect(self.alert).not_to_be_visible
+        
