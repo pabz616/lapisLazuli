@@ -10,7 +10,9 @@ If using VS Code: visit https://code.visualstudio.com/docs/python/python-tutoria
 ```
 ### Foundational Requirements
 ```
-1. Reference documentation: https://playwright.dev/python/docs/intro
+1. Reference documentation: https://playwright.dev/python/docs/intro 
+& https://playwright.dev/python/docs/test-assertions
+
 2. Latest Python version - brew install python3 (be sure to create a virtual environment)
 3. Latest pytest: pip install pytest
 4. pytest-playwright: pip install pytest-playwright
