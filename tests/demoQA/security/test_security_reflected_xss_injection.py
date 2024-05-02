@@ -24,7 +24,7 @@ def test_xss_using_html_tag(page: Page):
     onBookStoreSearch.enterSearchTerm(pd.simpleHTML)
     onBookStoreSearch.confirmNoAlertShown
 
-    
+
 def test_xss_using_html_entities(page: Page):
     """Test by replacing < and > with HTML entities &lt; and &gt;"""
     onBookStoreSearch = Search(page)
@@ -37,7 +37,7 @@ def test_xss_using_image_tag(page: Page):
     onBookStoreSearch.enterSearchTerm(pd.xssImageTag)
     onBookStoreSearch.confirmNoAlertShown
     
-
+    
 def test_xss_with_a_character_escape_sequence(page: Page):
     onBookStoreSearch = Search(page)
     onBookStoreSearch.enterSearchTerm(pd.escapeSequence)

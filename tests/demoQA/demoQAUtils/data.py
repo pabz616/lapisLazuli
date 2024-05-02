@@ -6,8 +6,10 @@ month = fake.month_name()
 
 
 class ProjectData:
+    simpleString = 'this is a security test'
     simpleHTML = '<h1>test</h1>'
     htmlEntities = '&lt;test&lt;'
+    scriptTagVariation = '<ScRiPt>alert("XSS")</ScRiPt>'
     mixedCharSet = 'Lorem ipsum dolor sit amet, Римский император Константин I Великий, 北京位於華北平原的西北边缘'
     sanskrit = 'وضع ابن الهيثم تصور واضح للعلاقة بين النموذج الرياضي المثالي ومنظومة الظواهر الملحوظة.'
     sqlInjection = "Robert'); DROP TABLE Students;--"
