@@ -1,5 +1,4 @@
 import pytest
-import json
 from playwright.sync_api import Page
 from demoQAUtils.data import ProjectData as pd, DemoQA
 from demoQABookStore.demoQABookStoreSearch import BookStoreSearchPage as Search
