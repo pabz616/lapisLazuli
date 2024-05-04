@@ -15,6 +15,10 @@ def not_found_response_status(response, status_code):
     assert_that(response.status_code).is_equal_to(requests.codes.not_found), 'Error: {0}'.format(response.status_code)
     
     
+def bad_request_status(response, status_code):
+    assert_that(response.status_code).is_equal_to(requests.codes.bad_request), 'Error: {0}'.format(response.status_code)
+    
+    
 def entity_too_large_response_status(response, status_code):
     assert_that(response.status_code).is_equal_to(requests.content_too_large), 'Error: {0}'.format(response.status_code)
 
