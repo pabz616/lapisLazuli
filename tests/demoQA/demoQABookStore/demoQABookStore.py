@@ -2,6 +2,10 @@
 
 from demoQALocators.pageElements import BookStoreDisplay, BookStoreSearch
 from playwright.sync_api import expect
+from api.demoQAAssertions import assertions as confirm
+from api.demoQAClient.book_client import BooksClient
+
+client = BooksClient()
 
 
 class BookStoreDisplayPage:
@@ -74,3 +78,7 @@ class BookStoreDisplayPage:
         
     def navigateToBookStoreLoginPage(self):
         self.loginButton.click()
+        
+    def confirmPageRedirectionIsUnsuccessful(self):
+        response = client.get_searched_book()
+        confirm.bad_request_status(response, 400), "Vulnerability found! Attacker can manipulate the request and bypass security mechanisms"

@@ -28,4 +28,4 @@ class Bookstore(object):
     BOOKS = f"{BOOKS_URL}/Books"
     SINGLE_BOOK = f"{BOOKS_URL}/Book"
     SELECTED_BOOK = f"{BOOKS_URL}/Book?ISBN=9781449337711"
-    SELECTION = f"{BOOKS_URL}/Books?ISBN={param}"
+    SELECTION = f"{BOOKS_URL}/Book?ISBN={param}"
