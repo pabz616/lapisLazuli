@@ -1,6 +1,6 @@
 """ BOOK STORE SEARCH """
 
-from demoQALocators.pageElements import BookStoreSearch, BookStoreDisplay
+from demoQAComponentLocators.pageElements import BookStoreSearch, BookStoreDisplay
 from playwright.sync_api import expect
 import json
 from api.demoQAClient.book_client import BooksClient

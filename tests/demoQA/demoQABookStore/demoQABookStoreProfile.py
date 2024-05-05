@@ -1,6 +1,6 @@
 """ BOOK STORE USER PROFILE """
  
-from demoQALocators.pageElements import BookStoreUserProfile, BookStoreSearch, BookStoreDisplay
+from demoQAComponentLocators.pageElements import BookStoreUserProfile, BookStoreSearch, BookStoreDisplay
 from playwright.sync_api import expect
 from demoQAUtils.data import ProjectData as pd
 
