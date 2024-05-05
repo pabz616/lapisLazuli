@@ -16,10 +16,14 @@ class BooksClient(BaseClient):
         self.books_url = Bookstore.BOOKS
         self.single_book_url = Bookstore.SINGLE_BOOK
         self.selected_book_url = Bookstore.SELECTED_BOOK
+        self.searched_book_url = Bookstore.SELECTION
         self.request = APIRequest()
         
     def get_all_books(self):
         return self.request.get(self.books_url)
+    
+    def get_searched_book(self):
+        return self.request.get(self.searched_book_url)
     
     def get_selected_book(self):
         return self.request.get(self.selected_book_url)

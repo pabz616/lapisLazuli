@@ -13,6 +13,7 @@ class RestFulBookerEndpoints(object):
 DQA_URL = os.getenv("BASE_URL", DemoQA.baseUrl)
 ACCOUNT_URL = f"{DQA_URL}/Account/v1"
 BOOKS_URL = f"{DQA_URL}/BookStore/v1"
+param = None
 
 
 class Accounts(object):
@@ -27,3 +28,4 @@ class Bookstore(object):
     BOOKS = f"{BOOKS_URL}/Books"
     SINGLE_BOOK = f"{BOOKS_URL}/Book"
     SELECTED_BOOK = f"{BOOKS_URL}/Book?ISBN=9781449337711"
+    SELECTION = f"{BOOKS_URL}/Book?ISBN={param}"

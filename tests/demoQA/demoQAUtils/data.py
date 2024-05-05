@@ -6,12 +6,22 @@ month = fake.month_name()
 
 
 class ProjectData:
+    simpleAscii = "!@#$%^&'"
+    blankString = ""
+    simpleString = 'this is a security test'
+    simpleHTML = '<h1>test</h1>'
+    htmlEntities = '&lt;test&lt;'
+    scriptTagVariation = '<ScRiPt>alert("XSS")</ScRiPt>'
     mixedCharSet = 'Lorem ipsum dolor sit amet, Римский император Константин I Великий, 北京位於華北平原的西北边缘'
     sanskrit = 'وضع ابن الهيثم تصور واضح للعلاقة بين النموذج الرياضي المثالي ومنظومة الظواهر الملحوظة.'
-    sqlInjection = "Robert'); DROP TABLE Students;--"
+    sqlInjection = "OR 1=1;##"
+    encoding = '?search=%22%3E%3Csvg%3E%3Canimatetransform%20onbegin=alert(1)%3E'
     jsInjection = "Nice site,  I think I'll take it. <script>alert('Executing JS')</script>"
+    jsInjectionAllCaps = "Another one <SCRIPT>ALERT('DOCUMENT.COOKIE')</SCRIPT>"
     brokenHTML = '<i><b>Bold</i></b>'
+    anchorTag = '<ahref="<script>alert("Executing JS")</script>">Home</a>'
     xssImageTag = "<img src=x onerror=alert(‘boo’)>"
+    escapeSequence = " `<img src=x onerror=alert(‘boo’)>` "
     newUser = 'turquoise777777QA!$'  # fake.color_name()+'777777'+'QA!$'
     fname = fake.first_name_male()
     lname = fake.last_name()
@@ -41,6 +51,16 @@ class DemoQA(object):
                     {"isbn": "9712434961101"},
                     {"isbn": "9578984058653"}]
                     }
+    
+    parameterList = [
+        ProjectData.tel,
+        ProjectData.blankString,
+        ProjectData.simpleAscii,
+        ProjectData.simpleString,
+        ProjectData.jsInjection,
+        ProjectData.sqlInjection,
+        ProjectData.scriptTagVariation,
+        "&url=https://mysite.com"]
     
 
 class NetworkScan(object):

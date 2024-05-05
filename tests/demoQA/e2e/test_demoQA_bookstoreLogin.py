@@ -1,7 +1,7 @@
 import pytest
 import re
 from playwright.sync_api import Page, expect
-from demoQAUtils.data import ProjectData as pd
+from demoQAUtils.data import ProjectData as pd, DemoQA
 from demoQABookStore.demoQABookStoreLogin import BookStoreLoginPage as BookStoreLogin
 from demoQABookStore.demoQABookStoreProfile import BookStoreProfilePage as BookStoreProfile
 
@@ -9,7 +9,7 @@ from demoQABookStore.demoQABookStoreProfile import BookStoreProfilePage as BookS
 @pytest.fixture(scope="function", autouse=True)
 # use --browser-channel "chrome" to run tests in chrome, not chromium
 def before_each(page: Page):
-    bookStoreUrl = pd.baseUrl+'/login'
+    bookStoreUrl = DemoQA.baseUrl+'/login'
     page.goto(bookStoreUrl)
     yield
 
