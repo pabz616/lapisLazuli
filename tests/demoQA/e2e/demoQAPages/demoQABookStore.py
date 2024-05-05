@@ -1,6 +1,6 @@
 """ BOOK STORE LANDING """
 
-from demoQAComponentLocators.pageElements import BookStoreDisplay, BookStoreSearch
+from e2e.demoQALocators.pageElements import BookStoreDisplay, BookStoreSearch
 from playwright.sync_api import expect
 from api.demoQAAssertions import assertions as confirm
 from api.demoQAClient.book_client import BooksClient
