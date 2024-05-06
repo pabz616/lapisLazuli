@@ -1,4 +1,4 @@
-from demoQALocators.pageElements import CheckBoxLocators
+from components.demoQAComponentLocators.pageElements import CheckBoxLocators
 from playwright.sync_api import expect
 
 

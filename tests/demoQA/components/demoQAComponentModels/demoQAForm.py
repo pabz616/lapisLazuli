@@ -1,4 +1,4 @@
-from demoQALocators.pageElements import PracticeForm
+from components.demoQAComponentLocators.pageElements import PracticeForm
 from playwright.sync_api import expect
 import datetime
 

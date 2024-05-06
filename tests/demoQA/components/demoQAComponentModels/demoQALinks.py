@@ -1,6 +1,5 @@
-from demoQALocators.pageElements import LinksLocators
+from components.demoQAComponentLocators.pageElements import LinksLocators
 from playwright.sync_api import expect
-import re
 
 
 class LinksPage:

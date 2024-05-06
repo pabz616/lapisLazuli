@@ -1,4 +1,4 @@
-from demoQALocators.pageElements import RadioButtonLocators
+from components.demoQAComponentLocators.pageElements import RadioButtonLocators
 from playwright.sync_api import expect
 
 
@@ -10,7 +10,7 @@ class RadioButtonPage:
         self.radioBtnQuestion = page.locator(RadioButtonLocators.RB_QUESTION)
         
         self.yes_radioBtnLabel = page.locator(RadioButtonLocators.RB_ANSWER1_LABEL)
-        self.yes_radioBtn = page.get_by_test_id("yesRadio")
+        self.yes_radioBtn = page.get_by_label('yesRadio')  # page.locator(RadioButtonLocators.RB_ANSWER1)
         
         self.impressive_radioBtnLabel = page.locator(RadioButtonLocators.RB_ANSWER2_LABEL)
         self.impressive_radioBtn = page.locator(RadioButtonLocators.RB_ANSWER2)
@@ -40,7 +40,7 @@ class RadioButtonPage:
         expect(self.no_radioBtn).not_to_be_disabled()
         
     def selectYes(self):
-        self.yes_radioBtn.click()    
+        self.yes_radioBtn.check()
 
     def selectImpressive(self):
         self.impressive_radioBtn.click()

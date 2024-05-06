@@ -1,6 +1,6 @@
 """ BOOK STORE USER LOGIN """
 
-from demoQALocators.pageElements import BookStoreLogin
+from e2e.demoQALocators.pageElements import BookStoreLogin
 from playwright.sync_api import expect
 
 

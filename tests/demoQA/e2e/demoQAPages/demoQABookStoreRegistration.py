@@ -1,6 +1,6 @@
 """ BOOK STORE NEW USER REGISTRATION """
 
-from demoQALocators.pageElements import BookStoreRegistration
+from e2e.demoQALocators.pageElements import BookStoreRegistration
 from playwright.sync_api import expect
 from demoQAUtils.data import ErrorMessages as msg
 
