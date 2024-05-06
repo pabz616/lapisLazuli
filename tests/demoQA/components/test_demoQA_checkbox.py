@@ -1,14 +1,14 @@
 import pytest
 from playwright.sync_api import Page
-from demoQAUtils.data import ProjectData as pd
-from demoQAComponentModels.demoQACheckBox import CheckBoxPage
+from demoQAUtils.data import DemoQA
+from components.demoQAComponentModels.demoQACheckBox import CheckBoxPage
 
 
-@pytest.fixture(scope="function", autouse=True)
 @pytest.mark.normal
 class TestCheckboxes:
-    def before_each(page: Page):
-        checkBoxPageUrl = pd.baseUrl+'/checkbox'
+    @pytest.fixture(scope="function", autouse=True)
+    def before_each(self, page: Page):
+        checkBoxPageUrl = DemoQA.baseUrl+'/checkbox'
         page.goto(checkBoxPageUrl)
         yield
 

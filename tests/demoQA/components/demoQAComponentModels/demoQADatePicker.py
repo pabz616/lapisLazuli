@@ -1,4 +1,4 @@
-from demoQAComponentLocators.pageElements import DatePickerLocators
+from components.demoQAComponentLocators.pageElements import DatePickerLocators
 from playwright.sync_api import expect
 from demoQAUtils.data import DemoQADates as testData
 
@@ -9,9 +9,7 @@ class DatePickerPage:
         self.pageHeader = page.locator(DatePickerLocators.PAGE_HEADER)
         self.datePickerInput = page.locator(DatePickerLocators.DATE)
         self.dateTimeInput = page.locator(DatePickerLocators.DATETIME)
-        
-        
-    
+            
     def checkUI(self):
         pageHeaderCopy = 'Date Picker'
         datePickerInputCopy = self.datePickerInput.textContent

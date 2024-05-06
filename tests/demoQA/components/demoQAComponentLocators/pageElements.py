@@ -1,5 +1,5 @@
 class TextFormLocators(object):
-    PAGE_HEADER = '[class="main-header"]'
+    PAGE_HEADER = '//h1[@class="text-center"]'
     FULLNAME_INPUT_LABEL = '[id="userName-label"]'
     FULLNAME_INPUT = '[id="userName"]'
     EMAIL_INPUT_LABEL = '[id="userEmail-label"]'
@@ -42,7 +42,7 @@ class RadioButtonLocators(object):
     RB_ANSWER2 = '//input[@id="impressiveRadio"]'
     RB_ANSWER3_LABEL = '//label[@for="noRadio"]'
     RB_ANSWER3 = '//input[@id="noRadio"]'
-    MSG = '//p[@class="mt-3"]'
+    MSG = '//p[contains(@class,"mt-3")]'
     
     
 class LinksLocators(object):
@@ -95,6 +95,3 @@ class PracticeForm(object):
     STUDENT_LASTNAME_ERROR = ''
     STUDENT_EMAIL_ERROR = ''
     STUDENT_PHONE_ERROR = ''
-    
-
-    

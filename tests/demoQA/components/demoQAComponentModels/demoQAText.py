@@ -1,4 +1,4 @@
-from demoQAComponentLocators.pageElements import TextFormLocators
+from components.demoQAComponentLocators.pageElements import TextFormLocators
 from playwright.sync_api import expect
 
 
@@ -63,7 +63,7 @@ class TextBoxPage:
         self.permanentAddressField.fill(addr2)
         self.submitButton.click()
     
-    def confirmResult(self, name, email, addr1, addr2):
+    def confirmResults(self, name, email, addr1, addr2):
         expect(self.resultsPanel).to_be_visible()
         expect(self.resultsPanel).to_contain_text(name)
         expect(self.resultsPanel).to_contain_text(email)

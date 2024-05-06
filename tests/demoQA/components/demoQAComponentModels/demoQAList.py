@@ -1,4 +1,4 @@
-from demoQAComponentLocators.pageElements import ListLocators
+from components.demoQAComponentLocators.pageElements import ListLocators
 from playwright.sync_api import expect
 
 
