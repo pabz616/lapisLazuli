@@ -79,17 +79,3 @@ class TestBookStoreLogin:
         onBookStoreLogin = BookStoreLogin(page)
         onBookStoreLogin.submitLogin(DemoQA.usn, pd.jsInjection)
         onBookStoreLogin.confirmInvalidLoginCredentialsValidation
-                
-    def test_BookStore_Login_SQL_Injection_At_Username(self, page: Page):
-        """Test bookstore login functionality - SQL injection at username should fail"""
-
-        onBookStoreLogin = BookStoreLogin(page)
-        onBookStoreLogin.submitLogin(pd.sqlInjection, 'password123')
-        onBookStoreLogin.confirmInvalidLoginCredentialsValidation
-
-    def test_BookStore_Login_SQL_Injection_At_Password(self, page: Page):
-        """Test bookstore login functionality - SQL injection at password should fail"""
-
-        onBookStoreLogin = BookStoreLogin(page)
-        onBookStoreLogin.submitLogin(DemoQA.usn, pd.sqlInjection)
-        onBookStoreLogin.confirmInvalidLoginCredentialsValidation

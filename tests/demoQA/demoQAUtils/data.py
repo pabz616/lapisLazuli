@@ -15,6 +15,7 @@ class ProjectData:
     mixedCharSet = 'Lorem ipsum dolor sit amet, Римский император Константин I Великий, 北京位於華北平原的西北边缘'
     sanskrit = 'وضع ابن الهيثم تصور واضح للعلاقة بين النموذج الرياضي المثالي ومنظومة الظواهر الملحوظة.'
     sqlInjection = "OR 1=1;##"
+    sqlInjection2 = " '+OR+1=1-- "
     encoding = '?search=%22%3E%3Csvg%3E%3Canimatetransform%20onbegin=alert(1)%3E'
     jsInjection = "Nice site,  I think I'll take it. <script>alert('Executing JS')</script>"
     jsInjectionAllCaps = "Another one <SCRIPT>ALERT('DOCUMENT.COOKIE')</SCRIPT>"
