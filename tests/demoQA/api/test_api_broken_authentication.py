@@ -26,7 +26,7 @@ class TestBrokenAuthentication:
         confirm.ok_response_status(response, 200)
         confirm.created_token(data)
 
-    def test_generate_token_is_unsuccessful(self):
+    def test_generate_token_is_unsuccessful(self):        
         response = client.generate_token_unsuccessfully()
         data = json.loads(response.text)
         confirm.ok_response_status(response, 200)
