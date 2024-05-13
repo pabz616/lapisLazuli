@@ -13,6 +13,7 @@ from demoQAUtils.data import DemoQA
 client = AccountsClient()
 
 payload = "' OR '1'='1"
+payload_endcoded = "%22%27%20OR%20%271%27%3D%271%22"
 
 
 @pytest.mark.security
@@ -72,6 +73,20 @@ class TestAPISQLInjection:
         response = requests.post(Bookstore.BOOKS, json=data)     
         confirm.unauthorized_status(response, 401)
 
+    def test_SQL_Injection_with_URL_ENCODED_STRING_In_GET(self):
+        response = requests.get(Bookstore.SINGLE_BOOK+f"?ISBN={payload_endcoded}")
+        confirm.bad_request_status(response, 400)
+    
+    def test_SQL_Injection_with_URL_ENCODED_STRING_In_POST(self):
+        data = {
+            "userId": "DemoQA.userId",
+            "collectionOfIsbns": [{
+                "isbn": f"%00{payload_endcoded}",
+                }]
+        }
+        
+        response = requests.post(Bookstore.BOOKS, json=data)     
+        confirm.unauthorized_status(response, 401)
 
 
         

@@ -56,13 +56,21 @@ class TestSQLInjectionAtLogin:
         onBookStoreLogin = BookStoreLogin(page)
         onBookStoreLogin.submitLogin(DemoQA.usn, pd.sqlInjection)
         onBookStoreLogin.confirmInvalidLoginCredentialsValidation
-
+    
     def test_SQL_Injection_using_NULL_BYTE(self, page: Page):
         """Test SQL injection employing a Null Byte at password should fail"""
         
         onBookStoreLogin = BookStoreLogin(page)
         onBookStoreLogin.submitLogin(DemoQA.usn, 'password/%')
         onBookStoreLogin.confirmInvalidLoginCredentialsValidation
+        
+    def test_SQL_Injection_with_URL_ENCODED_STRING_At_Login(self, page: Page):
+        """Test SQL injection using URL ENCODING at login should fail"""
+        
+        onBookStoreLogin = BookStoreLogin(page)
+        onBookStoreLogin.submitLogin(DemoQA.usn, '%22%27%20OR%20%271%27%3D%271%22')
+        onBookStoreLogin.confirmInvalidLoginCredentialsValidation
+
 
 @pytest.mark.security
 class TestSQLInjectionAtRegistration:
