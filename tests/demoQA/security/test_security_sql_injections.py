@@ -68,7 +68,14 @@ class TestSQLInjectionAtLogin:
         """Test SQL injection using URL ENCODING at login should fail"""
         
         onBookStoreLogin = BookStoreLogin(page)
-        onBookStoreLogin.submitLogin(DemoQA.usn, '%22%27%20OR%20%271%27%3D%271%22')
+        onBookStoreLogin.submitLogin(DemoQA.usn, pd.sqlInjection_endcoded)
+        onBookStoreLogin.confirmInvalidLoginCredentialsValidation
+        
+    def test_SQL_Injection_with_LOWERCASE_PAYLOAD_At_Login(self, page: Page):
+        """Test SQL injection using URL ENCODING at login should fail"""
+        
+        onBookStoreLogin = BookStoreLogin(page)
+        onBookStoreLogin.submitLogin(DemoQA.usn, pd.sqlInjection_lowercase)
         onBookStoreLogin.confirmInvalidLoginCredentialsValidation
 
 

@@ -16,6 +16,8 @@ class ProjectData:
     sanskrit = 'وضع ابن الهيثم تصور واضح للعلاقة بين النموذج الرياضي المثالي ومنظومة الظواهر الملحوظة.'
     sqlInjection = "OR 1=1;##"
     sqlInjection2 = " '+OR+1=1-- "
+    sqlInjection_lowercase = " '+or+1=1-- "
+    sqlInjection_encoded = "%22%27%20OR%20%271%27%3D%271%22"
     encoding = '?search=%22%3E%3Csvg%3E%3Canimatetransform%20onbegin=alert(1)%3E'
     jsInjection = "Nice site,  I think I'll take it. <script>alert('Executing JS')</script>"
     jsInjectionAllCaps = "Another one <SCRIPT>ALERT('DOCUMENT.COOKIE')</SCRIPT>"
