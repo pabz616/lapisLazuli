@@ -57,6 +57,12 @@ class TestSQLInjectionAtLogin:
         onBookStoreLogin.submitLogin(DemoQA.usn, pd.sqlInjection)
         onBookStoreLogin.confirmInvalidLoginCredentialsValidation
 
+    def test_SQL_Injection_using_NULL_BYTE(self, page: Page):
+        """Test SQL injection employing a Null Byte at password should fail"""
+        
+        onBookStoreLogin = BookStoreLogin(page)
+        onBookStoreLogin.submitLogin(DemoQA.usn, 'password/%')
+        onBookStoreLogin.confirmInvalidLoginCredentialsValidation
 
 @pytest.mark.security
 class TestSQLInjectionAtRegistration:
@@ -71,6 +77,18 @@ class TestSQLInjectionAtRegistration:
 
         first_name = 'tester1'
         last_name = 'tester1'
+        username = 'tester1' + pd.sqlInjection2 + '*@example.com'
+        password = 'Password123!'
+       
+        onBookStoreRegistrationPage.completeRegistrationForm(first_name, last_name, username, password)
+        onBookStoreRegistrationPage.confirmErrorMessageForexisting_userIsDisplayed
+        
+    def test_SQL_Injection_using_NULL_BYTE_At_Registration(self, page: Page):
+        """Test that registration fails when a sql injection using a null byte is attempted"""
+        onBookStoreRegistrationPage = Registration(page)
+
+        first_name = 'hack%00'
+        last_name = 'hack\x00'
         username = 'tester1' + pd.sqlInjection2 + '*@example.com'
         password = 'Password123!'
        

@@ -31,8 +31,7 @@ class TestAPISQLInjection:
                     }]
                 }
         
-        malicious_url = Bookstore.BOOKS
-        response = requests.post(malicious_url, json=data)     
+        response = requests.post(Bookstore.BOOKS, json=data)     
         confirm.unauthorized_status(response, 401)
     
     @pytest.mark.skip(reason="Site doesn't use cookies")    
@@ -57,6 +56,21 @@ class TestAPISQLInjection:
         }
         response = requests.get(Bookstore.BOOKS, headers=headers)
         confirm.ok_response_status(response, 200)
+
+    def test_SQL_Injection_with_NULL_BYTE_In_GET(self):
+        response = requests.get(Bookstore.SINGLE_BOOK+f"?ISBN=\x00{payload}")
+        confirm.bad_request_status(response, 400)
+    
+    def test_SQL_Injection_with_NULL_BYTE_In_POST(self):
+        data = {
+            "userId": "DemoQA.userId",
+            "collectionOfIsbns": [{
+                "isbn": f"%00{payload}",
+                }]
+        }
+        
+        response = requests.post(Bookstore.BOOKS, json=data)     
+        confirm.unauthorized_status(response, 401)
 
 
 
