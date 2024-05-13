@@ -67,7 +67,9 @@ class TestNormalBookStoreSearch:
         onBookStoreSearch.enterSearchTerm(pd.sanskrit)
         onBookStoreSearch.confirmNoResults
      
-    @pytest.mark.security  
+
+@pytest.mark.security 
+class TestBookStoreSearchSecurity: 
     def test_BookStore_formatExploit_SQL_Injection(self, page: Page):
         """Test bookstore search feature - format exploit: SQL injection term"""
         
@@ -75,7 +77,6 @@ class TestNormalBookStoreSearch:
         onBookStoreSearch.enterSearchTerm(pd.sqlInjection)
         onBookStoreSearch.confirmNoResults
      
-    @pytest.mark.security   
     def test_BookStore_formatExploit_JS_Injection(self, page: Page):
         """Test bookstore search feature - format exploit: SQL injection term"""
         
@@ -83,7 +84,6 @@ class TestNormalBookStoreSearch:
         onBookStoreSearch.enterSearchTerm(pd.jsInjection)
         onBookStoreSearch.confirmNoResults
     
-    @pytest.mark.security
     def test_BookStore_formatExploit_BrokenHTML(self, page: Page):
         """Test bookstore search feature - format exploit: Broken HTML term"""
         
@@ -91,8 +91,7 @@ class TestNormalBookStoreSearch:
         onBookStoreSearch.enterSearchTerm(pd.brokenHTML)
         onBookStoreSearch.confirmNoResults
     
-    @pytest.mark.security
-    def test_BookStore_formatExploit_XSS_ImageTag(self, page: Page):
+     def test_BookStore_formatExploit_XSS_ImageTag(self, page: Page):
         """Test bookstore search feature - Cross-site scripting with image tag, using alert() term"""
         
         onBookStoreSearch = Search(page)
