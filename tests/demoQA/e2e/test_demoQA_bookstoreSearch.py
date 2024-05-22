@@ -1,6 +1,6 @@
 import pytest
 from playwright.sync_api import Page
-from demoQAUtils.data import ProjectData as pd, DemoQA
+from utils.data import ProjectData as pd, DemoQA
 from e2e.demoQAPages.demoQABookStoreSearch import BookStoreSearchPage as Search
 
 from faker import Faker
@@ -91,7 +91,7 @@ class TestBookStoreSearchSecurity:
         onBookStoreSearch.enterSearchTerm(pd.brokenHTML)
         onBookStoreSearch.confirmNoResults
     
-     def test_BookStore_formatExploit_XSS_ImageTag(self, page: Page):
+    def test_BookStore_formatExploit_XSS_ImageTag(self, page: Page):
         """Test bookstore search feature - Cross-site scripting with image tag, using alert() term"""
         
         onBookStoreSearch = Search(page)

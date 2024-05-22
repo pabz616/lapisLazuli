@@ -1,6 +1,6 @@
 import pytest
 from playwright.sync_api import Page, expect
-from demoQAUtils.data import DemoQA
+from utils.data import DemoQA
 from e2e.demoQAPages.demoQABookStore import BookStoreDisplayPage as BookStore
 
 bookStoreUrl = DemoQA.baseUrl+'/books'
@@ -22,9 +22,10 @@ class TestBookStoreCatalog:
         onBookStore.checkBookStoreCatalogUI
         onBookStore.checkBookStoreCatalogPagination
 
-    # def test_BookStore_BrowseSelection(self, page: Page):
-    #     """Test that a user can select a book and navigate to the details page"""
+    @pytest.mark.skip(reason="Site fails to load product details page")
+    def test_BookStore_BrowseSelection(self, page: Page):
+        """Test that a user can select a book and navigate to the details page"""
         
-    #     onBookStore = BookStore(page)
-    #     onBookStore.navigateToDetailsView
-    #     expect(page).to_have_url(bookStoreUrl+'?book=9781449325862')
+        onBookStore = BookStore(page)
+        onBookStore.navigateToDetailsView
+        expect(page).to_have_url(bookStoreUrl+'?book=9781449325862')

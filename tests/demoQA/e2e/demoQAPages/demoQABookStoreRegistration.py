@@ -2,7 +2,7 @@
 
 from e2e.demoQALocators.pageElements import BookStoreRegistration
 from playwright.sync_api import expect
-from demoQAUtils.data import ErrorMessages as msg
+from utils.data import ErrorMessages as msg
 
 
 class BookStoreRegistrationPage:

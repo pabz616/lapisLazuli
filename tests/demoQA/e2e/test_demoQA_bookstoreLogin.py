@@ -1,6 +1,6 @@
 import pytest
 from playwright.sync_api import Page, expect
-from demoQAUtils.data import ProjectData as pd, DemoQA
+from utils.data import ProjectData as pd, DemoQA
 from e2e.demoQAPages.demoQABookStoreLogin import BookStoreLoginPage as BookStoreLogin
 from e2e.demoQAPages.demoQABookStoreProfile import BookStoreProfilePage as BookStoreProfile
 

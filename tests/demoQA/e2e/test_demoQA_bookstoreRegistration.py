@@ -1,6 +1,6 @@
 import pytest
 from playwright.sync_api import Page
-from demoQAUtils.data import ProjectData as pd, DemoQA
+from utils.data import ProjectData as pd, DemoQA
 from e2e.demoQAPages.demoQABookStoreRegistration import BookStoreRegistrationPage as Registration
 
 from faker import Faker

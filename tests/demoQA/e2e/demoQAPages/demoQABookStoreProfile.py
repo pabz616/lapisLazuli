@@ -2,7 +2,7 @@
  
 from e2e.demoQALocators.pageElements import BookStoreUserProfile, BookStoreSearch, BookStoreDisplay
 from playwright.sync_api import expect
-from demoQAUtils.data import ProjectData as pd
+from utils.data import ProjectData as pd
 
 
 class BookStoreProfilePage:
