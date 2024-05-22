@@ -1,7 +1,7 @@
 import pytest
 from playwright.sync_api import Page
 from components.demoQAComponentModels.demoQALinks import LinksPage
-from demoQAUtils.data import DemoQA, DemoQAResponseMsg as statusMsg
+from utils.data import DemoQA, DemoQAResponseMsg as statusMsg
 
 
 # use --browser-channel "chrome" to run tests in chrome, not chromium

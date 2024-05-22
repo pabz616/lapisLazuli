@@ -3,7 +3,7 @@ from playwright.sync_api import Page
 from e2e.demoQAPages.demoQABookStoreLogin import BookStoreLoginPage as BookStoreLogin
 from e2e.demoQAPages.demoQABookStoreRegistration import BookStoreRegistrationPage as Registration
 from e2e.demoQAPages.demoQABookStore import BookStoreDisplayPage as onBookstore
-from demoQAUtils.data import DemoQA, ProjectData as pd
+from utils.data import DemoQA, ProjectData as pd
 
 
 """

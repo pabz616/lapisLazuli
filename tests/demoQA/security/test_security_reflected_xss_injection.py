@@ -1,6 +1,6 @@
 import pytest
 from playwright.sync_api import Page
-from demoQAUtils.data import ProjectData as pd, DemoQA
+from utils.data import ProjectData as pd, DemoQA
 from e2e.demoQABookStore.demoQABookStoreSearch import BookStoreSearchPage as Search
 
 """

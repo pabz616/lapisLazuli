@@ -1,6 +1,6 @@
 from components.demoQAComponentLocators.pageElements import DatePickerLocators
 from playwright.sync_api import expect
-from demoQAUtils.data import DemoQADates as testData
+from utils.data import DemoQADates as testData
 
 
 class DatePickerPage:

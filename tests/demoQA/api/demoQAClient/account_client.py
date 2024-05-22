@@ -1,7 +1,7 @@
 from json import dumps
 from api.demoQABaseClient.base_client import BaseClient
-from demoQAUtils.data import DemoQA, ProjectData as pd
-from demoQAUtils.urls import Accounts
+from utils.data import DemoQA, ProjectData as pd
+from utils.urls import Accounts
 from api.demoQABaseAPI.request import APIRequest
 
 UUID = 'c8b459a2-eb0c-4499-bafa-4e38e946c33c'

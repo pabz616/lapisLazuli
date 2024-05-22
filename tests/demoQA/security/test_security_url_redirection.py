@@ -1,10 +1,10 @@
 import pytest
 from playwright.sync_api import Page
 from playwright.sync_api import expect
-from demoQAUtils.data import DemoQA
-from demoQAUtils.book_selection import BookSelection
-from demoQAUtils.injection_parameters import InjectionParameters as IP
-file_path = '../../demoQA/demoQAUtils/payload.txt'
+from utils.data import DemoQA
+from utils.book_selection import BookSelection
+from utils.injection_parameters import InjectionParameters as IP
+file_path = '../../demoQA/utils/payload.txt'
 
 
 # PAYLOAD FILE

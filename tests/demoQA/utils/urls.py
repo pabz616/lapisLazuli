@@ -1,5 +1,5 @@
 import os
-from demoQAUtils.data import APIDemoData, DemoQA
+from utils.data import APIDemoData, DemoQA
 
 
 class RestFulBookerEndpoints(object):

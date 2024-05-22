@@ -1,9 +1,9 @@
 from json import dumps
 from api.demoQABaseClient.base_client import BaseClient
-from demoQAUtils.data import DemoQA
-from demoQAUtils.urls import Bookstore
+from utils.data import DemoQA
+from utils.urls import Bookstore
 from api.demoQABaseAPI.request import APIRequest
-from demoQAUtils.book_selection import BookSelection
+from utils.book_selection import BookSelection
 
 
 ISBN = BookSelection.select_a_book()

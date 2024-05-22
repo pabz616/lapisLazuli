@@ -1,5 +1,5 @@
 from assertpy import assert_that
-from demoQAUtils.data import ProjectData as pd
+from utils.data import ProjectData as pd
 import requests
 
 

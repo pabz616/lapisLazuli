@@ -1,7 +1,7 @@
 import pytest
 from playwright.sync_api import Page
 from demoQABookStore.demoQABookStore import BookStoreDisplayPage as onBookstore
-from demoQAUtils.data import DemoQA
+from utils.data import DemoQA
 
 
 """

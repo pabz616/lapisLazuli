@@ -7,7 +7,7 @@ import requests
 import pytest
 from api.demoQAClient.account_client import AccountsClient
 from api.demoQABaseAPI.endpoints import ENDPOINT_ROLES
-from demoQAUtils.data import DemoQA
+from utils.data import DemoQA
 
 client = AccountsClient()
 

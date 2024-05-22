@@ -1,6 +1,6 @@
 import pytest
 from playwright.sync_api import Page
-from demoQAUtils.data import DemoQA
+from utils.data import DemoQA
 from components.demoQAComponentModels.demoQACheckBox import CheckBoxPage
 
 

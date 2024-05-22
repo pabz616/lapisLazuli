@@ -1,6 +1,6 @@
 import pytest
 from playwright.sync_api import Page
-from demoQAUtils.data import DemoQA, ProjectData as pd
+from utils.data import DemoQA, ProjectData as pd
 from components.demoQAComponentModels.demoQAForm import RegistrationPage
 
 

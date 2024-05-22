@@ -5,7 +5,7 @@ src: https://owasp.org/API-Security/editions/2023/en/0xa7-server-side-request-fo
 
 import requests
 import pytest
-from demoQAUtils.data import DemoQA
+from utils.data import DemoQA
 from api.demoQAAssertions import assertions as confirm
 
 

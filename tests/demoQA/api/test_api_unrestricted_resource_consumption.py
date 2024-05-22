@@ -5,7 +5,7 @@ src: https://owasp.org/API-Security/editions/2023/en/0xa4-unrestricted-resource-
 
 import requests
 import pytest
-from demoQAUtils.data import ProjectData as pd
+from utils.data import ProjectData as pd
 from api.demoQABaseAPI.endpoints import ENDPOINTS
 
 

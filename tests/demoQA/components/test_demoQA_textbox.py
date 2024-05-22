@@ -1,7 +1,7 @@
 import pytest
 from playwright.sync_api import Page
 from components.demoQAComponentModels.demoQAText import TextBoxPage
-from demoQAUtils.data import DemoQA, DemoQATextForm as testData, InvalidEmailAddresses as testEmails
+from utils.data import DemoQA, DemoQATextForm as testData, InvalidEmailAddresses as testEmails
 
 
 @pytest.mark.normal

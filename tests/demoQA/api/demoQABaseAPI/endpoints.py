@@ -1,7 +1,7 @@
-from demoQAUtils.urls import Accounts, Bookstore
+from utils.urls import Accounts, Bookstore
 from api.demoQABaseClient.base_client import BaseClient as bc
-from demoQAUtils.book_selection import BookSelection
-from demoQAUtils.data import DemoQA
+from utils.book_selection import BookSelection
+from utils.data import DemoQA
 
 book_id = BookSelection.select_a_book()
 

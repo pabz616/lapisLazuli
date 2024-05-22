@@ -4,10 +4,10 @@ TEST SQL INJECTION VULNERABILITY AT BOOKS ENDPOINT
 
 import pytest
 import requests
-from demoQAUtils.urls import Bookstore
+from utils.urls import Bookstore
 from api.demoQAClient.account_client import AccountsClient
 from api.demoQAAssertions import assertions as confirm
-from demoQAUtils.data import DemoQA, ProjectData as pd
+from utils.data import DemoQA, ProjectData as pd
         
 
 client = AccountsClient()

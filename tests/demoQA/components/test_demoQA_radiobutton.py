@@ -1,7 +1,7 @@
 import pytest
 from playwright.sync_api import Page
 from components.demoQAComponentModels.demoQARadioButtons import RadioButtonPage
-from demoQAUtils.data import DemoQA
+from utils.data import DemoQA
 
 
 @pytest.mark.normal
